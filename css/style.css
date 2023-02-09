@@ -1,7 +1,6 @@
-/* Header */
+/* Header And Footer*/
 header, footer{
     width:100%;
-    height: 50px;
     margin:10px 0 10px 0;
 }
 
@@ -14,10 +13,18 @@ header, footer{
     z-index: 999;
 }
 
-.header-nav ul{
+.header-nav ul, .footerContent ul{
     list-style: none;
 }
 
 .header-nav li{
     display: inline-block;
+}
+
+.footerContent th, .footerContent td{
+	text-align: left;
+	font-size: medium;
+	width: 30%;
+	padding: 5px;
+	vertical-align:top
 }
