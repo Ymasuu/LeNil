@@ -65,11 +65,9 @@
 			</fieldset>
 		</form>
 		<br>
-		<p>
 			<button name="retour" value="retour" onclick="window.location.href='index.php'"><a href="index.php">Retour</a></button>
-			Vous posséder déjà un compte ?
+			<span style="padding-left: 135px;">Vous posséder déjà un compte ?</span>
 			<button style="display: inline-block;" name="Se connecter" value="Se connecter" onclick="window.location.href='login.php'"><a href="login.php">Se connecter</a></button>
-		</p>
 	</div>
 </body>
 </html>
