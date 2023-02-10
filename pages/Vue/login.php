@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Se connecter</title>
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="icon" type="image/png" href="../../img/logo2.png">
+</head>
+<body>
+	<div style="width: 500px; margin: auto;">
+		<h1>Se connecter</h1>
+		<form>
+			<fieldset>
+                <legend>Identifiants</legend>
+                <table>
+                    <tr>
+                        <td><label for="mail">Mail</label></td>
+                        <td><input type="text" name="mail" id="mail"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="password">Mot de passe</label></td>
+                        <td><input type="password" name="password" id="password"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Se connecter"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+        <div style="text-align:right"><a href="forgotPassword.php">Mot de passe oublié ?</a></div>
+    </div>
+</body>

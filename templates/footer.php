@@ -22,7 +22,7 @@
 			</td>
 		</tr>
 	</table>
-	<table class="footerContent">
+	<table class="footerContent" style="padding-top:15px">
 		<tr>
 			<th>Concepteurs</th>
 			<th>Mention légale</th>
@@ -39,7 +39,7 @@
 					<li>Ethan PINTO</li>
 				</ul>
 			</td>
-			<td style="text-align: top;"><ul><li>© LeNil</li></ul></td>
+			<td style="text-align: top;"><ul><li>© 2023, LeNil.com</li></ul></td>
 			<td>
 				<address><ul><li>websiteprojet2023@gmail.com</li></ul></address>
 			</td>

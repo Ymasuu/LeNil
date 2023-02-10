@@ -1,3 +1,7 @@
+body {
+    margin-left: 10px;
+}
+
 /* Header And Footer*/
 header, footer{
     width:100%;
@@ -26,5 +30,11 @@ header, footer{
 	font-size: medium;
 	width: 30%;
 	padding: 5px;
-	vertical-align:top
+	vertical-align:top;
+    font-size: small;
+}
+
+.footerContent ul{
+    margin: 0;
+    padding: 0;
 }
