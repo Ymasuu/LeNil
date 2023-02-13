@@ -4,7 +4,7 @@
 	</div>
 	<nav class="header-nav">
 		<ul>
-			<li class="current" ><a href="index.php">Acceuil</a></li>
+			<li class="current" ><a href="index.php">Accueil</a></li>
 			<li><a href="about.php">A propos</a></li>
 		</ul>
 	</nav>
