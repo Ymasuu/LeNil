@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(isset($_SESSION['mail'])){
+        header('Location: ./index.php');
+    }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +16,7 @@
 <body>
 	<div style="width: 500px; margin: auto;">
 		<h1>Se connecter</h1>
-		<form>
+		<form action="../Contrôleur/process_login.php" method="post">
 			<fieldset>
                 <legend>Identifiants</legend>
                 <table>
@@ -24,6 +30,14 @@
                     </tr>
                     <tr>
                         <td><input type="submit" value="Se connecter"></td>
+                        <td>
+                            <?php
+                                if(isset($_SESSION["error"])){
+                                    echo $_SESSION["error"];
+                                    unset($_SESSION["error"]);
+                                }
+                            ?>
+                        </td>
                     </tr>
                 </table>
             </fieldset>
