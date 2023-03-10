@@ -19,7 +19,7 @@
 			<p>du texte...</p>
 			<?php
 				if(isset($_SESSION["UTILISATEUR"])){
-					echo "Vous êtes connecté en tant que ".$_SESSION["UTILISATEUR"];
+					echo "Vous êtes connecté en tant que " . $_SESSION["UTILISATEUR"]["nom"] . " " . $_SESSION["UTILISATEUR"]["prenom"];
 				}
 			?>
 		</div>

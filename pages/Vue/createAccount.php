@@ -1,8 +1,9 @@
-<?php 
-session_start();
-if(isset($_SESSION['mail'])){
-	header('Location: ./index.php');
-}
+<?php
+    session_start();
+    if(isset($_SESSION["UTILISATEUR"])){
+        header("Location: profil.php");
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,8 +83,8 @@ if(isset($_SESSION['mail'])){
 			</fieldset>
 		</form>
 		<br>
-			<button name="retour" value="retour" onclick="window.location.href='index.php'"><a href="index.php">Retour</a></button>
-			<span style="padding-left: 135px;">Vous posséder déjà un compte ?</span>
+		<a href="index.php">Retour à l'accueil</a>
+			<span style="padding-left: 80px;">Vous posséder déjà un compte ?</span>
 			<button style="display: inline-block;" name="Se connecter" value="Se connecter" onclick="window.location.href='login.php'"><a href="login.php">Se connecter</a></button>
 	</div>
 </body>
