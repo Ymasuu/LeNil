@@ -1,3 +1,9 @@
+<?php 
+session_start();
+if(isset($_SESSION['mail'])){
+	header('Location: ./index.php');
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +16,7 @@
 <body>
 	<div style="width: 500px; margin: auto;">
 		<h1>Créer un compte</h1>
-		<form>
+		<form action="../Contrôleur/process_createAccount.php" method="post">
 			<fieldset>
 				<legend>Informations personnelles</legend>
 				<table>
@@ -36,11 +42,14 @@
 					</tr>
 					<tr>
 						<td><label for="adresse">Adresse*</label></td>
-						<td><input type="text" name="adresse" id="adresse" pattern="[A-Za-z0-9-]{1,60}" required></td>
+						<td><input type="text" name="adresse" id="adresse" pattern="[A-Za-z0-9-' ]{1,60}" required></td>
 					</tr>
 					<tr>
 						<td><label for="ville">Ville*</label></td>
 						<td><input type="text" name="ville" id="ville" pattern="[A-Za-z-]{1,26}" required></td>
+						<!--
+						Créer un pattern [A-Za-z-] mais ne pouvant accepter qu'un seul espace consécutif
+						-->
 					</tr>
 					<tr>
 						<td><label for="codePostal">Code postal*</label></td>
@@ -60,6 +69,14 @@
 					</tr>
 					<tr>
 						<td><input type="submit" value="Créer le compte"></td>
+						<td>
+							<?php
+								if(isset($_SESSION['error'])){
+									echo $_SESSION['error'];
+									unset($_SESSION['error']);
+								}
+							?>
+						</td>
 					</tr>
 				</table>
 			</fieldset>

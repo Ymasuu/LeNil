@@ -10,7 +10,7 @@ $valide = 0; //par défaut, on considère que les informations entrées sont inv
 foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs 
 {
     $detailUtilisateur = explode("|", $end);
-    if($detailUtilisateur[1] == $mail && $detailUtilisateur[2] == $password)
+    if($detailUtilisateur[2] == $mail && $detailUtilisateur[9] == $password)
     {
         $valide = 1;
         $_SESSION["UTILISATEUR"] = $detailUtilisateur[0]; //changement de la variable environnement
@@ -26,7 +26,7 @@ if ($valide == 0)//si aucun login ne correspond, on renvoie un message d'erreur
 }
 else //si l'opération à réussi, on affiche un message de succès
 {
-    header("Location: ../Vue/index.php");
+    header("Location:../Vue/index.php");
 }
 
 ?>
