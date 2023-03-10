@@ -2,6 +2,12 @@ body {
     margin-left: 10px;
 }
 
+/*cahngement de la font du texte */
+
+h1,h2,h3,h4,h5 {
+    font-family: Arial, sans-serif;
+  }
+
 /* Header And Footer*/
 header, footer{
     width:100%;
