@@ -22,7 +22,7 @@ if ($mdp != $mdp2) {
     exit();
 }
 
-$utilisateurs = explode("\n", file_get_contents("../../database/client.txt")); // récupération des données utilisateur
+$utilisateurs = explode("\n", file_get_contents("../../database/client.csv")); // récupération des données utilisateur
 
 $valide = 0; //par défaut, on considère que les informations entrées sont invalides
 
@@ -39,10 +39,10 @@ foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs
 }
 
 //si l'adresse mail n'est pas déjà utilisée, on ajoute le nouvel utilisateur
-$utilisateurs[] = $nom."|".$prenom."|".$email."|".$dateNaissance."|".$tel."|".$adresse."|".$ville."|".$codePostal."|".$pays."|".$mdp;
-file_put_contents("../../database/client.txt", implode("\n", $utilisateurs));
+$utilisateurs[] = $nom.",".$prenom.",".$email.",".$dateNaissance.",".$tel.",".$adresse.",".$ville.",".$codePostal.",".$pays.",".$mdp;
+file_put_contents("../../database/client.csv", implode("\n", $utilisateurs));
 
 //on connecte l'utilisateur
-$_SESSION["UTILISATEUR"] = $nom;
+$_SESSION["UTILISATEUR"] = $prenom." ".$nom; //changement de la variable environnement
 header("Location: ../Vue/index.php");
 ?>

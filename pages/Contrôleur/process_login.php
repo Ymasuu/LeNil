@@ -3,17 +3,17 @@ session_start();
 $mail = $_POST['mail'];
 $password = $_POST['password'];
 
-$utilisateurs = explode("\n", file_get_contents("../../database/client.txt")); // récupération des données utilisateur
+$utilisateurs = explode("\n", file_get_contents("../../database/client.csv")); // récupération des données utilisateur
 
 $valide = 0; //par défaut, on considère que les informations entrées sont invalides
 
 foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs 
 {
-    $detailUtilisateur = explode("|", $end);
+    $detailUtilisateur = explode(",", $end);
     if($detailUtilisateur[2] == $mail && $detailUtilisateur[9] == $password)
     {
         $valide = 1;
-        $_SESSION["UTILISATEUR"] = $detailUtilisateur[0]; //changement de la variable environnement
+        $_SESSION["UTILISATEUR"] = $detailUtilisateur[0]." ".$detailUtilisateur[1]; //changement de la variable environnement
         break;
     }
 }
