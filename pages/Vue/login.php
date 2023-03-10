@@ -48,7 +48,7 @@
         <div>
             <a href="index.php">Retour à l'accueil</a>
             <span style="padding-left: 210px;">Pas de compte ?</span>
-            <a href="register.php">S'inscrire</a>
+            <a href="createAccount.php">S'inscrire</a>
         </div>
     </div>
 </body>
