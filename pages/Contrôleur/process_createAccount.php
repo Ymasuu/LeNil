@@ -2,21 +2,22 @@
 session_start();
 if(isset($_SESSION['email'])){
     header('Location: ../vue/index.php');
+    exit();
 }
 
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$email = $_POST['email'];
-$dateNaissance = $_POST['dateNaissance'];
-$tel = $_POST['tel'];
-$adresse = $_POST['adresse'];
-$ville = $_POST['ville'];
-$codePostal = $_POST['codePostal'];
-$pays = $_POST['pays'];
-$mdp = $_POST['mdp'];
-$mdp2 = $_POST['mdp2'];
+$user["nom"] = $_POST["nom"];
+$user["prenom"] = $_POST["prenom"];
+$user["email"] = $_POST["email"];
+$user["dateNaissance"] = $_POST["dateNaissance"];
+$user["tel"] = $_POST["tel"];
+$user["adresse"] = $_POST["adresse"];
+$user["ville"] = $_POST["ville"];
+$user["codePostal"] = $_POST["codePostal"];
+$user["pays"] = $_POST["pays"];
+$user["mdp"] = $_POST["mdp"];
+$mdp = $_POST["mdp2"];
 
-if ($mdp != $mdp2) {
+if ($mdp != $user["mdp"]){ //si les mots de passe ne correspondent pas, on renvoie un message d'erreur
     $_SESSION["error"] = "Les mots de passe ne correspondent pas";
     header("Location:../Vue/createAccount.php");
     exit();
@@ -39,10 +40,11 @@ foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs
 }
 
 //si l'adresse mail n'est pas déjà utilisée, on ajoute le nouvel utilisateur
-$utilisateurs[] = $nom.",".$prenom.",".$email.",".$dateNaissance.",".$tel.",".$adresse.",".$ville.",".$codePostal.",".$pays.",".$mdp;
+$utilisateurs[] = implode(",", $user);
 file_put_contents("../../database/client.csv", implode("\n", $utilisateurs));
 
-//on connecte l'utilisateur
-$_SESSION["UTILISATEUR"] = $prenom." ".$nom; //changement de la variable environnement
+//on connecte l'utilisateur, un tableau contenant les informations de l'utilisateur est créé
+$_SESSION["UTILISATEUR"] = $user;
 header("Location: ../Vue/index.php");
+exit();
 ?>

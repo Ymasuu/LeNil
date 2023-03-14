@@ -1,7 +1,8 @@
 <?php
     session_start();
-    if(isset($_SESSION['mail'])){
-        header('Location: ./index.php');
+    if(isset($_SESSION["UTILISATEUR"])){
+        header("Location: profil.php");
+        exit();
     }
 ?>
 <!DOCTYPE html>
@@ -40,8 +41,14 @@
                         </td>
                     </tr>
                 </table>
+                <div style="text-align: right;"><a href="forgotPassword.php">Mot de passe oublié ?</a></div>
             </fieldset>
         </form>
-        <div style="text-align:right"><a href="forgotPassword.php">Mot de passe oublié ?</a></div>
+        <!-- Faire en sorte que les boutons soit sur la même ligne -->
+        <div>
+            <a href="index.php">Retour à l'accueil</a>
+            <span style="padding-left: 210px;">Pas de compte ?</span>
+            <a href="createAccount.php">S'inscrire</a>
+        </div>
     </div>
 </body>
