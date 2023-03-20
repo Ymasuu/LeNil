@@ -29,7 +29,7 @@ $valide = 0; //par défaut, on considère que les informations entrées sont inv
 
 foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs 
 {
-    $detailUtilisateur = explode("|", $end);
+    $detailUtilisateur = explode(",", $end);
     if($detailUtilisateur[1] == $email)
     {
         $valide = 1;

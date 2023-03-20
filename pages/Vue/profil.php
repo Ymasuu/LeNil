@@ -23,6 +23,11 @@ if(!isset($_SESSION['UTILISATEUR'])){
                 <legend>Informations</legend>
                 <table>
                     <tr>
+                        <td colspan="2">
+                        <?php if(isset($_SESSION['succes'])){echo $_SESSION['succes']; unset($_SESSION['succes']);} ?>
+                        </td>
+                    </tr>
+                    <tr>
                         <td>nom :
                             <?php echo $_SESSION['UTILISATEUR']['nom']; ?>
                         </td>
@@ -65,11 +70,6 @@ if(!isset($_SESSION['UTILISATEUR'])){
                     <tr>
                         <td>pays :
                             <?php echo $_SESSION['UTILISATEUR']['pays']; ?>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>mdp :
-                            <?php echo $_SESSION['UTILISATEUR']['mdp']; ?>
                         </td>
                     </tr>
                 </table>
