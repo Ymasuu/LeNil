@@ -72,6 +72,15 @@ if(!isset($_SESSION['UTILISATEUR'])){
                             <?php echo $_SESSION['UTILISATEUR']['pays']; ?>
                         </td>
                     </tr>
+                    <tr>
+                        <td>Statut :
+                            <?php echo $_SESSION['UTILISATEUR']['Abonnement']; ?>
+                        </td>
+                    </tr>
+                    <?php if($_SESSION['UTILISATEUR']['DateAbonnement'] != 'None'){
+                            echo '<tr><td>Date d\'abonnement : '.$_SESSION['UTILISATEUR']['DateAbonnement'].'</td></tr>';
+                        }
+                    ?>
                 </table>
             <div style="text-align:right"><a href="editProfil.php">Modifier les informations</a></div>
             </fieldset>

@@ -16,6 +16,8 @@ $user["codePostal"] = $_POST["codePostal"];
 $user["pays"] = $_POST["pays"];
 $user["mdp"] = $_POST["mdp"];
 $mdp = $_POST["mdp2"];
+$user["Abonnement"] = "Non abonné";
+$user["DateAbonnement"] = "None";
 
 if ($mdp != $user["mdp"]){ //si les mots de passe ne correspondent pas, on renvoie un message d'erreur
     $_SESSION["error"] = "Les mots de passe ne correspondent pas";

@@ -33,6 +33,8 @@ foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs
         $_SESSION["UTILISATEUR"]["codePostal"] = $detailUtilisateur[7];
         $_SESSION["UTILISATEUR"]["pays"] = $detailUtilisateur[8];
         $_SESSION["UTILISATEUR"]["mdp"] = $detailUtilisateur[9];
+        $_SESSION["UTILISATEUR"]["Abonnement"] = $detailUtilisateur[10];
+        $_SESSION["UTILISATEUR"]["DateAbonnement"] = $detailUtilisateur[11];
         header("Location:../Vue/index.php");
         exit();
     }
