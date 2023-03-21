@@ -23,11 +23,11 @@
                 <table>
                     <tr>
                         <td><label for="mail">Mail</label></td>
-                        <td><input type="text" name="mail" id="mail"></td>
+                        <td><input type="text" name="mail" id="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required></td>
                     </tr>
                     <tr>
                         <td><label for="password">Mot de passe</label></td>
-                        <td><input type="password" name="password" id="password"></td>
+                        <td><input type="password" name="password" id="password" pattern="[A-Za-z0-9-]{1,60}" required></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Se connecter"></td>
