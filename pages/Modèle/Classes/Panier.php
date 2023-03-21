@@ -4,12 +4,14 @@ private $HT;
 private $TTC;
 private $TVA;
 private Compte $compte;
+private $listeNombreQuantite;
 
-function __construct(Compte $compte ,$HT,$TVA) { 
+function __construct(Compte $compte ,$HT,$TVA,$listeNombreQuantite) { 
     $this ->HT = $HT;
     $this ->TVA = $TVA;
     $this->TTC = $HT + $TVA;
     $this->compte = $compte;
+    $this->listeNombreQuantite = $listeNombreQuantite;
     
   }
 
@@ -33,6 +35,10 @@ function getTTC() {
 
 function getCompte() {
     return $this->compte;
+}
+
+function getListeNombreQuantite() {
+    return $this->listeNombreQuantite;
 }
 
 }

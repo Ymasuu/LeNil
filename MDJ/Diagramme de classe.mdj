@@ -5692,30 +5692,13 @@
 											"height": 13,
 											"text": "+Comparerproduit()",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGGO7+pbP9a6JA=",
-											"_parent": {
-												"$ref": "AAAAAAGGO788Ffh/qBA="
-											},
-											"model": {
-												"$ref": "AAAAAAGGO7+pRP8qSGQ="
-											},
-											"font": "Arial;13;0",
-											"left": 1301,
-											"top": 1212,
-											"width": 117.42529296875,
-											"height": 13,
-											"text": "+Operation1()",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1296,
 									"top": 1192,
 									"width": 127.42529296875,
-									"height": 38
+									"height": 23
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -7035,9 +7018,9 @@
 											"font": "Arial;13;1",
 											"left": 901,
 											"top": 743,
-											"width": 94.3134765625,
+											"width": 98.21728515625,
 											"height": 13,
-											"text": "Class6"
+											"text": "NombrePaniers"
 										},
 										{
 											"_type": "LabelView",
@@ -7070,7 +7053,7 @@
 									"font": "Arial;13;0",
 									"left": 896,
 									"top": 736,
-									"width": 104.3134765625,
+									"width": 108.21728515625,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGGO8f1/CjxEcM="
@@ -7107,7 +7090,7 @@
 											"font": "Arial;13;0",
 											"left": 901,
 											"top": 766,
-											"width": 94.3134765625,
+											"width": 98.21728515625,
 											"height": 13,
 											"text": "+QuantitéPanier",
 											"horizontalAlignment": 0
@@ -7116,7 +7099,7 @@
 									"font": "Arial;13;0",
 									"left": 896,
 									"top": 761,
-									"width": 104.3134765625,
+									"width": 108.21728515625,
 									"height": 23
 								},
 								{
@@ -7131,7 +7114,7 @@
 									"font": "Arial;13;0",
 									"left": 896,
 									"top": 784,
-									"width": 104.3134765625,
+									"width": 108.21728515625,
 									"height": 10
 								},
 								{
@@ -7171,7 +7154,7 @@
 							"containerChangeable": true,
 							"left": 896,
 							"top": 736,
-							"width": 104.3134765625,
+							"width": 108.21728515625,
 							"height": 58,
 							"nameCompartment": {
 								"$ref": "AAAAAAGGO8f1/CjwF4E="
@@ -7205,7 +7188,7 @@
 							"tail": {
 								"$ref": "AAAAAAGGO8f1/Cjv75I="
 							},
-							"points": "1000:794;1000:768;1049:768;1049:770"
+							"points": "1004:768;1049:768;1049:770"
 						},
 						{
 							"_type": "UMLClassView",
@@ -10842,14 +10825,6 @@
 								"$ref": "AAAAAAGGO788FPh2fYc="
 							},
 							"name": "Comparerproduit"
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGGO7+pRP8qSGQ=",
-							"_parent": {
-								"$ref": "AAAAAAGGO788FPh2fYc="
-							},
-							"name": "Operation1"
 						}
 					]
 				},
@@ -10969,7 +10944,7 @@
 					"_parent": {
 						"$ref": "AAAAAAGGNaHUfQlJMX8="
 					},
-					"name": "Class6",
+					"name": "NombrePaniers",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociationClassLink",

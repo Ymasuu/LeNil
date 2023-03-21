@@ -4,11 +4,13 @@ class ProduitsVendeur {
     private int $prix;
     private $listeProduits; //1..* C'est une liste ayant tous les types de Produit
             //qu'il y a dans le site que le vendeur dispose pour vendre
+            private $listeNombreQuantite; //0..*
 
-    function __construct(int $quantite ,int $prix,$listeProduits) { 
+    function __construct(int $quantite ,int $prix,$listeProduits,$listeNombreQuantite) { 
         $this ->quantite = $quantite;
         $this ->prix = $prix;
         $this->listeProduits = $listeProduits;
+        $this->listeNombreQuantite = $listeNombreQuantite;
         
       }
 
@@ -23,6 +25,12 @@ class ProduitsVendeur {
     function getListeProduits() {
         return $this->listeProduits;
     }
+
+    function getListeNombreQuantite() {
+        return $this->listeNombreQuantite;
+    }
+
+    
 }
 
 ?>
