@@ -5,7 +5,7 @@ private $listeComptes; // 1..* liste de type Compte ayant les comptes associées
 
 //à defaut, les moyens de payment sont nulls
 function __construct($CodePromo = null) { 
-    $this -> $this->CodePromo;
+    $this ->CodePromo = $CodePromo;
     
   }
 

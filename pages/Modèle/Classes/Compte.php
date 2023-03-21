@@ -5,15 +5,18 @@ class Compte {
     private bool $abonnement;
     private bool $signatureContratClient;
     private bool $signatureContratVendeur;
-    private $listeMoyensPayments;
+    private $listeMoyensPayments; //1..* 
+    private Contrat $contrat; //1..1 une compte a un seul contrat
+    private Panier $panier;
     
   
-    function __construct(string $email, string $motDePasse,bool $abonnement,$signatureContratClient,$signatureContratVendeur) { 
+    function __construct(string $email, string $motDePasse,bool $abonnement,$signatureContratClient,$signatureContratVendeur,$panier) { 
       $this->email = $email;
       $this->motDePasse = $motDePasse;
       $this ->abonnement = $abonnement;
       $this ->signatureContratClient = $signatureContratClient;
       $this ->signatureContratVendeur = $signatureContratVendeur;
+      $this->panier = $panier;
     
   
     }
