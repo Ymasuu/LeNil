@@ -4,23 +4,29 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LE NIL </title>
     <style>
         .user{
-            margin-left: 70%;
+            margin-left: 60%;
+        }
+        .panier{
+            margin-left: 75%;
         }
     </style>
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" type="image/png" href="../../img/logo2.png">
-    <h3> Catalogue </h3>
-    <h3 class="user"> Bienvenue <?php echo $_SESSION["user"] ?> 
-        <p>Panier : 0</p>
+    <h3>
+        <?php  if(isset($_SESSION["UTILISATEUR"])){
+                    echo "Bienvenue ". $_SESSION["UTILISATEUR"]["nom"] . " " . $_SESSION["UTILISATEUR"]["prenom"];
+                    echo "<a class=user href='abonnement.php'> S'abonner ?</a>";
+                    echo "<p class='panier'>Panier : 0</p>";
+                    echo "<hr> <!-- Repère visuel temporaire -->";
+                }
+        ?> 
+        
     </h3>
 </head>
 <body>
     <div>
-        <?php include '../../templates/header.php'; ?>
-        <hr> <!-- Repère visuel temporaire -->
         <div>
             <h5>Casquette : </h5>
             <div style="display: flex; align-items: center;">
@@ -51,6 +57,5 @@
             <button>Ajouter au panier</button>
         </div>
         <hr> <!-- Repère visuel temporaire -->
-        <?php include '../../templates/footer.php'; ?>
     </div>
 </body>

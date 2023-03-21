@@ -15,15 +15,8 @@
 		<?php include '../../templates/header.php'; ?>
 		<hr> <!-- Repère visuel temporaire -->
 		<div>
-			<h1>Ma page</h1>
-			<p>du texte...</p>
-			<?php
-				if(isset($_SESSION["UTILISATEUR"])){
-					echo "Vous êtes connecté en tant que " . $_SESSION["UTILISATEUR"]["nom"] . " " . $_SESSION["UTILISATEUR"]["prenom"];
-				}
-			?>
+			<?php include 'catalogue.php'?>
 		</div>
-		<hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>
