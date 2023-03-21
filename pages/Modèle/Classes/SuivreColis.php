@@ -1,13 +1,13 @@
 <?php
 class SuivreColis {
     private int $numero;
-    private $dateLivraison = date('Y-m-d H:i:s');
+    private $dateLivraison;
     private Colis $colis;
     private ProduitsVendeur $prod;
 
-    function __construct(int $numero, int $dateLivraison, Colis $colis, ProduitsVendeur $prod) { 
+    function __construct(int $numero,$dateLivraison, Colis $colis, ProduitsVendeur $prod) { 
         $this -> numero = $numero;
-        $this -> dateLivraison = $dateLivraison; 
+        $this -> dateLivraison = date('Y-m-d H:i:s'); 
         $this -> colis = $colis;
         $this -> prod = $prod;
     }
