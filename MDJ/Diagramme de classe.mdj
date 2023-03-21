@@ -5658,30 +5658,13 @@
 											"height": 13,
 											"text": "+mot clé: String",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGGO8Pm/xA18Yk=",
-											"_parent": {
-												"$ref": "AAAAAAGGO788Ffh+8lA="
-											},
-											"model": {
-												"$ref": "AAAAAAGGO8Pm2RAF/qw="
-											},
-											"font": "Arial;13;0",
-											"left": 1301,
-											"top": 1189,
-											"width": 117.42529296875,
-											"height": 13,
-											"text": "+caractéristique: tab",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1296,
 									"top": 1169,
 									"width": 127.42529296875,
-									"height": 38
+									"height": 23
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -5704,7 +5687,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1301,
-											"top": 1212,
+											"top": 1197,
 											"width": 117.42529296875,
 											"height": 13,
 											"text": "+Comparerproduit()",
@@ -5721,7 +5704,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1301,
-											"top": 1227,
+											"top": 1212,
 											"width": 117.42529296875,
 											"height": 13,
 											"text": "+Operation1()",
@@ -5730,7 +5713,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1296,
-									"top": 1207,
+									"top": 1192,
 									"width": 127.42529296875,
 									"height": 38
 								},
@@ -10849,15 +10832,6 @@
 							},
 							"name": "mot clé",
 							"type": "String"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAGGO8Pm2RAF/qw=",
-							"_parent": {
-								"$ref": "AAAAAAGGO788FPh2fYc="
-							},
-							"name": "caractéristique",
-							"type": "tab"
 						}
 					],
 					"operations": [

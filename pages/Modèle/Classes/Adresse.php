@@ -7,7 +7,7 @@ class Adresse {
     private string $pays;
     private string $complementAdresse;
     private Compte $compte;
-    private Commande $commande;
+    private  $listeCommande; //1..*
     
   
     function __construct(string $numeroRue, string $nomRue, int $codePostal,string $ville,string $pays, string $complementAdresse,Compte $compte, Commande $commande) { 
@@ -18,7 +18,7 @@ class Adresse {
       $this -> pays = $pays;
       $this -> complementAdresse = $complementAdresse;
       $this -> compte = $compte;
-      $this -> commande = $commande;
+      $this -> listeCommande = $commande;
     }
   
     function getNumeroRue() {
@@ -42,8 +42,8 @@ class Adresse {
     function getCompte(){
         return $this->compte;
     }
-    function getCommande(){
-        return $this->commande;
+    function getListeCommande(){
+        return $this->listeCommande;
     }
   }  
 ?>
