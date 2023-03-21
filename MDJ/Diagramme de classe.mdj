@@ -1881,7 +1881,7 @@
 											"top": 901,
 											"width": 111,
 											"height": 13,
-											"text": "+ModePaiement",
+											"text": "+ModePayement",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1898,7 +1898,7 @@
 											"top": 916,
 											"width": 111,
 											"height": 13,
-											"text": "+DatePaiement",
+											"text": "+DatePayement",
 											"horizontalAlignment": 0
 										}
 									],
@@ -10142,8 +10142,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGGO5zj3bWv5VI="
 							},
-							"name": "ModePaiement",
-							"type": ""
+							"name": "ModePayement"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -10151,8 +10150,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGGO5zj3bWv5VI="
 							},
-							"name": "DatePaiement",
-							"type": ""
+							"name": "DatePayement"
 						}
 					]
 				},
