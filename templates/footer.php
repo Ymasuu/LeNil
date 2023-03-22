@@ -40,7 +40,7 @@
 			</td>
 			<td style="text-align: top;"><ul><li>© 2023, LeNil.com</li></ul></td>
 			<td>
-				<address><ul><li>leNil@gmail.com</li></ul></address>
+				<address><ul><li>websiteprojet2023@gmail.com</li></ul></address>
 			</td>
 		</tr>
 	</table>
