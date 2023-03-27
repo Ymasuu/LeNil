@@ -8,7 +8,12 @@
 			<li>
 			<form action="rechercher.php">
 				<input class = "barreSearch" type="text" name ="query" placeholder="Rechercher sur LeNil.com">
-				<button class = "buttonSearch" type="submit"><img src="../../img/loupe.png" style="width: 30px; height: 30px;"></button>
+				<button class = "buttonSearch" type="submit">
+					<svg width="32" height="32" viewBox="0 0 460 460">
+					<ellipse style="fill: none; stroke: rgb(0, 0, 0); stroke-width: 40px;" cx="165" cy="164.984" rx="115" ry="114.984"></ellipse>
+					<path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-width: 50px;" d="M 208.166 347.127 L 438.717 347.027" transform="matrix(0.707107, 0.707107, -0.707107, 0.707107, 340.154351, -127.051178)"></path>
+					</svg>
+				</button>
 			</form>
 			</li>
 			<li><a href="about.php">A propos</a></li>
