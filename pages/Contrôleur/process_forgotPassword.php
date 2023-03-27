@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(isset($_SESSION["UTILISATEUR"])){
+    header("Location: profil.php");
+    exit();
+}
 $email = $_POST['mail'];
 
 $utilisateurs = explode("\n", file_get_contents("../../database/client.csv")); // récupération des données utilisateur
@@ -39,6 +43,7 @@ mail($email, $sujet, $message, $header);
 // On ne peut pas envoyer de mail sur le serveur de l'école, donc on ne peut pas tester 
 // cette partie du code. Nous allons donc la simuler.
 
-header("Location:../Vue/login.php");
+$_SESSION["mail"] = $email;
+header("Location:../Vue/forgotPassword2.php");
 exit();
 ?>
