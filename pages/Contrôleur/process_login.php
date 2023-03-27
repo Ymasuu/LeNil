@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 // Si l'utilisateur à déjà essayé de se connecter 3 fois, mais qu'il a attendu 5 minutes, on réinitialise le compteur
@@ -6,7 +6,7 @@ if (isset($_SESSION["errorLogin"]) && $_SESSION["errorLogin"] >= 3) {
     if (time() - $_SESSION["errorLoginTime"] > 300) {
         $_SESSION["errorLogin"] = 0;
     } else {
-        $_SESSION["error"] = "Vous avez essayé de vous connecter 3 fois, vous devez attendre 5 minutes avant de pouvoir réessayer";
+        $_SESSION["message"] = "Vous avez essayé de vous connecter 3 fois, vous devez attendre 5 minutes avant de pouvoir réessayer";
         header("Location:../Vue/login.php");
         exit();
     }
@@ -17,8 +17,7 @@ $password = $_POST['password'];
 
 $utilisateurs = explode("\n", file_get_contents("../../database/client.csv")); // récupération des données utilisateur
 
-foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs 
-{
+foreach($utilisateurs as $end){ //on parcourt dans la liste des utilisateurs 
     $detailUtilisateur = explode(",", $end);
     if($detailUtilisateur[2] == $mail && $detailUtilisateur[9] == $password)
     {
@@ -35,6 +34,29 @@ foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs
         $_SESSION["UTILISATEUR"]["mdp"] = $detailUtilisateur[9];
         $_SESSION["UTILISATEUR"]["Abonnement"] = $detailUtilisateur[10];
         $_SESSION["UTILISATEUR"]["DateAbonnement"] = $detailUtilisateur[11];
+        $_SESSION["UTILISATEUR"]["TypeCompte"] = "client";
+        header("Location:../Vue/index.php");
+        exit();
+    }
+}
+
+// Si l'utilisateur n'a pas été trouvé, on vérifie s'il s'agit d'un vendeur
+$utilisateurs = explode("\n", file_get_contents("../../database/vendeur.csv")); // récupération des données utilisateur
+
+foreach($utilisateurs as $end){ //on parcourt dans la liste des utilisateurs
+    $detailUtilisateur = explode(",", $end);
+    if($detailUtilisateur[1] == $mail && $detailUtilisateur[7] == $password)
+    {
+        unset($_SESSION["errorLogin"]); // on supprime la variable de session
+        $_SESSION["UTILISATEUR"]["nom"] = $detailUtilisateur[0];
+        $_SESSION["UTILISATEUR"]["email"] = $detailUtilisateur[1];
+        $_SESSION["UTILISATEUR"]["tel"] = $detailUtilisateur[2];
+        $_SESSION["UTILISATEUR"]["adresse"] = $detailUtilisateur[3];
+        $_SESSION["UTILISATEUR"]["ville"] = $detailUtilisateur[4];
+        $_SESSION["UTILISATEUR"]["codePostal"] = $detailUtilisateur[5];
+        $_SESSION["UTILISATEUR"]["pays"] = $detailUtilisateur[6];
+        $_SESSION["UTILISATEUR"]["mdp"] = $detailUtilisateur[7];
+        $_SESSION["UTILISATEUR"]["TypeCompte"] = "vendeur";
         header("Location:../Vue/index.php");
         exit();
     }
@@ -49,7 +71,7 @@ foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs
     if ($_SESSION["errorLogin"] >= 3) {
         $_SESSION["lastErrorLogin"] = time();
     }
-    $_SESSION["error"] = "Login ou mot de passe incorrect";
+    $_SESSION["message"] = "Login ou mot de passe incorrect";
     header("Location:../Vue/login.php");
     exit();
 ?>

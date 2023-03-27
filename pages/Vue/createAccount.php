@@ -48,9 +48,6 @@
 					<tr>
 						<td><label for="ville">Ville*</label></td>
 						<td><input type="text" name="ville" id="ville" pattern="[A-Za-z-]{1,26}" required></td>
-						<!--
-						Créer un pattern [A-Za-z-] mais ne pouvant accepter qu'un seul espace consécutif
-						-->
 					</tr>
 					<tr>
 						<td><label for="codePostal">Code postal*</label></td>

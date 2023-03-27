@@ -26,7 +26,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><input type="text" name="mail" id="mail" required></td>
+                        <td><input type="text" name="mail" id="mail" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"></td>
                         <td><input type="submit" value="Envoyer"></td>
                     </tr>
                     <tr>
