@@ -8,6 +8,7 @@ class Adresse {
     private string $complementAdresse;
     private Compte $compte;
     private  $listeCommande; //1..*
+    private $listeQuantiteCommande;//1..* objets de type QuantiteCommande
     
   
     function __construct(string $numeroRue, string $nomRue, int $codePostal,string $ville,string $pays, string $complementAdresse,Compte $compte, Commande $commande) { 
@@ -19,6 +20,8 @@ class Adresse {
       $this -> complementAdresse = $complementAdresse;
       $this -> compte = $compte;
       $this -> listeCommande = $commande;
+      //On en deduit la listeQuantiteCommande à partir de la listeCommande
+      $this->listeQuantiteCommande = null;//Il faut implementer encore
     }
   
     function getNumeroRue() {
