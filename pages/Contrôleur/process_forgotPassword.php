@@ -21,7 +21,7 @@ if($valide == 0){
     header("Location:../Vue/forgotPassword.php");
     exit();
 }
-
+/* 
 // Génération du lien unique pour la modification du mot de passe
 $lien = "http://localhost:3000/pages/Vue/modifier_mot_de_passe.php?email=".urlencode($email)."&token=".uniqid();
 
@@ -34,8 +34,11 @@ Si vous n'avez pas demandé à modifier votre mot de passe,
 veuillez ignorer ce message.\n\nCordialement,\n\nL'équipe Le Nil";
 $header = "From: LeNil@gmail.com\r\nReply-To: LeNil@gmail.com\r\nX-Mailer: PHP/".phpversion();
 mail($email, $sujet, $message, $header);
+*/
 
-$_SESSION["error"] = "Un mail vous a été envoyé pour modifier votre mot de passe";
+// On ne peut pas envoyer de mail sur le serveur de l'école, donc on ne peut pas tester 
+// cette partie du code. Nous allons donc la simuler.
+
 header("Location:../Vue/login.php");
 exit();
 ?>
