@@ -17,6 +17,7 @@
 			</form>
 			</li>
 			<li><a href="about.php">A propos</a></li>
+			<li><a href="abonnement.php">S'abonner ?</a></li>
 			<li><a href="panier.php">
 			<svg width="48" height="48" viewBox="0 0 512 512">
     			<circle cx="176" cy="416" r="16" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></circle>
