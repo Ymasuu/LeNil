@@ -13,6 +13,7 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
+		<?php if(isset($_SESSION["merci"]))echo "<center><b>".$_SESSION["merci"]."</b></center>";?>
 		<div class = "global">
 
 			<div class = "gauche">
