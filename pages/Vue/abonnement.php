@@ -37,7 +37,10 @@ if(!isset($_SESSION['UTILISATEUR'])){
 	<div>
 		<?php include '../../templates/header.php'; ?>
 		<hr> <!-- Repère visuel temporaire -->
-        <div class="conteneur">
+        <form action="../Contrôleur/process_abonnement.php" class="conteneur" method="POST">
+            <?php
+
+            ?>
             <div class="flex">
                 <h4>ABONNEMENT MENSUEL</h4>
                 <ul>
@@ -46,7 +49,7 @@ if(!isset($_SESSION['UTILISATEUR'])){
                     <li>Frais de Livraison gratuits</li>
                     <li>10€/mois</li>
                 </ul>
-                <button>S'abonner</button>
+                <input type="submit"  id="mensuel" name="mensuel" value="s'abonner">
             </div>
             <div class="flex">
                 <h4>ABONNEMENT ANNUEL</h4>
@@ -56,9 +59,9 @@ if(!isset($_SESSION['UTILISATEUR'])){
                     <li>Frais de Livraison gratuits</li>
                     <li>50€/an</li>
                 </ul>
-                <button>S'abonner</button>
+                <input type="submit" id="annuel" name="annuel" value="s'abonner">
             </div>
-        </div>
+    </form>
         <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
 	</div>
