@@ -1,5 +1,5 @@
-<footer>
-	<table class="footerContent" style="padding-top:30px">
+<footer style="text-align:center;">
+	<table class="footerContent" style="margin:auto;">
 		<tr>
 			<th>Gestion du compte</th>
 			<th>Autres pages</th>
@@ -22,7 +22,7 @@
 			</td>
 		</tr>
 	</table>
-	<table class="footerContent" style="padding-top:15px">
+	<table class="footerContent" style="margin:auto;">
 		<tr>
 			<th>Concepteurs</th>
 			<th>Mention légale</th>
