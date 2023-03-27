@@ -1,3 +1,5 @@
+--Les tables doivent etre crées dans l'ordre suivante:
+
 CREATE TABLE Colis (
 id int not null PRIMARY key,
 longueur SMALLINT CHECK (longueur > 0),
@@ -11,7 +13,7 @@ CREATE TABLE Commande (
     modePayment varchar(20),
     datePayment date,
     idColis int FOREIGN KEY REFERENCES Colis(id),
-    
+
 );
 
 CREATE TABLE Client (
@@ -26,6 +28,11 @@ codePostal SMALLINT not null,
 pays varchar(50) not null,
 motDePasse varchar(100) not null,
 idCommande int,
-    FOREIGN KEY REFERENCES Commande(idCommande)
+    FOREIGN KEY (idCommande) REFERENCES Commande(id)
+);
+
+CREATE TABLE RECHRCHE(
+    motCle varchar(255) not null PRIMARY KEY,
+    
 );
 
