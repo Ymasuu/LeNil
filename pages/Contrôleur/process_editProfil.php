@@ -50,6 +50,6 @@ foreach($csvArray as $key => $line) {
 }
 
 $_SESSION['succes'] = "Données du profil mis à jour";
-header('Location:../vue/profil.php');
+header('Location:../Vue/profil.php');
 exit();
 ?>

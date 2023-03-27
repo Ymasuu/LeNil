@@ -8,40 +8,48 @@
     }
 
 
-    /*$csvFile = file_get_contents("../../database/client.csv");
-    $csvArray = explode("\n", $csvFile);
-    foreach($csvArray as $key => $line) {
-        $utilisateur = explode(",", $line);
-        if ($utilisateur[2] == $_SESSION['UTILISATEUR']['email'] && $utilisateur[9] == $_SESSION['UTILISATEUR']['mdp']) {
+    /*$fichier = file_get_contents("../../database/client.csv");
+    $utilisateur = explode("\n", $fichier);
+    foreach($utilisateur as $end) {
+        if ($utilisateur[2] == $_SESSION["UTILISATEUR"]["email"]) {
             // Mettre à jour les données dans le tableau $ligne
-            $utilisateur[10] = $_SESSION['UTILISATEUR']['Abonnement'];
+            $utilisateur[10] = "test";
+            header('Location:../Vue/profil.php');
+            exit();
         }
-        $csvArray[$key] = implode(",", $utilisateur);
-
-        $csvFile = implode("\n", $csvArray);
-        file_put_contents("../../database/client.csv", $csvFile);
+        $fichier = implode("\n", $csvArray);
+        file_put_contents("../../database/client.csv", $fichier);
         break;
     }*/
 
-    $fichier = fopen("../../database/client.csv", 'r+');
-    // Boucle pour parcourir les lignes du fichier CSV
-    while (($utilisateur = fgetcsv($fichier)) !== false) {
-        
-        // Vérification de l'identifiant de la ligne courante
-        if ($utilisateur[2] == $_SESSION['UTILISATEUR']['email'] && $utilisateur[9] == $_SESSION['UTILISATEUR']['mdp']) {
-            
-            // Modification des données de la ligne courante
-            $utilisateur[10] = $_SESSION['UTILISATEUR']['Abonnement'];
-            
-            // Réécriture de la ligne courante dans le fichier CSV
-            fseek($fichier, -1, SEEK_CUR);
-            fputcsv($fichier, $utilisateur);
-            break;
-        }
-    }
-    // Fermeture du fichier CSV
-    fclose($fichier);
+    $csv = file_get_contents("../../database/client.csv");
+    // diviser la chaîne en lignes
+    $lignes = explode("\n", $csv);
 
-    header('Location: ../Vue/profil.php');
+    // parcourir chaque ligne
+    foreach ($lignes as $index => $ligne) {
+        // diviser la ligne en colonnes
+        $colonnes = str_getcsv($ligne, ',');
+
+        // si la colonne 3 contient votre adresse e-mail, mettre à jour la colonne 9 avec la nouvelle donnée
+        if ($colonnes[2] == $_SESSION['UTILISATEUR']['email']) {
+            $colonnes[10] = $_SESSION['UTILISATEUR']['Abonnement'];
+            // fusionner les colonnes en une nouvelle ligne
+            $nouvelle_ligne = implode(',', $colonnes);
+            // remplacer la ligne d'origine par la nouvelle ligne
+            $lignes[$index] = $nouvelle_ligne;
+            // fusionner les lignes en une chaîne de caractères
+            $nouveau_csv = implode("\n", $lignes);
+            // fusionner les lignes en une chaîne de caractères
+            $nouveau_csv = implode("\n", $lignes);
+            // écrire le nouveau contenu dans le fichier
+            file_put_contents('chemin/vers/votre/fichier.csv', $nouveau_csv);
+            break;
+        }        
+    }
+
+
+
+    header('Location:../Vue/index.php');
     exit();
 ?>
