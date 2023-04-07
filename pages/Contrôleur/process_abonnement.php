@@ -2,7 +2,7 @@
     session_start();
 
     date_default_timezone_set('Europe/Paris');
-    $date = date('d-m-y');
+    $date = date('d-m-Y');
 
     if(isset($_POST['desabonner'])){
         $_SESSION["UTILISATEUR"]["Abonnement"] = "None";
