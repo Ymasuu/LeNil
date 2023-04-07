@@ -81,7 +81,7 @@
 		</form>
 		<a class="bouton-golden" href="index.php">Retour à l'accueil</a>
 			<span>Vous posséder déjà un compte ?</span>
-			<button class="bouton-golden" name="Se connecter" value="Se connecter" onclick="window.location.href='login.php'"><a href="login.php">Se connecter</a></button>
+			<a class="bouton-golden" href="login.php">Se connecter</a>
 	</div>
 </body>
 </html>
