@@ -15,7 +15,7 @@
 			<p>Insérer ici le texte à propos</p>		
 		</div>
 		<hr> <!-- Repère visuel temporaire -->
-		<?php include '../../templates/footer.php'; ?>
 	</div>
+	<?php include '../../templates/footer.php'; ?>
 </body>
 </html>

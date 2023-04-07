@@ -1,0 +1,15 @@
+.conteneur {
+    display: flex;
+}
+.flex {
+    flex-grow: 1;
+    border: ridge #2E3F58;
+    color: #2E3F58;
+    margin: 10px;
+}
+h4{
+    text-align : center;
+}
+.desabonner{
+    margin-left: 10px;
+}
