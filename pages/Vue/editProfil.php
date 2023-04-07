@@ -70,7 +70,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
                         </tr>
                         <tr>
                             <td><input type="submit" value="Modifier"></td>
-                            <td><?php if(isset($_SESSION["erreur"])){echo $_SESSION["erreur"];unset($_SESSION["erreur"]);} ?></td>
+                            <td><?php if(isset($_SESSION['erreur'])){echo $_SESSION['erreur'];unset($_SESSION['erreur']);} ?></td>
                         </tr>
                     </table>
                 </fieldset>
@@ -78,7 +78,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
         </div>
         <!-- un bouton permettant de revenir à la page précédente-->
         <div style="width: 500px; margin: auto; padding-left:100px;">
-            <a href="profil.php">Retour</a>
+            <a class="bouton-golden" href="profil.php">Retour</a>
         </div>
     </div>
 </body>
