@@ -16,7 +16,7 @@ CREATE TABLE Panier (
      int not null PRIMARY KEY,
     HT decimal,
     TVA decimal,
-    TTC decimal CHECK (TTC >= HT)
+    TTC decimal CHECK (TTC >= HT),
     idClient int FOREIGN KEY REFERENCES Client(id),
     
 );
@@ -24,8 +24,8 @@ CREATE TABLE Panier (
 CREATE TABLE Colis (
 id int not null PRIMARY KEY,
 longueur SMALLINT CHECK (longueur > 0),
-hauteur SMALLINT CHECK (hauteur > 0);
-poids SMALLINT CHECK(poids > 0)
+hauteur SMALLINT CHECK (hauteur > 0),
+poids SMALLINT CHECK(poids > 0),
 );
 
 CREATE TABLE Commande (
