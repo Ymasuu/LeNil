@@ -12,24 +12,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
 	<meta cjharset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>abonnement</title>
-    <style>
-        .conteneur {
-            display: flex;
-        }
-        .flex {
-            flex-grow: 1;
-            border-style: ridge;
-            margin: 10px;
-        }
-        h4{
-            text-align : center;
-        }
-        .desabonner{
-            margin-left: 10px;
-        }
-
-    </style>
-    
+    <link rel="stylesheet" href="../../css/abonnement.css">
 	<link rel="stylesheet" href="../../css/style.css">
 	<link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
@@ -46,7 +29,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
                     <li>Frais de Livraison gratuits</li>
                     <li>10€/mois</li>
                 </ul>
-                <input type="submit"  id="mensuel" name="mensuel" value="s'abonner">
+                <input class="bouton-golden" type="submit"  id="mensuel" name="mensuel" value="s'abonner">
             </div>
             <div class="flex">
                 <h4>ABONNEMENT ANNUEL</h4>
@@ -56,11 +39,11 @@ if(!isset($_SESSION["UTILISATEUR"])){
                     <li>Frais de Livraison gratuits</li>
                     <li>100€/an</li>
                 </ul>
-                <input type="submit" id="annuel" name="annuel" value="s'abonner">
+                <input class="bouton-golden" type="submit" id="annuel" name="annuel" value="s'abonner">
             </div>     
         </form>
         <form action="../Contrôleur/process_abonnement.php" class="desabonner" method="POST">
-            <input type="submit" id="desabonner" name="desabonner" value="se désabonner">
+            <input class="bouton-golden" type="submit" id="desabonner" name="desabonner" value="se désabonner">
         </form>
         <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
