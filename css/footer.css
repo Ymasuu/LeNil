@@ -1,6 +1,4 @@
 /* footer */
-
-
 .color { 
     color:#2E3F58;
 }
@@ -9,7 +7,10 @@ footer {
     width:100%; 
     background-color:#f9f7f7; 
     min-height:250px; 
-    padding:10px 0px 25px 0px ;
+}
+
+ul{
+    padding-left: 0px;
 }
 
 .pt2 { 
@@ -39,9 +40,6 @@ footer p {
 .fleft { 
     float:left;
 }
-.padding-right { 
-    padding-right:10px; 
-}
 
 .bottom_border { 
     border-bottom:1px solid #2E3F58; 
@@ -68,10 +66,10 @@ footer p {
     margin:0 12px;
 }
 
-.logo { 
-    display:table; 
-    list-style-type:none;  
-    margin: 0 auto;
+.logo {
+    list-style-type:none;
+    display: flex;
+    justify-content: center;
 }
 
 .logo li { 

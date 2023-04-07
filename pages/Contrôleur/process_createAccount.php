@@ -9,6 +9,7 @@ $user["nom"] = $_POST["nom"];
 $user["prenom"] = $_POST["prenom"];
 $user["email"] = $_POST["email"];
 $user["dateNaissance"] = $_POST["dateNaissance"];
+$user["dateNaissance"] = date('d-m-y');
 $user["tel"] = $_POST["tel"];
 $user["adresse"] = $_POST["adresse"];
 $user["ville"] = $_POST["ville"];

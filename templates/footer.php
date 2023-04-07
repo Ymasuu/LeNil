@@ -33,11 +33,12 @@
             <li><a href=contact.php>Contacter</a></li>
         </ul>
         <center>© 2023, LeNil.com</center>
-        <ul class="logo">
-            <li><a><i class="fab fa-facebook-f"></i></a></li>
-            <li><a><i class="fab fa-twitter"></i></a></li>
-            <li><a><i class="fab fa-linkedin"></i></a></li>
-            <li><a><i class="fab fa-instagram"></i></a></li>
-        </ul>
+            <ul class="logo">
+                <li style="padding-left: 0px;"><a><i class="fab fa-facebook-f"></i></a></li>
+                <li><a><i class="fab fa-twitter"></i></a></li>
+                <li><a><i class="fab fa-linkedin"></i></a></li>
+                <li><a><i class="fab fa-instagram"></i></a></li>
+            </ul>
+            
     </div>
 </footer>
