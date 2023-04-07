@@ -54,7 +54,7 @@ pays varchar(50) not null,
 motDePasse varchar(100) not null,
 idCommande int,
     FOREIGN KEY (idCommande) REFERENCES Commande(id),
-FOREIGN KEY (email) REFERENCES Compte(email)
+FOREIGN KEY (emailCompte) REFERENCES Compte(email)
 );
 
 
@@ -63,8 +63,6 @@ CREATE TABLE Panier (
     HT decimal,
     TVA decimal,
     TTC decimal,
-    nomClient varchar(50) not null,
-    prenomClient varChar(50) not null,
     idClient int not null,
     FOREIGN KEY (idClient) REFERENCES Client(id)
 );
@@ -73,7 +71,9 @@ CREATE TABLE Panier (
 CREATE TABLE ProduitsVendeur (
 id int not null PRIMARY KEY,
 QuantiteVendeur int not null,
-prix decimal(10,2) not null
+prix decimal(10,2) not null,
+idPanier int,
+FOREIGN KEY(idPanier) REFERENCES Panier(id)
 );
 
 CREATE TABLE a_CommandeContientProduitVendeur(
@@ -84,7 +84,25 @@ FOREIGN KEY (idCommande) REFERENCES Commande(id),
 FOREIGN KEY (idProduitVendeur) REFERENCES ProduitsVendeur(id)
 );
 
+CREATE TABLE NombrePanier (
+    id int not null PRIMARY KEY,
+    QuantitePanier int not null,
+    idPanier int REFERENCES Panier(id),
+    idProduitVendeur int REFERENCES Panier(id)
+);
 
 CREATE TABLE Recherche(
     motCle varchar(255) not null PRIMARY KEY
+);
+
+CREATE TABLE Caracteristique(
+    id int not null PRIMARY KEY,
+    valeur varchar(10) not null,
+    nom varchar(50) not null
+);
+
+CREATE TABLE Produit(
+    id int not null PRIMARY KEY,
+    description varchar(255) not null,
+    idCaracteristique int REFERENCES Caracteristique(id)
 );
