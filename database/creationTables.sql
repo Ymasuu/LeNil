@@ -44,7 +44,7 @@ CREATE TABLE Client (
     id int not null PRIMARY KEY,
 prenom varchar(50) not null,
 nom varchar(50) not null,
-email varchar(150) not null,
+emailCompte varchar(150) not null,
 dateNaissance date not null,
 telephone int not null,
 adresse varchar(250) not null,
@@ -105,4 +105,53 @@ CREATE TABLE Produit(
     id int not null PRIMARY KEY,
     description varchar(255) not null,
     idCaracteristique int REFERENCES Caracteristique(id)
+);
+
+CREATE TABLE Contrat(
+numero int not null Primary Key,
+texte varchar(255),
+emailCompte varchar(100),
+FOREIGN KEY (emailCompte) REFERENCES Compte(email)
+);
+
+CREATE TABLE MoyenPayment(
+    id int not null Primary key,
+    modePayment ENUM('paypal', 'cb')
+);
+
+CREATE TABLE a_payePar(
+emailCompte varchar(50) not null,
+idMoyenPayment int not null,
+Primary KEY (emailCompte,idMoyenPayment),
+FOREIGN KEY (emailCompte) REFERENCES Compte(email),
+FOREIGN KEY (idMoyenPayment) REFERENCES MoyenPayment(id)
+);
+
+CREATE TABLE Adresse(
+id int PRYMARY KEY AUTO_INCREMENT,
+numeroRue varchar(255) not null,
+nomRue varchar(255),
+codePostal SMALLINT not null,
+ville varchar(100) not null,
+pays varchar(50),
+complementAdresse varchar(255),
+idCommande int not null,
+FOREIGN KEY (idCommande) REFERENCES Commande(id)
+);
+
+CREATE TABLE QuantiteCommande (
+    id INT NOT NULL PRIMARY KEY,
+    quantite DECIMAL(2)
+);
+
+
+--Table de la relation ternaire
+CREATE TABLE Adresse_Commande_QuantiteCommande(
+idAdresse int not null,
+idCommande int not null,
+idQuantiteCommande int not null,
+PRIMARY KEY (idAdresse,idCommande,idQuantiteCommande),
+Foreign KEY (idAdresse) REFERENCES Adresse(id),
+FOREIGN KEY (idCommande) REFERENCES Commande(id),
+FOREIGN KEY (idQuantiteCommande) REFERENCES QuantiteCommande(id)
 );
