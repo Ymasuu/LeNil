@@ -32,7 +32,7 @@ $valide = 0; //par défaut, on considère que les informations entrées sont inv
 foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs 
 {
     $detailUtilisateur = explode(",", $end);
-    if($detailUtilisateur[1] == $email)
+    if($detailUtilisateur[2] == $user["email"])
     {
         $valide = 1;
         $_SESSION["error"] = "L'adresse mail est déjà utilisée";
