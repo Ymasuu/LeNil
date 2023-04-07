@@ -8,7 +8,8 @@ if(isset($_SESSION['email'])){
 $user["nom"] = $_POST["nom"];
 $user["prenom"] = $_POST["prenom"];
 $user["email"] = $_POST["email"];
-$user["dateNaissance"] = $_POST["dateNaissance"];
+$date = $_POST["dateNaissance"];
+$user["dateNaissance"] =  date("d-m-y", strtotime($date));
 $user["tel"] = $_POST["tel"];
 $user["adresse"] = $_POST["adresse"];
 $user["ville"] = $_POST["ville"];

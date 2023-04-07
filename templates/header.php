@@ -18,7 +18,7 @@
 			<li class="style"><a href="abonnement.php" class="lien">S'abonner</a></li>
 			<div class="test">
 				<li class="style"><a href="panier.php" class="lien">
-				<svg width="48" height="48" viewBox="0 0 512 512">
+				<svg width="32" height="32" viewBox="0 0 512 512">
 					<circle cx="176" cy="416" r="16" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></circle>
 					<circle cx="400" cy="416" r="16" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></circle>
 					<polyline points="48 80 112 80 160 352 416 352" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"></polyline>
