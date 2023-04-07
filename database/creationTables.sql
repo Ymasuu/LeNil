@@ -8,7 +8,8 @@ DROP TABLE IF EXISTS Colis;
 DROP TABLE IF EXISTS Commande;
 DROP TABLE IF EXISTS ProduitsVendeur;
 DROP TABLE IF EXISTS Recherche;
-DROP TABLE IF EXISTS Produit;
+DROP TABLE IF EXISTS Compte;
+
 
 CREATE TABLE Colis (
     id int not null PRIMARY KEY,
@@ -23,8 +24,6 @@ CREATE TABLE Commande (
     modePayment varchar(20),
     datePayment date,
     idColis int REFERENCES Colis(id)
-    
-
 );
 
 CREATE TABLE Client (
@@ -38,7 +37,7 @@ CREATE TABLE Client (
     codePostal SMALLINT not null,
     pays varchar(50) not null,
     motDePasse varchar(100) not null,
-    idCommande int REFERENCES Commande(id)
+    idCommande int REFERENCES Commande(id),
     emailCompte varchar(150) REFERENCES Compte(email)
 );
 
@@ -81,5 +80,5 @@ CREATE TABLE Compte (
     motdepasse varchar(255) not null,
     est_abonne bit not null,
     est_SignatureContratClient bit not null,
-    est_SignatureContratVendeur bit not null,
+    est_SignatureContratVendeur bit not null
 );
