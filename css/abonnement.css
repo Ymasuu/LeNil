@@ -3,7 +3,8 @@
 }
 .flex {
     flex-grow: 1;
-    border-style: ridge;
+    border: ridge #2E3F58;
+    color: #2E3F58;
     margin: 10px;
 }
 h4{
