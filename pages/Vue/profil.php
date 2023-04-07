@@ -77,8 +77,8 @@ if(!isset($_SESSION["UTILISATEUR"])){
                             <?php echo $_SESSION["UTILISATEUR"]["Abonnement"]; ?>
                         </td>
                     </tr>
-                    <?php if($_SESSION["UTILISATEUR"]["Abonnement"] != "None"){
-                            echo '<tr><td>Date d\'abonnement : '.$_SESSION["UTILISATEUR"]["DateAbonnement"].'</td></tr>';
+                    <?php if($_SESSION['UTILISATEUR']['DateAbonnement'] != 'None'){
+                            echo '<tr><td>Date d\'abonnement : '.$_SESSION['UTILISATEUR']['DateAbonnement'].'</td></tr>';
                         }
                     ?>
                 </table>

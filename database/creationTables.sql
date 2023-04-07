@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS Colis;
 DROP TABLE IF EXISTS Commande;
 DROP TABLE IF EXISTS ProduitsVendeur;
 DROP TABLE IF EXISTS Recherche;
+DROP TABLE IF EXISTS Produit;
 
 CREATE TABLE Client (
 prenom varchar(50) not null,
@@ -65,4 +66,15 @@ CREATE TABLE Recherche(
     motCle varchar(255) not null PRIMARY KEY,
     
 );
+CREATE TABLE Caracteristique{
+    id int not null PRIMARY KEY,
+    valeur varchar(10) not null,
+    nom varchar(50) not null,
+};
+
+CREATE TABLE Produit{
+    id int not null PRIMARY KEY,
+    description varchar(255) not null,
+    FOREIGN KEY (idCaracteristique) REFERENCES Caracteristique(id)
+};
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Si l'utilisateur n'est pas connecté, on le redirige vers la page de connexion
-if(!isset($_SESSION['UTILISATEUR'])){
+if(!isset($_SESSION["UTILISATEUR"])){
     header('Location: login.php');
     exit();
 }
@@ -24,8 +24,8 @@ if(!isset($_SESSION['UTILISATEUR'])){
         h4{
             text-align : center;
         }
-        button{
-            margin : 5px;
+        .desabonner{
+            margin-left: 10px;
         }
 
     </style>
@@ -38,9 +38,6 @@ if(!isset($_SESSION['UTILISATEUR'])){
 		<?php include '../../templates/header.php'; ?>
 		<hr> <!-- Repère visuel temporaire -->
         <form action="../Contrôleur/process_abonnement.php" class="conteneur" method="POST">
-            <?php
-
-            ?>
             <div class="flex">
                 <h4>ABONNEMENT MENSUEL</h4>
                 <ul>
@@ -57,11 +54,14 @@ if(!isset($_SESSION['UTILISATEUR'])){
                     <li>Des réductions sur certains articles</li>
                     <li>Livraison plus rapide</li>
                     <li>Frais de Livraison gratuits</li>
-                    <li>50€/an</li>
+                    <li>100€/an</li>
                 </ul>
                 <input type="submit" id="annuel" name="annuel" value="s'abonner">
-            </div>
-    </form>
+            </div>     
+        </form>
+        <form action="../Contrôleur/process_abonnement.php" class="desabonner" method="POST">
+            <input type="submit" id="desabonner" name="desabonner" value="se désabonner">
+        </form>
         <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
 	</div>
