@@ -17,6 +17,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
     <link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
 <body>
+    <?php include '../../templates/header.php'; ?>
     <div>
         <div style="width: 500px; margin: auto;">
             <h1>Profil Utilisateur</h1>
@@ -96,6 +97,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
             </div>
         </div>
     </div>
+    <?php include '../../templates/footer.php'; ?>
     <script>
         function afficherPopup(){
             document.getElementById("popup").style.display = "block";

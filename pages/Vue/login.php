@@ -15,6 +15,7 @@
 	<link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
 <body>
+    <?php include '../../templates/header.php'; ?>
 	<div style="width: 500px; margin: auto;">
 		<h1>Se connecter</h1>
 		<form action="../Contrôleur/process_login.php" method="post">
@@ -50,4 +51,5 @@
             <a class="bouton-golden" href="createAccount.php">S'inscrire</a>
         </div>
     </div>
+    <?php include '../../templates/footer.php'; ?>
 </body>
