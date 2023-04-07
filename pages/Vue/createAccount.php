@@ -17,6 +17,7 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
+		<hr>
 		<div style="width: 520px; margin: auto;">
 			<h1>Créer un compte</h1>
 			<form action="../Contrôleur/process_createAccount.php" method="post">
@@ -85,7 +86,8 @@
 			<a class="bouton-golden" href="index.php">Retour à l'accueil</a>
 				<span style="padding-left: 10px;">Vous posséder déjà un compte ?</span>
 				<a class="bouton-golden" href="login.php">Se connecter</a>
-		</div> 
+		</div>
+		<hr>
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>

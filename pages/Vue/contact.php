@@ -20,7 +20,6 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
-		<hr> <!-- Repère visuel temporaire -->
         <div class="contact">
             <h2>Demande de contact</h2>
             <form id="form" action="mail.php" method="post">
@@ -48,7 +47,7 @@
                 <label for='Contenu'> Contenu : </label>
                 <textarea placeholder="Tapez ici la demande de votre mail" name="contenu"></textarea><br><br>
                 <input class="color" class="bouton" type="submit" value="Envoyer" name="submit">
-                <input class="color" class="bouton" type="Reset" value="Reset">
+                <input class="color" style="margin-bottom: 5px;" class="bouton" type="Reset" value="Reset">
 
             </form>
         </div>

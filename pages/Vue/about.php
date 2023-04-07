@@ -15,7 +15,7 @@
 		<!-- faire en sorte que le texte soit justifié -->
 			<h1>A propos</h1>
 			<p>Bienvenue sur LeNil,<br><br>
-			Ce site est ne simulation de market place en ligne créée par une équipe d'étudiants d'Ing-1 en informatique à l'école CY-Tech.
+			Ce site est une simulation de market place en ligne créée par une équipe d'étudiants d'Ing-1 en informatique à l'école CY-Tech.
 			Celui-ci offre une sélection diversifiée de produits, allant du high-tech à la mode, en passant par les articles ménagers et bien plus encore.<br><br>
 			Nous avons conçu un design simple et épuré, dans un souci de simplicité et d'écologie, en minimisant la charge du site pour être plus respectueux de l'environnement.<br><br>
 			Veuillez noter que LeNil est une simulation et ne permet pas réellement d'acheter des produits.

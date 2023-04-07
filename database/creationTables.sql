@@ -58,6 +58,13 @@ CREATE TABLE ProduitsVendeur (
     idPanier int REFERENCES Panier(id)
 );
 
+CREATE TABLE NombrePanier (
+    id int not null PRIMARY KEY,
+    QuantitePanier int not null,
+    idPanier int REFERENCES Panier(id),
+    idProduitVendeur int REFERENCES Panier(id)
+);
+
 CREATE TABLE Recherche(
     motCle varchar(255) not null PRIMARY KEY
     
