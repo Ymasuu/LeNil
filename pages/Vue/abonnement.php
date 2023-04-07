@@ -46,7 +46,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
             <input class="bouton-golden" type="submit" id="desabonner" name="desabonner" value="se désabonner">
         </form>
         <hr> <!-- Repère visuel temporaire -->
-		<?php include '../../templates/footer.php'; ?>
 	</div>
+    <?php include '../../templates/footer.php'; ?>
 </body>
 </html>
