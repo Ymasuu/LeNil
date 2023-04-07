@@ -70,7 +70,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
                             <td><input type="password" name="mdp" id="mdp" placeholder="mot de passe"></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Modifier"></td>
+                            <td><input class="bouton-golden" type="submit" value="Modifier"></td>
                             <td><?php if(isset($_SESSION['erreur'])){echo $_SESSION['erreur'];unset($_SESSION['erreur']);} ?></td>
                         </tr>
                     </table>
