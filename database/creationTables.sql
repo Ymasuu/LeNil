@@ -10,6 +10,7 @@ DROP TABLE IF EXISTS Colis;
 DROP TABLE IF EXISTS Commande;
 DROP TABLE IF EXISTS ProduitsVendeur;
 DROP TABLE IF EXISTS Recherche;
+DROP TABLE IF EXISTS Produit;
 
 CREATE TABLE Client (
 prenom varchar(50) not null,
