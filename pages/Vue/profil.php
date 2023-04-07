@@ -24,61 +24,61 @@ if(!isset($_SESSION['UTILISATEUR'])){
                 <table>
                     <tr>
                         <td colspan="2">
-                        <?php if(isset($_SESSION['succes'])){echo $_SESSION['succes']; unset($_SESSION['succes']);} ?>
+                        <?php if(isset($_SESSION["succes"])){echo $_SESSION["succes"]; unset($_SESSION["succes"]);} ?>
                         </td>
                     </tr>
                     <tr>
                         <td>nom :
-                            <?php echo $_SESSION['UTILISATEUR']['nom']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["nom"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>prenom :
-                            <?php echo $_SESSION['UTILISATEUR']['prenom']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["prenom"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>mail :
-                            <?php echo $_SESSION['UTILISATEUR']['email']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["email"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>date de naissance :
-                            <?php echo $_SESSION['UTILISATEUR']['dateNaissance']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["dateNaissance"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>numéro de téléphone :
-                            <?php echo $_SESSION['UTILISATEUR']['tel']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["tel"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>adresse :
-                            <?php echo $_SESSION['UTILISATEUR']['adresse']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["adresse"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>ville :
-                            <?php echo $_SESSION['UTILISATEUR']['ville']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["ville"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>code postal :
-                            <?php echo $_SESSION['UTILISATEUR']['codePostal']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["codePostal"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>pays :
-                            <?php echo $_SESSION['UTILISATEUR']['pays']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["pays"]; ?>
                         </td>
                     </tr>
                     <tr>
                         <td>Statut :
-                            <?php echo $_SESSION['UTILISATEUR']['Abonnement']; ?>
+                            <?php echo $_SESSION["UTILISATEUR"]["Abonnement"]; ?>
                         </td>
                     </tr>
-                    <?php if($_SESSION['UTILISATEUR']['DateAbonnement'] != 'None'){
-                            echo '<tr><td>Date d\'abonnement : '.$_SESSION['UTILISATEUR']['DateAbonnement'].'</td></tr>';
+                    <?php if($_SESSION["UTILISATEUR"]["DateAbonnement"] != 'None'){
+                            echo '<tr><td>Date d\'abonnement : '.$_SESSION["UTILISATEUR"]["DateAbonnement"].'</td></tr>';
                         }
                     ?>
                 </table>
