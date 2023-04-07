@@ -1,4 +1,4 @@
---Les tables doivent etre crées dans l'ordre suivante:
+
 
 DROP DATABASE IF EXISTS Marketplace;  -- creer la base avant
 CREATE DATABASE Marketplace;
@@ -37,7 +37,7 @@ CREATE TABLE Panier (
 );
 
 CREATE TABLE Colis (
-id int not null PRIMARY key,
+id int not null PRIMARY KEY,
 longueur SMALLINT CHECK (longueur > 0),
 hauteur SMALLINT CHECK (hauteur > 0);
 poids SMALLINT CHECK(poids > 0)
@@ -58,9 +58,6 @@ QuantiteVendeur int not null,
 prix decimal not null,
 FOREIGN KEY (idPanier) REFERENCES Panier(id)
 );
-
-
-
 
 CREATE TABLE Recherche(
     motCle varchar(255) not null PRIMARY KEY,
