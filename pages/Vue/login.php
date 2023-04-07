@@ -47,7 +47,7 @@
         <!-- Faire en sorte que les boutons soit sur la même ligne -->
         <div>
             <a class="bouton-golden" href="index.php">Retour à l'accueil</a>
-            <span style="padding-left: 112px;">Pas de compte ?</span>
+            <span style="padding-left: 35px;">Pas de compte ?</span>
             <a class="bouton-golden" href="createAccount.php">S'inscrire</a>
         </div>
     </div>
