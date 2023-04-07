@@ -12,21 +12,6 @@ DROP TABLE IF EXISTS ProduitsVendeur;
 DROP TABLE IF EXISTS Recherche;
 DROP TABLE IF EXISTS Produit;
 
-CREATE TABLE Client (
-prenom varchar(50) not null,
-nom varchar(50) not null,
-email varchar(150) not null PRIMARY KEY,
-dateNaissance date not null,
-telephone int not null,
-adresse varchar(250) not null,
-ville varchar(50) not null,
-codePostal SMALLINT not null,
-pays varchar(50) not null,
-motDePasse varchar(100) not null,
-idCommande int,
-    FOREIGN KEY (idCommande) REFERENCES Commande(id)
-);
-
 CREATE TABLE Panier (
      int not null PRIMARY KEY,
     HT decimal,
@@ -50,6 +35,21 @@ CREATE TABLE Commande (
     datePayment date,
     idColis int FOREIGN KEY REFERENCES Colis(id),
 
+);
+
+CREATE TABLE Client (
+prenom varchar(50) not null,
+nom varchar(50) not null,
+email varchar(150) not null PRIMARY KEY,
+dateNaissance date not null,
+telephone int not null,
+adresse varchar(250) not null,
+ville varchar(50) not null,
+codePostal SMALLINT not null,
+pays varchar(50) not null,
+motDePasse varchar(100) not null,
+idCommande int,
+    FOREIGN KEY (idCommande) REFERENCES Commande(id)
 );
 
 CREATE TABLE ProduitsVendeur (
