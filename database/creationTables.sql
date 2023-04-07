@@ -71,4 +71,9 @@ CREATE TABLE Caracteristique{
     nom varchar(50) not null,
 };
 
+CREATE TABLE Produit{
+    id int not null PRIMARY KEY,
+    description varchar(255) not null,
+    FOREIGN KEY (idCaracteristique) REFERENCES Caracteristique(id)
+};
 
