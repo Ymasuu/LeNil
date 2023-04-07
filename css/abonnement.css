@@ -7,6 +7,10 @@
     color: #2E3F58;
     margin: 10px;
 }
+.test{
+    list-style: none;
+    margin-left: 15px;
+}
 h4{
     text-align : center;
 }

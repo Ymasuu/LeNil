@@ -23,7 +23,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
         <form action="../Contrôleur/process_abonnement.php" class="conteneur" method="POST">
             <div class="flex">
                 <h4>ABONNEMENT MENSUEL</h4>
-                <ul>
+                <ul class="test">
                     <li>Des réductions sur certains articles</li>
                     <li>Livraison plus rapide</li>
                     <li>Frais de Livraison gratuits</li>
@@ -33,7 +33,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
             </div>
             <div class="flex">
                 <h4>ABONNEMENT ANNUEL</h4>
-                <ul>
+                <ul class="test">
                     <li>Des réductions sur certains articles</li>
                     <li>Livraison plus rapide</li>
                     <li>Frais de Livraison gratuits</li>
