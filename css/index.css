@@ -1,0 +1,42 @@
+/* Index */
+
+.box{
+    width : 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 10px;
+    column-gap: 10px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    justify-content: space-between;
+}
+
+.article {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #a7976a;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    height: 200px;
+  }
+  
+  .article:hover {
+    background-color: #a7976a;
+    color: #fff;
+    border-color: #2E3F58;
+  }
+
+.gauche{
+    width: 30%;
+    border: 2px solid #a7976a;
+    border-radius: 4px;
+}
+
+.global{
+    width: 100%;
+    display: flex;
+    
+}

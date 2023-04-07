@@ -7,13 +7,14 @@
 		<meta cjharset="utf-8">
 		<meta name="viewport">
 		<title>Accueil</title>
+		<link rel="stylesheet" href="../../css/index.css">
 		<link rel="stylesheet" href="../../css/style.css">
 		<link rel="icon" type="image/png" href="../../img/logo2.png">
 	</head>
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
-		<?php if(isset($_SESSION["merci"]))echo "<center><b>".$_SESSION["merci"]."</b></center>";?>
+		<?php if(isset($_SESSION["merci"]))echo "<center><b>".$_SESSION["merci"]."</b></center>"; unset($_SESSION["merci"]);?>
 		<div class = "global">
 
 			<div class = "gauche">

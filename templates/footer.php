@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="../../css/footer.css">  
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
 <footer class="footer">
@@ -32,12 +32,12 @@
             <li><a href=about.php>A propos</a></li>
             <li><a href=contact.php>Contacter</a></li>
         </ul>
-        <p class="text-center">© 2023, LeNil.com</p>
+        <center>© 2023, LeNil.com</center>
         <ul class="logo">
-            <li><a href="http://webenlance.com"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="http://webenlance.com"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="http://webenlance.com"><i class="fab fa-instagram"></i></a></li>
+            <li><a><i class="fab fa-facebook-f"></i></a></li>
+            <li><a><i class="fab fa-twitter"></i></a></li>
+            <li><a><i class="fab fa-linkedin"></i></a></li>
+            <li><a><i class="fab fa-instagram"></i></a></li>
         </ul>
     </div>
 </footer>
