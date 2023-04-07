@@ -17,6 +17,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
 </html>
 <body>
     <div>
+        <?php include '../../templates/header.php'; ?>
         <div style="width: 500px; margin: auto;">
             <h1>Profil Utilisateur</h1>
             <form action="../Contrôleur/process_editProfil.php" method="post">
@@ -80,5 +81,6 @@ if(!isset($_SESSION["UTILISATEUR"])){
         <div style="width: 500px; margin: auto; padding-left:100px;">
             <a class="bouton-golden" href="profil.php">Retour</a>
         </div>
+        <?php include '../../templates/footer.php'; ?>
     </div>
 </body>

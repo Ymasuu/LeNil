@@ -15,6 +15,7 @@
 	<link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
 <body>
+    <?php include '../../templates/header.php'; ?>
 	<div style="width: 500px; margin: auto;">
 		<h1>Mot de passe oublié ?</h1>
 		<form action="../Contrôleur/process_forgotPassword.php" method="post">
@@ -43,5 +44,6 @@
             </fieldset>
         </form>
     </div>
+    <?php include '../../templates/footer.php'; ?>
 </body>
 </html>
