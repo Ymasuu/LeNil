@@ -30,7 +30,7 @@
                         <td><input type="password" name="password" id="password" pattern="[A-Za-z0-9-]{1,60}" required></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="Se connecter"></td>
+                        <td><input class="bouton-golden" type="submit" value="Se connecter"></td>
                         <td>
                             <?php
                                 if(isset($_SESSION["message"])){
@@ -41,14 +41,14 @@
                         </td>
                     </tr>
                 </table>
-                <div style="text-align: right;"><a href="forgotPassword.php">Mot de passe oublié ?</a></div>
+                <div style="text-align: right;"><a class="bouton-golden" href="forgotPassword.php">Mot de passe oublié ?</a></div>
             </fieldset>
         </form>
         <!-- Faire en sorte que les boutons soit sur la même ligne -->
         <div>
-            <a href="index.php">Retour à l'accueil</a>
-            <span style="padding-left: 210px;">Pas de compte ?</span>
-            <a href="createAccount.php">S'inscrire</a>
+            <a class="bouton-golden" href="index.php">Retour à l'accueil</a>
+            <span style="padding-left: 112px;">Pas de compte ?</span>
+            <a class="bouton-golden" href="createAccount.php">S'inscrire</a>
         </div>
     </div>
 </body>

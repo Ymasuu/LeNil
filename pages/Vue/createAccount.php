@@ -15,7 +15,7 @@
 	<link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
 <body>
-	<div style="width: 500px; margin: auto;">
+	<div style="width: 520px; margin: auto;">
 		<h1>Créer un compte</h1>
 		<form action="../Contrôleur/process_createAccount.php" method="post">
 			<fieldset>
@@ -66,7 +66,7 @@
 						<td><input type="password" name="mdp2" id="mdp2" pattern="[A-Za-z0-9-]{1,60}" required></td>
 					</tr>
 					<tr>
-						<td><input type="submit" value="Créer le compte"></td>
+						<td><input class="bouton-golden" type="submit" value="Créer le compte"></td>
 						<td>
 							<?php
 								if(isset($_SESSION['error'])){
@@ -79,10 +79,9 @@
 				</table>
 			</fieldset>
 		</form>
-		<br>
-		<a href="index.php">Retour à l'accueil</a>
-			<span style="padding-left: 80px;">Vous posséder déjà un compte ?</span>
-			<button style="display: inline-block;" name="Se connecter" value="Se connecter" onclick="window.location.href='login.php'"><a href="login.php">Se connecter</a></button>
+		<a class="bouton-golden" href="index.php">Retour à l'accueil</a>
+			<span>Vous posséder déjà un compte ?</span>
+			<button class="bouton-golden" name="Se connecter" value="Se connecter" onclick="window.location.href='login.php'"><a href="login.php">Se connecter</a></button>
 	</div>
 </body>
 </html>
