@@ -42,6 +42,7 @@
                         </td>
                     </tr>
                 </table>
+                <div style="text-align: right;"><a class="bouton-golden" href="forgotPassword.php">Mot de passe oublié ?</a></div>
             </fieldset>
         </form>
         <!-- Faire en sorte que les boutons soit sur la même ligne -->
