@@ -1,12 +1,20 @@
 <?php
     session_start();
-    if(isset($_POST['mensuel'])){
-        $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Mensuel";
-    }
-    if(isset($_POST['annuel'])){
-        $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
-    }
 
+    if(isset($_POST['desabonner'])){
+        $_SESSION["UTILISATEUR"]["Abonnement"] = "None";
+        $_SESSION["merci"] = "Nous vous confirmons la résilation de votre abonnement. Vous pouvez vous réabonner quand vous voulez !";
+
+    }
+    else {
+        if(isset($_POST['mensuel'])){
+            $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Mensuel";
+        }
+        if(isset($_POST['annuel'])){
+            $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
+        }
+        $_SESSION["merci"] = "merci pour votre abonnement !";
+    }
 
     // On met à jour les informations de l'utilisateur dans la base de données
     $csvFile = file_get_contents("../../database/client.csv");
@@ -24,36 +32,6 @@
         }
     }
 
-
-
-    /*$csv = file_get_contents("../../database/client.csv");
-    // diviser la chaîne en lignes
-    $lignes = explode("\n", $csv);
-
-    // parcourir chaque ligne
-    foreach ($lignes as $index => $ligne) {
-        // diviser la ligne en colonnes
-        $colonnes = str_getcsv($ligne, ',');
-
-        // si la colonne 3 contient votre adresse e-mail, mettre à jour la colonne 9 avec la nouvelle donnée
-        if ($colonnes[2] == $_SESSION["UTILISATEUR"]["email"]) {
-            $colonnes[10] = $_SESSION["UTILISATEUR"]["Abonnement"];
-            // fusionner les colonnes en une nouvelle ligne
-            $nouvelle_ligne = implode(',', $colonnes);
-            // remplacer la ligne d'origine par la nouvelle ligne
-            $lignes[$index] = $nouvelle_ligne;
-            // fusionner les lignes en une chaîne de caractères
-            $nouveau_csv = implode("\n", $lignes);
-            // fusionner les lignes en une chaîne de caractères
-            $nouveau_csv = implode("\n", $lignes);
-            // écrire le nouveau contenu dans le fichier
-            exit();
-            break;
-        }        
-    }*/
-
-
-    $_SESSION["merci"] = "merci pour votre abonnement";
     header('Location:../Vue/index.php');
     exit();
 ?>
