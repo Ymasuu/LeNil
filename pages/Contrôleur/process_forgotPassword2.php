@@ -13,16 +13,20 @@ if($password != $password2){
     exit();
 }
 
-$utilisateurs = explode("\n", file_get_contents("../../database/client.csv"));
+$csvFile = file_get_contents("../../database/client.csv");
+$csvArray = explode("\n", $csvFile);
 
 $valide = 0;
 
-foreach($utilisateurs as $end){
-    $detailUtilisateur = explode(",", $end);
-    if($detailUtilisateur[2] == $_SESSION["email"])
+foreach($csvArray as $key => $line){
+    $userData = explode(",", $line);
+    if($userData[2] == $_SESSION["mail"])
     {
         $valide = 1;
-        $detailUtilisateur[9] = $password;
+        $userData[9] = $password;
+        $csvArray[$key] = implode(",", $userData);
+        $csvFile = implode("\n", $csvArray);
+        file_put_contents("../../database/client.csv", $csvFile);
         break;
     }
 }
@@ -32,9 +36,6 @@ if($valide == 0){
     header("Location: ../Vue/forgotPassword3.php");
     exit();
 }
-
-$utilisateurs[] = implode(",", $detailUtilisateur);
-file_put_contents("../../database/client.csv", implode("\n", $utilisateurs));
 
 $_SESSION["message"] = "Mot de passe modifié avec succès";
 header("Location: ../Vue/login.php");
