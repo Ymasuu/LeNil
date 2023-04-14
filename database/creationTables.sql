@@ -174,6 +174,7 @@ INSERT INTO Compte VALUES ('abdellah.hassani2002@gmail.com', '123456', 1,1,0);
 INSERT INTO Compte VALUES ('renato.nascimento.ardiles@cy-tech.fr', '123456', 0, 1, 0);
 INSERT INTO Compte VALUES ('magasin1@gmail.com', '123456', 2, 0, 1);
 
+
 INSERT INTO InfoCompte VALUES ('ethanpINTo02@gmail.com','Ethan','Pinto','2000-03-21','0661839460','22 rue de la petite-nuit','Cergy',95800,'France');
 INSERT INTO InfoCompte VALUES ('samy.belbouab@gmail.com','Samy','Belbouab','2002-02-18','0610122887','26 rue de le grande piece','Menucourt',95180,'France');
 INSERT INTO InfoCompte VALUES ('foulonclem@cy-tech.fr','Clement','Foulon','2002-03-19','0632135190','22 boulevard de l oise','Cergy',95000,'France');
