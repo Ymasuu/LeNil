@@ -144,6 +144,15 @@ CREATE TABLE QuantiteCommande (
     quantite DECIMAL(2)
 );
 
+CREATE TABLE SuivreColis(
+id int not null,
+commande_enregistré BIT NOT NULL DEFAULT 0,
+commande_expedie BITNOT NULL DEFAULT 0,
+commande_en_cours_de_livraison BIT NOT NULL DEFAULT 0,
+commande_en_cours_de_livre BIT NOT NULL DEFAULT 0,
+echec_de_la_livraison BIT NOT NULL DEFAULT 0,
+);
+
 
 --Table de la relation ternaire
 CREATE TABLE Adresse_Commande_QuantiteCommande(
