@@ -113,7 +113,6 @@ emailCompte varchar(100),
 FOREIGN KEY (emailCompte) REFERENCES Compte(email)
 );
 
-
 CREATE TABLE MoyenPayment(
     id int not null Primary key,
     modePayment ENUM('paypal', 'cb')
