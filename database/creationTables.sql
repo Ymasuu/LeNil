@@ -1,5 +1,3 @@
-
-
 DROP DATABASE IF EXISTS Marketplace;  -- creer la base avant
 CREATE DATABASE Marketplace;
 USE Marketplace;  -- se connecter a la base
@@ -10,7 +8,8 @@ DROP TABLE IF EXISTS Colis;
 DROP TABLE IF EXISTS Commande;
 DROP TABLE IF EXISTS ProduitsVendeur;
 DROP TABLE IF EXISTS Recherche;
-<<<<<<< HEAD
+-- HEAD
+
 
 CREATE TABLE Colis (
 id int not null PRIMARY key,
@@ -114,6 +113,7 @@ emailCompte varchar(100),
 FOREIGN KEY (emailCompte) REFERENCES Compte(email)
 );
 
+
 CREATE TABLE MoyenPayment(
     id int not null Primary key,
     modePayment ENUM('paypal', 'cb')
@@ -127,40 +127,59 @@ FOREIGN KEY (emailCompte) REFERENCES Compte(email),
 FOREIGN KEY (idMoyenPayment) REFERENCES MoyenPayment(id)
 );
 
+
 CREATE TABLE Adresse(
-id int PRYMARY KEY AUTO_INCREMENT,
-numeroRue varchar(255) not null,
-nomRue varchar(255),
-codePostal SMALLINT not null,
-ville varchar(100) not null,
-pays varchar(50),
-complementAdresse varchar(255),
-idCommande int not null,
-FOREIGN KEY (idCommande) REFERENCES Commande(id)
+	id int PRIMARY KEY AUTO_INCREMENT,
+	numeroRue varchar(255) not null,
+	nomRue varchar(255),
+	codePostal SMALLINT not null,
+	ville varchar(100) not null,
+	pays varchar(50),
+	complementAdresse varchar(255),
+	idCommande int not null,
+	FOREIGN KEY (idCommande) REFERENCES Commande(id)
 );
 
-CREATE TABLE QuantiteCommande (
+
+CREATE TABLE QuantiteCommande(
     id INT NOT NULL PRIMARY KEY,
     quantite DECIMAL(2)
 );
 
-CREATE TABLE SuivreColis(
-id int not null,
-commande_enregistre BIT NOT NULL DEFAULT 0,
-commande_expedie BIT NOT NULL DEFAULT 0,
-commande_en_cours_de_livraison BIT NOT NULL DEFAULT 0,
-commande_en_cours_de_livre BIT NOT NULL DEFAULT 0,
-echec_de_la_livraison BIT NOT NULL DEFAULT 0,
+CREATE TABLE CB(
+	id INT NOT NULL PRIMARY KEY,
+	numero INT NOT NULL,
+	date_expiration DATE NOT NULL,
+	CVV INT NOT NULL,
+	idCommande int not null,
+	emailCompte char(50) not null,
+	FOREIGN KEY (idCommande) REFERENCES Commande(id),
+	FOREIGN KEY (emailCompte) REFERENCES Compte(email)
+	
+	
+);
+
+CREATE TABLE Paypal(
+	id INT NOT NULL PRIMARY KEY,
+	email char(50) NOT NULL,
+	mot_de_passe char(50) NOT NULL,
+	idCommande int not null,
+	emailCompte char(50) not null,
+	FOREIGN KEY (idCommande) REFERENCES Commande(id),
+	FOREIGN KEY (emailCompte) REFERENCES Compte(email)
+	
 );
 
 
---Table de la relation ternaire
+
+-- Table de la relation ternaire
+
 CREATE TABLE Adresse_Commande_QuantiteCommande(
-idAdresse int not null,
-idCommande int not null,
-idQuantiteCommande int not null,
-PRIMARY KEY (idAdresse,idCommande,idQuantiteCommande),
-Foreign KEY (idAdresse) REFERENCES Adresse(id),
-FOREIGN KEY (idCommande) REFERENCES Commande(id),
-FOREIGN KEY (idQuantiteCommande) REFERENCES QuantiteCommande(id)
+	idAdresse int not null,
+	idCommande int not null,
+	idQuantiteCommande int not null,
+	PRIMARY KEY (idAdresse,idCommande,idQuantiteCommande),
+	Foreign KEY (idAdresse) REFERENCES Adresse(id),
+	FOREIGN KEY (idCommande) REFERENCES Commande(id),
+	FOREIGN KEY (idQuantiteCommande) REFERENCES QuantiteCommande(id)
 );
