@@ -14,7 +14,12 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
-		<?php if(isset($_SESSION["merci"]))echo "<center><b>".$_SESSION["merci"]."</b></center>"; unset($_SESSION["merci"]);?>
+		<?php
+			if(isset($_SESSION["UTILISATEUR"])){
+				echo " <h2 style=display:inline;> Bienvenue " . $_SESSION["UTILISATEUR"]["nom"] . " " . $_SESSION["UTILISATEUR"]["prenom"] . "</h4>";
+			} 
+			if(isset($_SESSION["merci"]))echo "<center><b>".$_SESSION["merci"]."</b></center>"; unset($_SESSION["merci"]);
+		?>
 		<div class = "global">
 
 			<div class = "gauche">
@@ -165,11 +170,7 @@
 					</div>
 				</button>
 				
-				<?php
-					if(isset($_SESSION["UTILISATEUR"])){
-						echo "Vous êtes connecté en tant que " . $_SESSION["UTILISATEUR"]["nom"] . " " . $_SESSION["UTILISATEUR"]["prenom"];
-					}
-				?>
+				
 			</div>
 		</div>
 		<?php include '../../templates/footer.php'; ?>

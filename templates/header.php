@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <link rel="stylesheet" href="../../css/header.css">
 <script src="https://kit.fontawesome.com/33e6d2f05c.js" crossorigin="anonymous"></script>
 
@@ -12,12 +15,16 @@
 				</form>
 			</div>
 			<li class="style"><a href="about.php" class="lien">A propos</a></li>
+			<?php 
+				if(!isset($_SESSION["UTILISATEUR"])) echo "<li class='style'><a href='login.php' class='lien'>Se Connecter</a></li>";
+				else echo "<li class='style'><a href='../Contrôleur/process_logout.php' class='lien'>Se Déconnecter</a></li>";
+			?>
 			<li class="style"><a href="abonnement.php" class="lien">S'abonner</a></li>
 			<div class="test">
 				<li class="style"><a href="panier.php" class="lien">
 				<i class="fa-sharp fa-solid fa-cart-shopping"></i> Panier</a></li>
 			</div>
 		</ul>
-		
+		<br>
 	</nav>
 </header>
