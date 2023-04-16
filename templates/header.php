@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <link rel="stylesheet" href="../../css/header.css">
 <script src="https://kit.fontawesome.com/33e6d2f05c.js" crossorigin="anonymous"></script>
