@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : Dim 16 avr. 2023 à 17:15
+-- Généré le : Dim 16 avr. 2023 à 17:29
 -- Version du serveur :  8.0.32-0ubuntu0.20.04.2
 -- Version de PHP : 7.4.3-4ubuntu2.18
 
@@ -15,7 +15,6 @@ SET time_zone = "+00:00";
 DROP DATABASE IF EXISTS lenil;  -- creer la base avant
 CREATE DATABASE lenil;
 USE lenil;  -- se connecter a la base
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -140,7 +139,8 @@ CREATE TABLE `Commande` (
 CREATE TABLE `Compte` (
   `email` varchar(100) NOT NULL,
   `motDePasse` varchar(50) NOT NULL,
-  `abonnement` smallint NOT NULL,
+  `abonnement` smallint NOT NULL, -- 0: pas abonné / 1 abonné mensuel / 2 abonné annuel
+  `dateAbonnement` date DEFAULT NULL,
   `signatureContratClient` tinyint(1) NOT NULL,
   `signatureContratVendeur` tinyint(1) NOT NULL,
   `signatureContratLivreur` tinyint(1) NOT NULL
