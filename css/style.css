@@ -1,3 +1,7 @@
+html{
+    margin-right: 10px;
+    margin-left: 5px;
+}
 body {
     margin: 0;
 	height: 100vh;
