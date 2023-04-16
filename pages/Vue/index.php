@@ -2,6 +2,7 @@
 	//Pour la connection de la bdd
 	require_once '..\..\database\config\connection.php';
 	require_once '..\..\database\config\database.php';
+	//test
 	session_start();
 ?>
 <!DOCTYPE html>
