@@ -3,19 +3,14 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : sam. 15 avr. 2023 à 00:12
+-- Généré le : Dim 16 avr. 2023 à 17:04
 -- Version du serveur :  8.0.32-0ubuntu0.20.04.2
 -- Version de PHP : 7.4.3-4ubuntu2.18
-
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
-
-DROP DATABASE IF EXISTS Marketplace;  -- creer la base avant
-CREATE DATABASE Marketplace;
-USE Marketplace;  -- se connecter a la base
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -64,7 +59,7 @@ CREATE TABLE `Adresse_Commande_QuantiteCommande` (
 
 CREATE TABLE `a_CommandeContientProduitVendeur` (
   `idCommande` int NOT NULL,
-  `idProduitVendeur` varchar(100) NOT NULL
+  `idProduitVendeur` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -102,7 +97,7 @@ CREATE TABLE `CB` (
   `date_expiration` date NOT NULL,
   `CVV` int NOT NULL,
   `idCommande` int NOT NULL,
-  `emailCompte` char(50) NOT NULL
+  `emailCompte` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -141,22 +136,24 @@ CREATE TABLE `Commande` (
 CREATE TABLE `Compte` (
   `email` varchar(100) NOT NULL,
   `motDePasse` varchar(50) NOT NULL,
-  `abonnement` int NOT NULL,
+  `abonnement` smallint NOT NULL, -- 0: pas abonné / 1 abonné mensuel / 2 abonné annuel
   `signatureContratClient` tinyint(1) NOT NULL,
-  `signatureContratVendeur` tinyint(1) NOT NULL
+  `signatureContratVendeur` tinyint(1) NOT NULL,
+  `signatureContratLivreur` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `Compte`
+-- Structure de la table `ContenuPanier`
 --
 
-INSERT INTO `Compte` (`email`, `motDePasse`, `abonnement`, `signatureContratClient`, `signatureContratVendeur`) VALUES
-('abdellah.hassani2002@gmail.com', '123456', 1, 1, 0),
-('ethanpINTo02@gmail.com', '123456', 0, 1, 0),
-('foulonclem@cy-tech.fr', '123456', 0, 1, 0),
-('magasin1@gmail.com', '123456', 2, 0, 1),
-('renato.nascimento.ardiles@cy-tech.fr', '123456', 0, 1, 0),
-('samy.belbouab@gmail.com', '123456', 2, 1, 0);
+CREATE TABLE `ContenuPanier` (
+  `idProduitsVendeur` int NOT NULL,
+  `QuantitePanier` int NOT NULL,
+  `idPanier` int NOT NULL,
+  `idProduitVendeur` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -188,18 +185,6 @@ CREATE TABLE `InfoCompte` (
   `pays` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Déchargement des données de la table `InfoCompte`
---
-
-INSERT INTO `InfoCompte` (`emailCompte`, `prenom`, `nom`, `dateNaissance`, `telephone`, `adresse`, `ville`, `codePostal`, `pays`) VALUES
-('abdellah.hassani2002@gmail.com', 'Abdellah', 'Hassani', '2000-03-21', 767756606, '15 bd du port', 'Cergy', 95000, 'France'),
-('ethanpINTo02@gmail.com', 'Ethan', 'Pinto', '2000-03-21', 661839460, '22 rue de la petite-nuit', 'Cergy', 95800, 'France'),
-('foulonclem@cy-tech.fr', 'Clement', 'Foulon', '2002-03-19', 632135190, '22 boulevard de l oise', 'Cergy', 95000, 'France'),
-('magasin1@gmail.com', 'MAGASIN1', 'MAGASIN1', '1989-05-11', 130365987, '12 Allée de la Garance', 'PARIS', 75019, 'France'),
-('renato.nascimento.ardiles@cy-tech.fr', 'Renato', 'Nascimento Ardiles', '2000-03-21', 0, '22 rue de la petite-nuit', 'Cergy', 95000, 'France'),
-('samy.belbouab@gmail.com', 'Samy', 'Belbouab', '2002-02-18', 610122887, '26 rue de le grande piece', 'Menucourt', 95180, 'France');
-
 -- --------------------------------------------------------
 
 --
@@ -214,28 +199,14 @@ CREATE TABLE `MoyenPayment` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `NombrePanier`
---
-
-CREATE TABLE `NombrePanier` (
-  `id` int NOT NULL,
-  `QuantitePanier` int NOT NULL,
-  `idPanier` int NOT NULL,
-  `idProduitVendeur` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `Panier`
 --
 
 CREATE TABLE `Panier` (
-  `id` int NOT NULL,
+  `emailCompte` varchar(100) NOT NULL,
   `HT` decimal(10,0) NOT NULL,
   `TVA` decimal(10,0) NOT NULL,
-  `TTC` decimal(10,0) NOT NULL,
-  `emailCompte` char(50) NOT NULL
+  `TTC` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -249,7 +220,7 @@ CREATE TABLE `Paypal` (
   `email` char(50) NOT NULL,
   `mot_de_passe` char(50) NOT NULL,
   `idCommande` int NOT NULL,
-  `emailCompte` char(50) NOT NULL
+  `emailCompte` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -271,6 +242,7 @@ CREATE TABLE `Produit` (
 --
 
 CREATE TABLE `ProduitsVendeur` (
+  `id` int NOT NULL,
   `emailVendeur` varchar(100) NOT NULL,
   `QuantiteVendeur` int NOT NULL,
   `prix` decimal(10,2) NOT NULL,
@@ -365,6 +337,12 @@ ALTER TABLE `Compte`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Index pour la table `ContenuPanier`
+--
+ALTER TABLE `ContenuPanier`
+  ADD PRIMARY KEY (`idProduitsVendeur`);
+
+--
 -- Index pour la table `Contrat`
 --
 ALTER TABLE `Contrat`
@@ -384,17 +362,10 @@ ALTER TABLE `MoyenPayment`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index pour la table `NombrePanier`
---
-ALTER TABLE `NombrePanier`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `Panier`
 --
 ALTER TABLE `Panier`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `emailCompte` (`emailCompte`);
+  ADD PRIMARY KEY (`emailCompte`);
 
 --
 -- Index pour la table `Paypal`
@@ -414,7 +385,8 @@ ALTER TABLE `Produit`
 -- Index pour la table `ProduitsVendeur`
 --
 ALTER TABLE `ProduitsVendeur`
-  ADD PRIMARY KEY (`emailVendeur`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `emailVendeur` (`emailVendeur`);
 
 --
 -- Index pour la table `QuantiteCommande`
@@ -461,7 +433,7 @@ ALTER TABLE `Adresse_Commande_QuantiteCommande`
 --
 ALTER TABLE `a_CommandeContientProduitVendeur`
   ADD CONSTRAINT `a_CommandeContientProduitVendeur_ibfk_1` FOREIGN KEY (`idCommande`) REFERENCES `Commande` (`id`),
-  ADD CONSTRAINT `a_CommandeContientProduitVendeur_ibfk_2` FOREIGN KEY (`idProduitVendeur`) REFERENCES `ProduitsVendeur` (`emailVendeur`);
+  ADD CONSTRAINT `a_CommandeContientProduitVendeur_ibfk_2` FOREIGN KEY (`idProduitVendeur`) REFERENCES `ProduitsVendeur` (`id`);
 
 --
 -- Contraintes pour la table `a_payePar`
