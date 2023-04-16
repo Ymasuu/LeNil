@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : Dim 16 avr. 2023 à 17:29
+-- Généré le : Dim 16 avr. 2023 à 20:12
 -- Version du serveur :  8.0.32-0ubuntu0.20.04.2
 -- Version de PHP : 7.4.3-4ubuntu2.18
 
@@ -12,9 +12,6 @@ SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-DROP DATABASE IF EXISTS lenil;  -- creer la base avant
-CREATE DATABASE lenil;
-USE lenil;  -- se connecter a la base
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -111,9 +108,10 @@ CREATE TABLE `CB` (
 
 CREATE TABLE `Colis` (
   `id` int NOT NULL,
-  `longueur` smallint DEFAULT NULL,
-  `hauteur` smallint DEFAULT NULL,
-  `poids` smallint DEFAULT NULL
+  `longueur` decimal(10,2) DEFAULT NULL,
+  `hauteur` decimal(10,2) DEFAULT NULL,
+  `poids` decimal(10,2) DEFAULT NULL,
+  `idCommande` int NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -124,10 +122,9 @@ CREATE TABLE `Colis` (
 
 CREATE TABLE `Commande` (
   `id` int NOT NULL,
-  `totalPayer` int DEFAULT NULL,
+  `totalPayer` decimal(10,2) DEFAULT NULL,
   `modePayment` varchar(20) NOT NULL,
-  `datePayment` date NOT NULL,
-  `idColis` int NOT NULL
+  `datePayment` date NOT NULL
 ) ;
 
 -- --------------------------------------------------------
@@ -139,7 +136,7 @@ CREATE TABLE `Commande` (
 CREATE TABLE `Compte` (
   `email` varchar(100) NOT NULL,
   `motDePasse` varchar(50) NOT NULL,
-  `abonnement` smallint NOT NULL, -- 0: pas abonné / 1 abonné mensuel / 2 abonné annuel
+  `abonnement` smallint NOT NULL,
   `dateAbonnement` date DEFAULT NULL,
   `signatureContratClient` tinyint(1) NOT NULL,
   `signatureContratVendeur` tinyint(1) NOT NULL,
@@ -155,8 +152,7 @@ CREATE TABLE `Compte` (
 CREATE TABLE `ContenuPanier` (
   `idProduitsVendeur` int NOT NULL,
   `QuantitePanier` int NOT NULL,
-  `idPanier` int NOT NULL,
-  `idProduitVendeur` int NOT NULL
+  `emailCompte` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -166,9 +162,8 @@ CREATE TABLE `ContenuPanier` (
 --
 
 CREATE TABLE `Contrat` (
-  `numero` int NOT NULL,
-  `texte` varchar(255) NOT NULL,
-  `emailCompte` varchar(100) NOT NULL
+  `numero` smallint NOT NULL,
+  `texte` varchar(3000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -208,9 +203,9 @@ CREATE TABLE `MoyenPayment` (
 
 CREATE TABLE `Panier` (
   `emailCompte` varchar(100) NOT NULL,
-  `HT` decimal(10,0) NOT NULL,
-  `TVA` decimal(10,0) NOT NULL,
-  `TTC` decimal(10,0) NOT NULL
+  `HT` decimal(10,2) NOT NULL,
+  `TVA` decimal(10,2) NOT NULL,
+  `TTC` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -250,7 +245,9 @@ CREATE TABLE `ProduitsVendeur` (
   `emailVendeur` varchar(100) NOT NULL,
   `QuantiteVendeur` int NOT NULL,
   `prix` decimal(10,2) NOT NULL,
-  `NomImage` char(50) NOT NULL
+  `NomImage` char(50) NOT NULL,
+  `nom` char(100) NOT NULL,
+  `description` char(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -271,6 +268,7 @@ CREATE TABLE `QuantiteCommande` (
 --
 
 CREATE TABLE `Recherche` (
+  `emailCompte` varchar(100) NOT NULL,
   `motCle` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -325,14 +323,14 @@ ALTER TABLE `CB`
 -- Index pour la table `Colis`
 --
 ALTER TABLE `Colis`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idCommande` (`idCommande`);
 
 --
 -- Index pour la table `Commande`
 --
 ALTER TABLE `Commande`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idColis` (`idColis`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `Compte`
@@ -350,8 +348,7 @@ ALTER TABLE `ContenuPanier`
 -- Index pour la table `Contrat`
 --
 ALTER TABLE `Contrat`
-  ADD PRIMARY KEY (`numero`),
-  ADD KEY `emailCompte` (`emailCompte`);
+  ADD PRIMARY KEY (`numero`);
 
 --
 -- Index pour la table `InfoCompte`
@@ -402,7 +399,7 @@ ALTER TABLE `QuantiteCommande`
 -- Index pour la table `Recherche`
 --
 ALTER TABLE `Recherche`
-  ADD PRIMARY KEY (`motCle`);
+  ADD PRIMARY KEY (`emailCompte`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -454,16 +451,16 @@ ALTER TABLE `CB`
   ADD CONSTRAINT `CB_ibfk_2` FOREIGN KEY (`emailCompte`) REFERENCES `Compte` (`email`);
 
 --
--- Contraintes pour la table `Commande`
+-- Contraintes pour la table `Colis`
 --
-ALTER TABLE `Commande`
-  ADD CONSTRAINT `Commande_ibfk_1` FOREIGN KEY (`idColis`) REFERENCES `Colis` (`id`);
+ALTER TABLE `Colis`
+  ADD CONSTRAINT `Colis_ibfk_1` FOREIGN KEY (`idCommande`) REFERENCES `Commande` (`id`);
 
 --
--- Contraintes pour la table `Contrat`
+-- Contraintes pour la table `ContenuPanier`
 --
-ALTER TABLE `Contrat`
-  ADD CONSTRAINT `Contrat_ibfk_1` FOREIGN KEY (`emailCompte`) REFERENCES `Compte` (`email`);
+ALTER TABLE `ContenuPanier`
+  ADD CONSTRAINT `ContenuPanier_ibfk_1` FOREIGN KEY (`idProduitsVendeur`) REFERENCES `ProduitsVendeur` (`id`);
 
 --
 -- Contraintes pour la table `InfoCompte`
@@ -489,6 +486,12 @@ ALTER TABLE `Paypal`
 --
 ALTER TABLE `ProduitsVendeur`
   ADD CONSTRAINT `ProduitsVendeur_ibfk_1` FOREIGN KEY (`emailVendeur`) REFERENCES `Compte` (`email`);
+
+--
+-- Contraintes pour la table `Recherche`
+--
+ALTER TABLE `Recherche`
+  ADD CONSTRAINT `Recherche_ibfk_1` FOREIGN KEY (`emailCompte`) REFERENCES `Compte` (`email`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
