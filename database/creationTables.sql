@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : Dim 16 avr. 2023 à 17:04
+-- Généré le : Dim 16 avr. 2023 à 17:15
 -- Version du serveur :  8.0.32-0ubuntu0.20.04.2
 -- Version de PHP : 7.4.3-4ubuntu2.18
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `Marketplace`
+-- Base de données : `lenil`
 --
 
 -- --------------------------------------------------------
@@ -136,7 +136,7 @@ CREATE TABLE `Commande` (
 CREATE TABLE `Compte` (
   `email` varchar(100) NOT NULL,
   `motDePasse` varchar(50) NOT NULL,
-  `abonnement` smallint NOT NULL, -- 0: pas abonné / 1 abonné mensuel / 2 abonné annuel
+  `abonnement` smallint NOT NULL,
   `signatureContratClient` tinyint(1) NOT NULL,
   `signatureContratVendeur` tinyint(1) NOT NULL,
   `signatureContratLivreur` tinyint(1) NOT NULL
