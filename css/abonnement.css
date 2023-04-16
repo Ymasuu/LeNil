@@ -5,6 +5,8 @@
     flex-grow: 1;
     border: ridge #2E3F58;
     color: #2E3F58;
+    line-height : 2.5;
+    font-size: 20px;
     margin: 10px;
 }
 .test{
@@ -13,7 +15,4 @@
 }
 h4{
     text-align : center;
-}
-.desabonner{
-    margin-left: 10px;
 }

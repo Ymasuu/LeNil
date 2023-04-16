@@ -42,9 +42,6 @@ if(!isset($_SESSION["UTILISATEUR"])){
                 <input class="bouton-golden" type="submit" id="annuel" name="annuel" value="s'abonner">
             </div>     
         </form>
-        <form action="../Contrôleur/process_abonnement.php" class="desabonner" method="POST">
-            <input class="bouton-golden" type="submit" id="desabonner" name="desabonner" value="se désabonner">
-        </form>
         <hr> <!-- Repère visuel temporaire -->
 	</div>
     <?php include '../../templates/footer.php'; ?>
