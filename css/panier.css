@@ -129,4 +129,12 @@ h3, h5 {
     font-weight: normal;
   }
   
- 
+/*
+<form method="post" action="panier.php">
+    <input type="hidden" name="produit_id" value="1"> <!-- Remplacez 1 par l'ID du produit à ajouter -->
+    <input type="number" name="quantite" value="1">
+    <input type="hidden" name="prix_produit" value="10.99"> <!-- Remplacez 10.99 par le prix du produit -->
+    <input type="hidden" name="prix_total" value="10.99"> <!-- Remplacez 10.99 par le prix total du produit (quantité x prix) -->
+    <input type="submit" name="ajouter_au_panier" value="Ajouter au panier">
+</form>
+*/
