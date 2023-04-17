@@ -70,17 +70,26 @@ if ($resultCheck>0) {
         exit();
     }
 
-    //VENDEUR ---> A GERER ENCORE
+    //VENDEUR 
     else if ($row['signatureContratVendeur'] == 1) {
+
+//On fait d'autres requetes pour obtenir les informations nécessaires de ce compte
+        $sousquery = "SELECT * FROM InfoCompte WHERE emailCompte = '$mail';";
+        $sousresult = mysqli_query($conn, $sousquery);
+        $sousresultCheck = mysqli_num_rows($sousresult);
+        if ($sousresultCheck>0) {
+            $informations = mysqli_fetch_assoc($sousresult);
+        }
+
         unset($_SESSION["errorLogin"]); // on supprime la variable de session
-        $_SESSION["UTILISATEUR"]["nom"] = $detailUtilisateur[0];
-        $_SESSION["UTILISATEUR"]["email"] = $detailUtilisateur[1];
-        $_SESSION["UTILISATEUR"]["tel"] = $detailUtilisateur[2];
-        $_SESSION["UTILISATEUR"]["adresse"] = $detailUtilisateur[3];
-        $_SESSION["UTILISATEUR"]["ville"] = $detailUtilisateur[4];
-        $_SESSION["UTILISATEUR"]["codePostal"] = $detailUtilisateur[5];
-        $_SESSION["UTILISATEUR"]["pays"] = $detailUtilisateur[6];
-        $_SESSION["UTILISATEUR"]["mdp"] = $detailUtilisateur[7];
+        $_SESSION["UTILISATEUR"]["nom"] = $informations['nom'];
+        $_SESSION["UTILISATEUR"]["email"] = $row['email'];
+        $_SESSION["UTILISATEUR"]["tel"] = $informations['telephone'];
+        $_SESSION["UTILISATEUR"]["adresse"] = $informations['adresse'];
+        $_SESSION["UTILISATEUR"]["ville"] = $informations['ville'];
+        $_SESSION["UTILISATEUR"]["codePostal"] = $informations['codePostal'];
+        $_SESSION["UTILISATEUR"]["pays"] = $informations['pays'];
+        $_SESSION["UTILISATEUR"]["mdp"] = $row['motDePasse'];
         $_SESSION["UTILISATEUR"]["TypeCompte"] = "vendeur";
         header("Location:../Vue/index.php");
         exit();
