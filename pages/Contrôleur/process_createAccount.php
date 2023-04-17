@@ -75,6 +75,7 @@ if (mysqli_num_rows($result) > 0) {
 //si l'adresse mail n'est pas déjà utilisée, on ajoute le nouvel utilisateur
 
 //---INSERTION DANS LA BDD POUR LES TABLES COMPTE & INFOCOMPTE----
+mysqli_begin_transaction($conn);
 // Requête d'insertion dans la table Compte
 $sql1 = "INSERT INTO Compte (email, motDePasse, abonnement, dateAbonnement, signatureContratClient, signatureContratVendeur, signatureContratLivreur)
          VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -120,9 +121,11 @@ $pays = $user['pays'];
 // Exécution des requêtes
 if(mysqli_stmt_execute($stmt1) && mysqli_stmt_execute($stmt2)) {
     // Succès
+    mysqli_commit($conn);
     //echo "Compte créé avec succès!";
 } else {
     // Erreur
+    mysqli_rollback($conn);
     echo "Erreur lors de la création du compte: " . mysqli_error($conn);
 }
 
