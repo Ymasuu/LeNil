@@ -5,7 +5,7 @@
     $date = date('d-m-Y');
 
     if(!isset($_POST['mensuel']) and !isset($_POST['annuel']) ){
-        $_SESSION["UTILISATEUR"]["Abonnement"] = "None";
+        $_SESSION["UTILISATEUR"]["Abonnement"] = "0";
         $_SESSION["UTILISATEUR"]["DateAbonnement"] = "None";
         $_SESSION["merci"] = "Nous vous confirmons la résilation de votre abonnement. Vous pouvez vous réabonner quand vous voulez !";
     }
