@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Ajouter une annonce</title>
-        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
     <body>
         <header>
@@ -24,18 +24,17 @@
                     <input type="number" id="prix" name="prix" required>
                 </div>
                 <div>
-                    <button type="submit" name="submit">Ajouter</button>
+                    <button class="bouton-golden" type="submit" name="submit">Ajouter</button>
                 </div>
             </form>
         </main>
         <footer>
-            <a href="#" class="bouton-golden">Supprimer mon compte</a>
+            
             <hr>
             
         </footer>
     </body>
 </html>
-
 
 <?php
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
