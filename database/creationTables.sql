@@ -32,7 +32,7 @@ CREATE TABLE `Adresse` (
   `id` int NOT NULL,
   `numeroRue` varchar(255) NOT NULL,
   `nomRue` varchar(255) NOT NULL,
-  `codePostal` smallint NOT NULL,
+  `codePostal` int NOT NULL,
   `ville` varchar(100) NOT NULL,
   `pays` varchar(50) NOT NULL,
   `complementAdresse` varchar(255) DEFAULT NULL,

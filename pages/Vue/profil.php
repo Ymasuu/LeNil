@@ -84,7 +84,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
                     ?>
                 </table>
             <div style="text-align:right"><a class="bouton-golden" href="editProfil.php">Modifier les informations</a></div>
-            <div style="text-align:right"><button class="bouton-golden" onclick="afficherPopup()">Supprimer mon mompte</button></div>
+            <div style="text-align:right"><button class="bouton-golden" onclick="afficherPopup()">Supprimer mon compte</button></div>
             </fieldset>
             <div><a class="bouton-golden" href="../Contrôleur/process_logout.php">Se déconnecter</a></div>
             <div><a class="bouton-golden" href="index.php">Retour à l'accueil</a></div>
