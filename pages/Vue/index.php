@@ -30,22 +30,26 @@
 			</div>
 			<div class = "box">
 			<?php
-				for ($i = 1; $i <= 17; $i++) {
-					// Récupération des informations du produit
-					$resultat = mysqli_query($conn, 'SELECT * FROM produitsvendeur WHERE id = ' . $i);
-					$produit = mysqli_fetch_assoc($resultat);
-			?>
-			<button class="article">
-				<img src="../../img/<?php echo $produit['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
-				<div>
-					<h5><?php echo $produit['nom']; ?></h5>
-					<p><?php echo $produit['minidescription']; ?></p>
-					<p>Prix : <?php echo $produit['prix']; ?> €</p>
-				</div>
-			</button>
-			<?php
-				}
-			?>
+// Requête pour récupérer les informations de chaque produit
+$resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur");
+
+//Parcours des résultats avec une boucle while
+while ($produit = mysqli_fetch_assoc($resultat)) {
+?>
+    <button class="article">
+        <img src="../../img/<?php echo $produit['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
+        <div>
+            <h5><?php echo $produit['nom']; ?></h5>
+            <p><?php echo $produit['minidescription']; ?></p>
+            <p>Prix : <?php echo $produit['prix']; ?> €</p>
+        </div>
+    </button>
+<?php
+}
+// Fermeture de la connexion à la base de données
+mysqli_close($conn);
+?>
+
 			</div>
 		</div>
 		<?php include '../../templates/footer.php'; ?>
