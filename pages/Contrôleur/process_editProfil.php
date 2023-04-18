@@ -15,10 +15,6 @@ if ($_POST['mdp'] != $_SESSION["UTILISATEUR"]["mdp"]) {
     exit();
 }
 
-// Initialisation de la clé 'email' dans $_SESSION["UTILISATEUR"]
-//$_SESSION["UTILISATEUR"]["email"] = $POST['mail'];
-
-
 // On récupère les informations de l'utilisateur
 if ($_POST['nom'] != "") $_SESSION["UTILISATEUR"]["nom"] = $_POST['nom'];
 if ($_POST['prenom'] != "") $_SESSION["UTILISATEUR"]["prenom"] = $_POST['prenom'];
@@ -27,15 +23,12 @@ if(isset($_POST['mail'])){
     $_SESSION["UTILISATEUR"]["email"] = $_POST['mail'];
 }
 
-//if ($_POST['email'] != "") $_SESSION["UTILISATEUR"]["email"] = $_POST['email'];
 if ($_POST['dateNaissance'] != "") $_SESSION["UTILISATEUR"]["dateNaissance"] = $_POST['dateNaissance'];
 if ($_POST['tel'] != "") $_SESSION["UTILISATEUR"]["tel"] = $_POST['tel'];
 if ($_POST['adresse'] != "") $_SESSION["UTILISATEUR"]["adresse"] = $_POST['adresse'];
 if ($_POST['ville'] != "") $_SESSION["UTILISATEUR"]["ville"] = $_POST['ville'];
 if ($_POST['codePostal'] != "") $_SESSION["UTILISATEUR"]["codePostal"] = $_POST['codePostal'];
 if ($_POST['pays'] != "") $_SESSION["UTILISATEUR"]["pays"] = $_POST['pays'];
-
-
 
 // Récupération des données POST
 $nom = $_POST['nom'];
