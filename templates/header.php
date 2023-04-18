@@ -16,8 +16,11 @@ if (session_status() == PHP_SESSION_NONE) {
 					<button type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
 				</form>
 			</div>
-			<li class="style"><a href="about.php" class="lien">A propos</a></li>
 			<?php
+			if(!isset($_SESSION["UTILISATEUR"]["TypeCompte"])) echo "<li class='style'><a href='about.php' class='lien'>A propos</a></li>";
+			else if ($_SESSION["UTILISATEUR"]["TypeCompte"] == "vendeur") echo "<li class='style'><a href='Vendeur.php' class='lien'>Gérer Produit</a></li>";
+			else echo "<li class='style'><a href='profil.php' class='lien'>Profil</a></li>";
+
 			if (!isset($_SESSION["UTILISATEUR"])) echo "<li class='style'><a href='login.php' class='lien'>Se Connecter</a></li>";
 			else echo "<li class='style'><a href='../Contrôleur/process_logout.php' class='lien'>Se Déconnecter</a></li>";
 			if((!isset($_SESSION["UTILISATEUR"])) or ($_SESSION["UTILISATEUR"]["Abonnement"] == "None")){

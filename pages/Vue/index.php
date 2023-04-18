@@ -50,9 +50,6 @@
                 ?>
             </div>
 		</div>
-		<form action="Vendeur.php">
-			<input type="submit" value="Gérer Produit">
-		</form>
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>
