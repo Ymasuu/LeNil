@@ -83,6 +83,7 @@ if ($resultCheck>0) {
 
         unset($_SESSION["errorLogin"]); // on supprime la variable de session
         $_SESSION["UTILISATEUR"]["nom"] = $informations['nom'];
+        $_SESSION["UTILISATEUR"]["prenom"] = "";
         $_SESSION["UTILISATEUR"]["email"] = $row['email'];
         $_SESSION["UTILISATEUR"]["tel"] = $informations['telephone'];
         $_SESSION["UTILISATEUR"]["adresse"] = $informations['adresse'];
@@ -90,6 +91,17 @@ if ($resultCheck>0) {
         $_SESSION["UTILISATEUR"]["codePostal"] = $informations['codePostal'];
         $_SESSION["UTILISATEUR"]["pays"] = $informations['pays'];
         $_SESSION["UTILISATEUR"]["mdp"] = $row['motDePasse'];
+        if ($row['abonnement'] == 0) {
+            $_SESSION["UTILISATEUR"]["Abonnement"] = "None";
+        }
+        if ($row['abonnement'] == 1) {
+            $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Mensuel";
+        }
+        if ($row['abonnement'] == 2) {
+            $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
+        }
+        //$_SESSION["UTILISATEUR"]["Abonnement"] = $row['abonnement'];
+        $_SESSION["UTILISATEUR"]["DateAbonnement"] = $row['dateAbonnement'];
         $_SESSION["UTILISATEUR"]["TypeCompte"] = "vendeur";
         header("Location:../Vue/index.php");
         exit();
