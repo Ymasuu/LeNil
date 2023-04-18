@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : lun. 17 avr. 2023 à 10:55
+-- Généré le : mar. 18 avr. 2023 à 13:56
 -- Version du serveur :  8.0.32-0ubuntu0.20.04.2
 -- Version de PHP : 7.4.3-4ubuntu2.18
 
@@ -32,7 +32,7 @@ CREATE TABLE `Adresse` (
   `id` int NOT NULL,
   `numeroRue` varchar(255) NOT NULL,
   `nomRue` varchar(255) NOT NULL,
-  `codePostal` int NOT NULL,
+  `codePostal` smallint NOT NULL,
   `ville` varchar(100) NOT NULL,
   `pays` varchar(50) NOT NULL,
   `complementAdresse` varchar(255) DEFAULT NULL,
@@ -210,7 +210,7 @@ CREATE TABLE `InfoCompte` (
   `prenom` varchar(50) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `dateNaissance` date NOT NULL,
-  `telephone` int NOT NULL,
+  `telephone` varchar(10) NOT NULL,
   `adresse` varchar(250) NOT NULL,
   `ville` varchar(50) NOT NULL,
   `codePostal` int NOT NULL,
@@ -222,13 +222,13 @@ CREATE TABLE `InfoCompte` (
 --
 
 INSERT INTO `InfoCompte` (`emailCompte`, `prenom`, `nom`, `dateNaissance`, `telephone`, `adresse`, `ville`, `codePostal`, `pays`) VALUES
-('abdellah.hassani2002@gmail.com', 'Abdellah', 'Hassani', '2000-03-21', 767756606, '15 bd du port', 'Cergy', 95000, 'France'),
-('ethanpINTo02@gmail.com', 'Ethan', 'Pinto', '2000-03-21', 661839460, '22 rue de la petite-nuit', 'Cergy', 95800, 'France'),
-('foulonclem@cy-tech.fr', 'Clement', 'Foulon', '2002-03-19', 632135190, '22 boulevard de l oise', 'Cergy', 95000, 'France'),
-('magasin1@gmail.com', 'MAGASIN1', 'MAGASIN1', '1989-05-11', 130365987, '12 Allée de la Garance', 'PARIS', 75019, 'France'),
-('magasin2@gmail.com', 'MAGASIN2', 'MAGASIN2', '1989-05-11', 130365987, '130, Clos Chapelle-aux-Champs', 'PARIS', 75019, 'France'),
-('renato.nascimento.ardiles@cy-tech.fr', 'Renato', 'Nascimento Ardiles', '2000-03-21', 0, '22 rue de la petite-nuit', 'Cergy', 95000, 'France'),
-('samy.belbouab@gmail.com', 'Samy', 'Belbouab', '2002-02-18', 610122887, '26 rue de le grande piece', 'Menucourt', 95180, 'France');
+('abdellah.hassani2002@gmail.com', 'Abdellah', 'Hassani', '2000-03-21', '0767756606', '15 bd du port', 'Cergy', 95000, 'France'),
+('ethanpINTo02@gmail.com', 'Ethan', 'Pinto', '2000-03-21', '0661839460', '22 rue de la petite-nuit', 'Cergy', 95800, 'France'),
+('foulonclem@cy-tech.fr', 'Clement', 'Foulon', '2002-03-19', '0632135190', '22 boulevard de l oise', 'Cergy', 95000, 'France'),
+('magasin1@gmail.com', 'MAGASIN1', 'MAGASIN1', '1989-05-11', '0130365987', '12 Allée de la Garance', 'PARIS', 75019, 'France'),
+('magasin2@gmail.com', 'MAGASIN2', 'MAGASIN2', '1989-05-11', '0130365987', '130, Clos Chapelle-aux-Champs', 'PARIS', 75019, 'France'),
+('renato.nascimento.ardiles@cy-tech.fr', 'Renato', 'Nascimento Ardiles', '2000-03-21', '0000000000', '22 rue de la petite-nuit', 'Cergy', 95000, 'France'),
+('samy.belbouab@gmail.com', 'Samy', 'Belbouab', '2002-02-18', '0610122887', '26 rue de le grande piece', 'Menucourt', 95180, 'France');
 
 -- --------------------------------------------------------
 
@@ -288,31 +288,32 @@ CREATE TABLE `ProduitsVendeur` (
   `prix` decimal(10,2) NOT NULL,
   `NomImage` char(50) NOT NULL,
   `nom` char(100) NOT NULL,
-  `description` text
+  `description` text,
+  `minidescription` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `ProduitsVendeur`
 --
 
-INSERT INTO `ProduitsVendeur` (`id`, `emailVendeur`, `QuantiteVendeur`, `prix`, `NomImage`, `nom`, `description`) VALUES
-(1, 'magasin1@gmail.com', 100, '29.99', 'casque.png', 'Casque', 'Grâce à la nouvelle conception de son boîtier de commande audio USB et sa carte son intégrée, HyperX Cloud II amplifie l\'audio et la voix pour créer une expérience de jeu Hi-Fi optimale. Vous serez toujours certain de tout entendre. Vous accédez à un monde de détails que les autres gamers ne connaîtront jamais : le bruissement d\'une botte dans les feuilles, une course furtive dans une conduite. Les commandes indépendantes permettent de régler le volume de l\'écoute et le niveau du micro. Vous pouvez aussi activer le son Surround 7.1 ou le micro.'),
-(2, 'magasin1@gmail.com', 150, '19.99', 'casquette.jpg', 'Casquette', 'Balinco Casquette d\'hélice colorée | Casquette d\'hélicoptère | Casquette de propulseur | Casquette de Baseball pour Adultes et Enfants - Taille Ajustable'),
-(3, 'magasin1@gmail.com', 200, '9.99', 'chausette.jpg', 'Chausette', NULL),
-(4, 'magasin2@gmail.com', 150, '19.99', 'casquette.jpg', 'Casquette', NULL),
-(5, 'magasin1@gmail.com', 55, '29.99', 'clavier.jpg', 'Clavier', NULL),
-(6, 'magasin1@gmail.com', 75, '149.99', 'ecran.jpg', 'Ecran', NULL),
-(7, 'magasin1@gmail.com', 44, '14.99', 'hdmi.jpg', 'Hdmi', NULL),
-(8, 'magasin2@gmail.com', 65, '50.99', 'lego2.jpg', 'Lego 2.0', NULL),
-(9, 'magasin2@gmail.com', 86, '45.99', 'lego_voiture.jpg', 'Lego de voiture', NULL),
-(10, 'magasin2@gmail.com', 89, '9.99', 'loupe.png', 'Loupe', NULL),
-(11, 'magasin2@gmail.com', 26, '5.99', 'lunette_soleil.jpg', 'Lunette soleil', NULL),
-(12, 'magasin2@gmail.com', 75, '24.99', 'manette.jpg', 'Manette', NULL),
-(13, 'magasin2@gmail.com', 99, '699.99', 'ordi_portable.jpg', 'Ordinateur Portable', NULL),
-(14, 'magasin1@gmail.com', 458, '5.99', 'playmobil.jpg', 'Playmobil 1.0', NULL),
-(15, 'magasin1@gmail.com', 54, '6.99', 'playmobil2.jpeg', 'Playmobil 2.0', NULL),
-(16, 'magasin1@gmail.com', 865, '13.99', 'souris.jpg', 'Souris', NULL),
-(17, 'magasin1@gmail.com', 254, '949.99', 'tour.jpg', 'Tour PC', NULL);
+INSERT INTO `ProduitsVendeur` (`id`, `emailVendeur`, `QuantiteVendeur`, `prix`, `NomImage`, `nom`, `description`, `minidescription`) VALUES
+(1, 'magasin1@gmail.com', 100, '29.99', 'casque.png', 'Casque', 'Grâce à la nouvelle conception de son boîtier de commande audio USB et sa carte son intégrée, HyperX Cloud II amplifie l\'audio et la voix pour créer une expérience de jeu Hi-Fi optimale. Vous serez toujours certain de tout entendre. Vous accédez à un monde de détails que les autres gamers ne connaîtront jamais : le bruissement d\'une botte dans les feuilles, une course furtive dans une conduite. Les commandes indépendantes permettent de régler le volume de l\'écoute et le niveau du micro. Vous pouvez aussi activer le son Surround 7.1 ou le micro.', 'Accessoire de mode'),
+(2, 'magasin1@gmail.com', 150, '19.99', 'casquette.jpg', 'Casquette', 'Balinco Casquette d\'hélice colorée | Casquette d\'hélicoptère | Casquette de propulseur | Casquette de Baseball pour Adultes et Enfants - Taille Ajustable', 'Accessoire de mode'),
+(3, 'magasin1@gmail.com', 200, '9.99', 'chaussette.jpg', 'Chaussette', NULL, 'Chaussette confortable'),
+(4, 'magasin2@gmail.com', 150, '19.99', 'casquette.jpg', 'Casquette', NULL, 'Accessoire de mode'),
+(5, 'magasin1@gmail.com', 55, '29.99', 'clavier.jpg', 'Clavier', NULL, 'Clavier de jeu'),
+(6, 'magasin1@gmail.com', 75, '149.99', 'ecran.jpg', 'Ecran', NULL, 'Ecran haute résolution'),
+(7, 'magasin1@gmail.com', 44, '14.99', 'hdmi.jpg', 'Câble Hdmi', NULL, 'Câble de connexion'),
+(8, 'magasin2@gmail.com', 65, '50.99', 'lego2.jpg', 'Lego City', NULL, 'Lego pour construire votre ville'),
+(9, 'magasin2@gmail.com', 86, '45.99', 'lego_voiture.jpg', 'Lego Technic Voiture', NULL, 'Lego pour adulte'),
+(10, 'magasin2@gmail.com', 26, '5.99', 'lunette_soleil.jpg', 'Lunette soleil', NULL, 'Accessoire de mode'),
+(11, 'magasin2@gmail.com', 75, '24.99', 'manette.jpg', 'Manette', NULL, 'Manette de jeu'),
+(12, 'magasin2@gmail.com', 99, '699.99', 'ordi_portable.jpg', 'Ordinateur Portable', NULL, 'Ordinateur portable pour gamer'),
+(13, 'magasin1@gmail.com', 458, '5.99', 'playmobil.jpg', 'Playmobil 1.0', NULL, 'Pour vos enfants'),
+(14, 'magasin1@gmail.com', 54, '6.99', 'playmobil2.jpeg', 'Playmobil 2.0', NULL, 'Pour vos enfants'),
+(15, 'magasin1@gmail.com', 865, '13.99', 'souris.jpg', 'Souris', NULL, 'Souris de jeu'),
+(16, 'magasin1@gmail.com', 254, '949.99', 'tour.jpg', 'Tour PC', NULL, 'Ordinateur pour gamer'),
+(17, 'magasin1@gmail.com', 55, '29.99', 'claquette.jpg', 'Claquette', NULL, 'Chaussure d\'été');
 
 -- --------------------------------------------------------
 
