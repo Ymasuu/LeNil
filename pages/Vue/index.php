@@ -35,7 +35,7 @@
                     //Parcours des résultats avec une boucle while
                     while ($produit = mysqli_fetch_assoc($resultat)) {
                 ?>
-                <button class="article" onclick="window.location.href='pageProduit.php'">
+                <button class="article" name="produit_id" value= "<?php $produit['id'] ?>" onclick="window.location.href='pageProduit.php'">
                     <img src="../../img/<?php echo $produit['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
                     <div>
                         <h5><?php echo $produit['nom']; ?></h5>
