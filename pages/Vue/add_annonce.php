@@ -1,28 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8">
-	<title>Ajouter une annonce</title>
-	<link rel="stylesheet" href="../style.css">
-	<link rel="icon" type="image/png" href="./logo2.png">
-</head>
-<body>
-	<div style="width: 520px; margin: auto;">
-		<h1>Ajouter une annonce</h1>
-		<form action="add_annonce.php" method="POST">
-			<label for="titre">Titre de l'annonce :</label>
-			<input type="text" id="titre" name="titre" required><br><br>
-			<label for="description">Description :</label>
-			<textarea id="description" name="description" required></textarea><br><br>
-			<label for="prix">Prix :</label>
-			<input type="number" id="prix" name="prix" min="0" required><br><br>
-			<label for="photo">Photo :</label>
-			<input type="file" id="photo" name="photo"><br><br>
-			<input class="bouton-golden" type="submit" value="Ajouter">
-		</form>
-	</div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Ajouter une annonce</title>
+        <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Ajouter une annonce</h1>
+        </header>
+        <main>
+            <form method="post">
+                <div>
+                    <label for="titre">Titre :</label>
+                    <input type="text" id="titre" name="titre" required>
+                </div>
+                <div>
+                    <label for="description">Description :</label>
+                    <textarea id="description" name="description" rows="5" required></textarea>
+                </div>
+                <div>
+                    <label for="prix">Prix :</label>
+                    <input type="number" id="prix" name="prix" required>
+                </div>
+                <div>
+                    <button type="submit" name="submit">Ajouter</button>
+                </div>
+            </form>
+        </main>
+        <footer>
+            <a href="#" class="bouton-golden">Supprimer mon compte</a>
+            <hr>
+            
+        </footer>
+    </body>
 </html>
+
 
 <?php
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
