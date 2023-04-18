@@ -20,7 +20,7 @@ if (session_status() == PHP_SESSION_NONE) {
 			<?php
 			if (!isset($_SESSION["UTILISATEUR"])) echo "<li class='style'><a href='login.php' class='lien'>Se Connecter</a></li>";
 			else echo "<li class='style'><a href='../Contrôleur/process_logout.php' class='lien'>Se Déconnecter</a></li>";
-			if((!isset($_SESSION["UTILISATEUR"])) or ($_SESSION["UTILISATEUR"]["Abonnement"] == "0")){
+			if((!isset($_SESSION["UTILISATEUR"])) or ($_SESSION["UTILISATEUR"]["Abonnement"] == "None")){
 					echo "<li class='style'><a href='abonnement.php' class='lien'>S'abonner</a></li>";
 				} else echo"<li class='style'><a href='../Contrôleur/process_abonnement.php' class='lien'>Se Désabonner</a></li>";
 			?>

@@ -60,7 +60,7 @@ if ($resultCheck>0) {
         if ($row['abonnement'] == 1) {
             $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Mensuel";
         }
-        if ($row['abonnement'] == 1) {
+        if ($row['abonnement'] == 2) {
             $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
         }
         //$_SESSION["UTILISATEUR"]["Abonnement"] = $row['abonnement'];
