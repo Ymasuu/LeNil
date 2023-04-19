@@ -61,7 +61,8 @@
                 <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
                 <input type="submit" name="modifier_un_produit" value="Modifier ce produit">
             </form>
-            <form method="post" action="suppProduitVendeur.php">
+            <form method="post" action="../Contrôleur/procces_suppProduit.php">
+                <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
                 <input type="submit" name="supprimer_un_produit" value="Supprimer ce produit">
             </form>
         <hr> <!-- Repère visuel temporaire -->
