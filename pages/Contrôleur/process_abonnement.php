@@ -42,24 +42,6 @@
     else $query = "UPDATE Compte SET dateAbonnement = NULL WHERE email='$mail' AND motDePasse='$password';";
     $result = mysqli_query($conn, $query);
 
-    /*
-    // On met à jour les informations de l'utilisateur dans la base de données
-    $csvFile = file_get_contents("../../database/client.csv");
-    $csvArray = explode("\n", $csvFile);
-    foreach($csvArray as $key => $line) {
-        $userData = explode(",", $line);
-        if($userData[2] == $_SESSION["UTILISATEUR"]["email"]) {
-            // On met à jour l'informations de l'utilisateur en question
-            $userData[10] = $_SESSION["UTILISATEUR"]["Abonnement"];
-            $userData[11] = $_SESSION["UTILISATEUR"]["DateAbonnement"];
-            $csvArray[$key] = implode(",", $userData);
-
-            $csvFile = implode("\n", $csvArray);
-            file_put_contents("../../database/client.csv", $csvFile);
-            break;
-        }
-    }*/
-
     header('Location:../Vue/index.php');
     exit();
 ?>

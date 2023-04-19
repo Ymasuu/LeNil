@@ -73,7 +73,7 @@ if ($resultCheck>0) {
     //VENDEUR 
     else if ($row['signatureContratVendeur'] == 1) {
 
-//On fait d'autres requetes pour obtenir les informations nécessaires de ce compte
+    //On fait d'autres requetes pour obtenir les informations nécessaires de ce compte
         $sousquery = "SELECT * FROM InfoCompte WHERE emailCompte = '$mail';";
         $sousresult = mysqli_query($conn, $sousquery);
         $sousresultCheck = mysqli_num_rows($sousresult);
@@ -123,53 +123,6 @@ if ($resultCheck>0) {
         exit();
             }
 }
-
-/*$utilisateurs = explode("\n", file_get_contents("../../database/client.csv")); // récupération des données utilisateur
-
-foreach($utilisateurs as $end){ //on parcourt dans la liste des utilisateurs 
-    $detailUtilisateur = explode(",", $end);
-    if($detailUtilisateur[2] == $mail && $detailUtilisateur[9] == $password)
-    {
-        unset($_SESSION["errorLogin"]); // on supprime la variable de session
-        $_SESSION["UTILISATEUR"]["nom"] = $detailUtilisateur[0];
-        $_SESSION["UTILISATEUR"]["prenom"] = $detailUtilisateur[1];
-        $_SESSION["UTILISATEUR"]["email"] = $detailUtilisateur[2];
-        $_SESSION["UTILISATEUR"]["dateNaissance"] = $detailUtilisateur[3];
-        $_SESSION["UTILISATEUR"]["tel"] = $detailUtilisateur[4];
-        $_SESSION["UTILISATEUR"]["adresse"] = $detailUtilisateur[5];
-        $_SESSION["UTILISATEUR"]["ville"] = $detailUtilisateur[6];
-        $_SESSION["UTILISATEUR"]["codePostal"] = $detailUtilisateur[7];
-        $_SESSION["UTILISATEUR"]["pays"] = $detailUtilisateur[8];
-        $_SESSION["UTILISATEUR"]["mdp"] = $detailUtilisateur[9];
-        $_SESSION["UTILISATEUR"]["Abonnement"] = $detailUtilisateur[10];
-        $_SESSION["UTILISATEUR"]["DateAbonnement"] = $detailUtilisateur[11];
-        $_SESSION["UTILISATEUR"]["TypeCompte"] = "client";
-        header("Location:../Vue/index.php");
-        exit();
-    } 
-} */
-
-// Si l'utilisateur n'a pas été trouvé, on vérifie s'il s'agit d'un vendeur
-/*$utilisateurs = explode("\n", file_get_contents("../../database/vendeur.csv")); // récupération des données utilisateur
-
-foreach($utilisateurs as $end){ //on parcourt dans la liste des utilisateurs
-    $detailUtilisateur = explode(",", $end);
-    if($detailUtilisateur[1] == $mail && $detailUtilisateur[7] == $password)
-    {
-        unset($_SESSION["errorLogin"]); // on supprime la variable de session
-        $_SESSION["UTILISATEUR"]["nom"] = $detailUtilisateur[0];
-        $_SESSION["UTILISATEUR"]["email"] = $detailUtilisateur[1];
-        $_SESSION["UTILISATEUR"]["tel"] = $detailUtilisateur[2];
-        $_SESSION["UTILISATEUR"]["adresse"] = $detailUtilisateur[3];
-        $_SESSION["UTILISATEUR"]["ville"] = $detailUtilisateur[4];
-        $_SESSION["UTILISATEUR"]["codePostal"] = $detailUtilisateur[5];
-        $_SESSION["UTILISATEUR"]["pays"] = $detailUtilisateur[6];
-        $_SESSION["UTILISATEUR"]["mdp"] = $detailUtilisateur[7];
-        $_SESSION["UTILISATEUR"]["TypeCompte"] = "vendeur";
-        header("Location:../Vue/index.php");
-        exit();
-    } 
-}*/
     // Pour chaque erreur de login, on imcrémente une variable de 1
     if (!isset($_SESSION["errorLogin"])) {
         $_SESSION["errorLogin"] = 1;
