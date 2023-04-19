@@ -18,7 +18,7 @@
     <?php include '../../templates/header.php'; ?>
 	<div style="width: 500px; margin: auto;">
 		<h1>Mot de passe oublié ?</h1>
-		<form action="../Contrôleur/process_forgotPassword3.php" method="post">
+		<form action="../Contrôleur/process_forgotPassword2.php" method="post">
 			<fieldset>
                 <table>
                     <tr>
