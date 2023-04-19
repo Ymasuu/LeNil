@@ -15,9 +15,13 @@
 </head>
 <body>
     <div>
-        <?php include '../../templates/header.php'; ?>
+        <?php include '../../templates/header.php';
+			if(isset($_SESSION["message"]))echo "<center><b>".$_SESSION["message"]."</b></center>"; unset($_SESSION["message"]);
+            unset($_SESSION['message']);
+		?>
         <hr> <!-- Repère visuel temporaire -->
         <div class = "global">
+
             <div class="box">
                 <?php
                     // Vérifier si la variable de session 'email' existe
