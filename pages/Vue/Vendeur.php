@@ -17,7 +17,7 @@
     <div>
         <?php include '../../templates/header.php'; ?>
         <hr> <!-- Repère visuel temporaire -->
-        <div>
+        <div class = "global">
             <div class="box">
                 <?php
                     // Vérifier si la variable de session 'email' existe
@@ -28,14 +28,19 @@
                         //Parcours des résultats avec une boucle while
                         while ($produit = mysqli_fetch_assoc($resultat)) {
                 ?>
-                            <button class="article">
-                                <img src="../../img/<?php echo $produit['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
-                                <div>
-                                    <h5><?php echo $produit['nom']; ?></h5>
-                                    <p><?php echo $produit['minidescription']; ?></p>
-                                    <p>Prix : <?php echo $produit['prix']; ?> €</p>
-                                </div>
-                            </button>
+                  <form action="pageProduitVendeur.php" method="post">
+						<div class="article">
+							<button type="submit" style="background-color: transparent; border: none; padding: 0; margin: 0; cursor: pointer;">
+								<img src="../../img/<?php echo $produit['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
+								<div>
+									<h5><?php echo $produit['nom']; ?></h5>
+									<p><?php echo $produit['minidescription']; ?></p>
+									<p>Prix : <?php echo $produit['prix']; ?> €</p>
+								</div>
+							</button>
+							<input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
+						</div>
+					</form>
                 <?php
                         }
                         // Fermeture de la connexion à la base de données
@@ -45,6 +50,9 @@
                     }
                 ?>
             </div>
+            <form method="post" action="ajoutProduitVendeur.php">
+                <input type="submit" name="ajouter_un_produit" value="Ajouter un produit">
+            </form>
             <hr> <!-- Repère visuel temporaire -->
             <?php include '../../templates/footer.php'; ?>
         </div>
