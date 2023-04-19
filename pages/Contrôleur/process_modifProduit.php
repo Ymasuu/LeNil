@@ -34,7 +34,7 @@
     if ($_POST['minidescription'] != "") $minidescription = $_POST['minidescription'];
     if ($_POST['description'] != "") $description = $_POST['description'];
     $description = str_replace("'", "''", $description); // pour évitez les probleme avec les apostrophes lorsque l'on utilisera la requete
-    if ($_POST['categorie'] != "") $nom = $_POST['categorie'];   
+    if ($_POST['categorie'] != "") $categorie = $_POST['categorie'];   
 
     $connexion = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     mysqli_begin_transaction($connexion);

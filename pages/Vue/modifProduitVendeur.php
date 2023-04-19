@@ -57,8 +57,14 @@
                             <td><input type="text" name="description" id="description" placeholder="<?php echo $produit['description']; ?>"></td>
                         </tr>
                         <tr>
-                            <td><label for="categorie">Categorie</label></td>
-                            <td><input type="text" name="categorie" id="categorie" placeholder="<?php echo $produit['categorie']; ?>"></td>
+                            <td><label for="categorie">categorie : </label></td>
+                            <td>
+                                <select name="categorie" id="categorie">
+                                    <option value="Vêtement" <?php if ($produit['categorie'] == "Vêtement") echo "selected"; ?> >Vêtement</option>
+                                    <option value="Informatique" <?php if ($produit['categorie'] == "Informatique") echo "selected"; ?> >Informatique</option>
+                                    <option value="Jeux pour enfant" <?php if ($produit['categorie'] == "Jeux pour enfant") echo "selected"; ?> >Jeux pour enfant</option>
+                                </select>
+                        </td>
                         </tr>
                         <td colspan="2"><p>Confirmer la modification avec votre mot de passe :</p></td>
                         </tr>
