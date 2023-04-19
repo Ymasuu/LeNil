@@ -11,7 +11,7 @@ if (session_status() == PHP_SESSION_NONE) {
 		<ul>
 			<li class="current"><a href="index.php"><img src="../../img/logo.png" alt="logo_du_site" width="175px"></a></li>
 			<div class="search-container">
-				<form class="search-form">
+				<form class="search-form" method="get">
 					<input type="text" name="query" placeholder="Rechercher sur LeNil.com">
 					<button type="submit"><i class="fa-sharp fa-solid fa-magnifying-glass"></i></button>
 				</form>
