@@ -19,7 +19,7 @@ if ($_POST['mdp'] != $_SESSION["UTILISATEUR"]["mdp"]) {
 if ($_POST['nom'] != "") $_SESSION["UTILISATEUR"]["nom"] = $_POST['nom'];
 if ($_POST['prenom'] != "") $_SESSION["UTILISATEUR"]["prenom"] = $_POST['prenom'];
 $OLDMAIL = $_SESSION["UTILISATEUR"]["email"];
-if(isset($_POST['mail'])){
+if($_POST['mail'] != ""){
     $_SESSION["UTILISATEUR"]["email"] = $_POST['mail'];
 }
 
@@ -31,46 +31,32 @@ if ($_POST['codePostal'] != "") $_SESSION["UTILISATEUR"]["codePostal"] = $_POST[
 if ($_POST['pays'] != "") $_SESSION["UTILISATEUR"]["pays"] = $_POST['pays'];
 
 // Récupération des données POST
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$email =$_SESSION["UTILISATEUR"]["email"];
-$dateNaissance = date('Y-m-d', strtotime($_POST['dateNaissance']));
+$nom = $_SESSION["UTILISATEUR"]["nom"];
+$prenom = $_SESSION["UTILISATEUR"]["prenom"];
+$email = $_SESSION["UTILISATEUR"]["email"];
+$dateNaissance = date('Y-m-d', strtotime($_SESSION["UTILISATEUR"]["dateNaissance"]));
 $tel = $_POST['tel'];
 //Correction pour tel
 if (isset($_POST['tel']) && is_numeric($_POST['tel'])) {
     $tel = (int)$_POST['tel'];
 } else {
-    $tel = 0;
+    $tel = $_SESSION["UTILISATEUR"]["tel"];
 }
-$adresse = $_POST['adresse'];
-$ville = $_POST['ville'];
-$codePostal = $_POST['codePostal'];
-$pays = $_POST['pays'];
+$adresse = $_SESSION["UTILISATEUR"]["adresse"];
+$ville = $_SESSION["UTILISATEUR"]["ville"];
+$codePostal = $_SESSION["UTILISATEUR"]["codePostal"];
+$pays = $_SESSION["UTILISATEUR"]["pays"];
 
-$connexion = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-mysqli_begin_transaction($connexion);
 
-// Préparation de la requête SQL
-if (isset($email)) {
-    $sql1 = "UPDATE Compte SET email = '$email' WHERE email = '{$_SESSION["UTILISATEUR"]["email"]}'";
-    if (!mysqli_query($connexion, $sql1)) {
-        mysqli_rollback($connexion);
-        die("Erreur lors de la mise à jour du compte : " . mysqli_error($connexion));
-    }
-    $_SESSION["UTILISATEUR"]["email"] = $email;
-}
+// Mise à jour de la table InfoCompte
+$sql = "UPDATE InfoCompte SET emailCompte = '$email', nom = '$nom', prenom = '$prenom', dateNaissance = '$dateNaissance', telephone = '$tel', adresse = '$adresse', ville = '$ville', codePostal = '$codePostal', pays = '$pays' WHERE emailCompte = '$OLDMAIL'";
+$result = mysqli_query($conn, $sql);
+// Mise à de jour la table Compte
+$sql2 = "UPDATE Compte SET email = '$email' WHERE email = '$OLDMAIL'";
+$result = mysqli_query($conn, $sql2);
 
-// Mettre à jour la table InfoCompte
-$sql2 = "UPDATE InfoCompte SET nom = '$nom', prenom = '$prenom', dateNaissance = '$dateNaissance', telephone = '$tel', adresse = '$adresse', ville = '$ville', codePostal = '$codePostal', pays = '$pays' WHERE emailCompte = '{$_SESSION["UTILISATEUR"]["email"]}'";
-if (!mysqli_query($connexion, $sql2)) {
-    mysqli_rollback($connexion);
-    die("Erreur lors de la mise à jour des informations du compte : " . mysqli_error($connexion));
-}
-
-mysqli_commit($connexion);
-
-// Fermer la connexion à la base de données
-mysqli_close($connexion);
+// Mettre à jour la variable de session
+$_SESSION["UTILISATEUR"]["email"] = $email;
 
 // On met à jour les informations de l'utilisateur dans la base de données
 /*$csvFile = file_get_contents("../../database/client.csv");
