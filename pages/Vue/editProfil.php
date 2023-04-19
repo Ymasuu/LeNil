@@ -63,7 +63,7 @@ if(!isset($_SESSION["UTILISATEUR"])){
                             <td><input type="text" name="pays" id="pays" placeholder="<?php echo $_SESSION["UTILISATEUR"]["pays"]; ?>"></td>
                         </tr>
                         <tr>
-                        <td colspan="2"><p>Confirmer la modification en métant votre mot de passe :</p></td>
+                        <td colspan="2"><p>Confirmer la modification avec votre mot de passe :</p></td>
                         </tr>
                         <tr>
                             <td><label for="mdp">mot de passe</label></td>
