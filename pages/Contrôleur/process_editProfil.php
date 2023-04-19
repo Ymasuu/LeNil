@@ -48,6 +48,36 @@ $codePostal = $_SESSION["UTILISATEUR"]["codePostal"];
 $pays = $_SESSION["UTILISATEUR"]["pays"];
 
 
+/*
+
+ERREUR A LA LIGNE 63 ON NE PEUT PAS MODIF L'EMAIL CAR C'EST UNE CLEF ETRANGERE DE LA TABLE COMPTE ???
+
+$connexion = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+mysqli_begin_transaction($connexion);
+
+// Préparation de la requête SQL
+
+// Mise à jour de la table InfoCompte
+$sql = "UPDATE InfoCompte SET emailCompte = '$email', nom = '$nom', prenom = '$prenom', dateNaissance = '$dateNaissance', telephone = '$tel', adresse = '$adresse', ville = '$ville', codePostal = '$codePostal', pays = '$pays' WHERE emailCompte = '$OLDMAIL'";
+
+if (!mysqli_query($connexion, $sql)) {
+    mysqli_rollback($connexion);
+    die("Erreur lors de la mise à jour de la table InfoCompte : " . mysqli_error($connexion));
+}
+
+// Mise à de jour la table Compte
+$sql2 = "UPDATE Compte SET email = '$email' WHERE email = '$OLDMAIL'";
+
+if (!mysqli_query($connexion, $sql2)) {
+    mysqli_rollback($connexion);
+    die("Erreur lors de la mise à jour de la table Compte : " . mysqli_error($connexion));
+}
+
+// Valider la transaction
+mysqli_commit($connexion);
+*/
+
+
 // Mise à jour de la table InfoCompte
 $sql = "UPDATE InfoCompte SET emailCompte = '$email', nom = '$nom', prenom = '$prenom', dateNaissance = '$dateNaissance', telephone = '$tel', adresse = '$adresse', ville = '$ville', codePostal = '$codePostal', pays = '$pays' WHERE emailCompte = '$OLDMAIL'";
 $result = mysqli_query($conn, $sql);
