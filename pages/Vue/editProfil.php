@@ -35,10 +35,6 @@ if(!isset($_SESSION["UTILISATEUR"])){
                             <td><input type="text" name="prenom" id="prenom" placeholder="<?php echo $_SESSION["UTILISATEUR"]["prenom"]; ?>"></td>
                         </tr>
                         <tr>
-                            <td><label for="mail">Mail</label></td>
-                            <td><input type="email" name="mail" id="mail" placeholder="<?php echo $_SESSION["UTILISATEUR"]["email"]; ?>"></td>
-                        </tr>
-                        <tr>
                             <td><label for="dateNaissance">Date de naissance</label></td>
                             <td><input type="date" name="dateNaissance" id="dateNaissance"></td>
                         </tr>
