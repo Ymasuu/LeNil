@@ -37,6 +37,8 @@
                 <h2><?php echo $produit['description']; ?></h2>
                 <hr>
                 <p>Prix : <?php echo $produit['prix']; ?> €</p>
+                <p>Catégorie : <?php echo $produit['categorie']; ?></p>
+
             </div>
             <div class="info">
                 <div class="prix"><?php echo $produit['prix']; ?> €</div>
