@@ -10,21 +10,39 @@
         $produit_id = $_POST['produit_id'];
         $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur WHERE id = '$produit_id'");
     }
-    $produit_id = $_SESSION["produit_id"];
 
-    // Récupération des données POST + METTRE DES CONDITIONS SI C'EST VIDE
-    $nom = $_POST['nom'];
-    $QuantiteVendeur = $_POST['QuantiteVendeur'];
-    $prix =$_POST['prix'];
-    $minidescription = $_POST['minidescription'];
-    $description = $_POST['description'];
-    $descri = "description";
+    $produit_id = $_SESSION["produit_id"];
+    $produit_id = mysqli_real_escape_string($conn, $produit_id);
+    $sql = "SELECT * FROM produitsvendeur WHERE id = '$produit_id';";
+    $result = $result = mysqli_query($conn, $sql);
+    $resultCheck = mysqli_num_rows($result);
+    //Si la requete est bonne...
+    if ($resultCheck>0) {
+        $row = mysqli_fetch_assoc($result);
+        $nom = $row['nom'];
+        $QuantiteVendeur = $row['QuantiteVendeur'];
+        $prix = $row['prix'];
+        $minidescription = $row['minidescription'];
+        $categorie = $row['categorie'];
+        $description = $row['description'];
+    }
+
+    // Récupération des données POST
+    if ($_POST['nom'] != "") $nom = $_POST['nom'];
+    if ($_POST['QuantiteVendeur'] != "") $QuantiteVendeur = $_POST['QuantiteVendeur'];
+    if ($_POST['prix'] != "") $prix =$_POST['prix'];
+    if ($_POST['minidescription'] != "") $minidescription = $_POST['minidescription'];
+    if ($_POST['description'] != "") $description = $_POST['description'];
+    $description = str_replace("'", "''", $description); // pour évitez les probleme avec les apostrophes lorsque l'on utilisera la requete
+    if ($_POST['categorie'] != "") $nom = $_POST['categorie'];   
 
     $connexion = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     mysqli_begin_transaction($connexion);
 
+    $descri = "description";
+
     //Mettre a jour la table produitsvendeur
-    $sql = "UPDATE produitsvendeur SET nom = '$nom', QuantiteVendeur = '$QuantiteVendeur', prix = '$prix', minidescription = '$minidescription', $descri = '$description' WHERE id = '$produit_id';";
+    $sql = "UPDATE produitsvendeur SET nom = '$nom', QuantiteVendeur = '$QuantiteVendeur', prix = '$prix', minidescription = '$minidescription', $descri = '$description', categorie = '$categorie' WHERE id = '$produit_id';";
     $result = mysqli_query($conn, $sql);
     if (!mysqli_query($connexion, $sql)) {
         mysqli_rollback($connexion);

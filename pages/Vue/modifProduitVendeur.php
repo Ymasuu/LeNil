@@ -56,6 +56,10 @@
                             <td><label for="description">Description</label></td>
                             <td><input type="text" name="description" id="description" placeholder="<?php echo $produit['description']; ?>"></td>
                         </tr>
+                        <tr>
+                            <td><label for="categorie">Categorie</label></td>
+                            <td><input type="text" name="categorie" id="categorie" placeholder="<?php echo $produit['categorie']; ?>"></td>
+                        </tr>
                         <td colspan="2"><p>Confirmer la modification avec votre mot de passe :</p></td>
                         </tr>
                         <tr>
@@ -66,10 +70,8 @@
                             <td><?php if(isset($_SESSION['erreur'])){echo $_SESSION['erreur'];unset($_SESSION['erreur']);} ?></td>
                         </tr> 
                     </table>
-                    <form method="post" action="process_modifProduit.php">
-                        <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
-                        <input type="submit" name="modifier_un_produit" value="Modifier">
-                    </form>
+                    <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
+                    <input type="submit" name="modifier_un_produit" value="Modifier">
                 </fieldset>
             </form>
             <?php
