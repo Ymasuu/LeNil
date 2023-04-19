@@ -70,8 +70,10 @@
                             <td><?php if(isset($_SESSION['erreur'])){echo $_SESSION['erreur'];unset($_SESSION['erreur']);} ?></td>
                         </tr> 
                     </table>
-                    <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
-                    <input type="submit" name="modifier_un_produit" value="Modifier">
+                    <form method="post" action="process_modifProduit.php">
+                        <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
+                        <input type="submit" name="modifier_un_produit" value="Modifier">
+                    </form>
                 </fieldset>
             </form>
             <?php

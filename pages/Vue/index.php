@@ -38,64 +38,60 @@
 			</div>
 			<div class="box">
 			<?php
+                //Si $query contient une valeur de recherche
+                if (isset($_GET['query']) && !empty($_GET['query'])) {
+                    $query = $_GET['query'];
+                    $motsCles = explode(" ", $query);
+                    // Utiliser la variable $query ici
+                }
+                // Requête pour récupérer les informations de chaque produit
+                //Si rien dans la barre de recherche
+                if (empty($_GET['query'])) {
+                    $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur");
 
-//Si $query contient une valeur de recherche
-if (isset($_GET['query']) && !empty($_GET['query'])) {
-    $query = $_GET['query'];
-	$motsCles = explode(" ", $query);
-    // Utiliser la variable $query ici
-}
+                    //Parcours des résultats avec une boucle while
+                    while ($produit = mysqli_fetch_assoc($resultat)) {
+                        ?>
+                        <form action="pageProduit.php" method="post">
+                            <div class="article">
+                                <button type="submit" style="background-color: transparent; border: none; padding: 0; margin: 0; cursor: pointer;">
+                                    <img src="../../img/<?php echo $produit['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
+                                    <div>
+                                        <h5><?php echo $produit['nom']; ?></h5>
+                                        <p><?php echo $produit['minidescription']; ?></p>
+                                        <p>Prix : <?php echo $produit['prix']; ?> €</p>
+                                    </div>
+                                </button>
+                                <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
+                            </div>
+                        </form>
+                        <?php
+                    }
+                } else {
+                    // Sélectionner toutes les lignes de la table
+                    $sql = "SELECT * FROM ProduitsVendeur
+                            WHERE nom REGEXP '$query' OR description REGEXP '$query' OR minidescription REGEXP '$query'";
+                    $result = mysqli_query($conn, $sql);
 
-// Requête pour récupérer les informations de chaque produit
-//Si rien dans la barre de recherche
-if (empty($_GET['query'])) {
-    $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur");
-
-    //Parcours des résultats avec une boucle while
-    while ($produit = mysqli_fetch_assoc($resultat)) {
-        ?>
-        <form action="pageProduit.php" method="post">
-            <div class="article">
-                <button type="submit" style="background-color: transparent; border: none; padding: 0; margin: 0; cursor: pointer;">
-                    <img src="../../img/<?php echo $produit['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
-                    <div>
-                        <h5><?php echo $produit['nom']; ?></h5>
-                        <p><?php echo $produit['minidescription']; ?></p>
-                        <p>Prix : <?php echo $produit['prix']; ?> €</p>
-                    </div>
-                </button>
-                <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
-            </div>
-        </form>
-        <?php
-    }
-} else {
-    // Sélectionner toutes les lignes de la table
-    $sql = "SELECT * FROM ProduitsVendeur
-            WHERE nom REGEXP '$query' OR description REGEXP '$query' OR minidescription REGEXP '$query'";
-    $result = mysqli_query($conn, $sql);
-
-    while ($row = mysqli_fetch_assoc($result)) { ?>
-        <form action="pageProduit.php" method="post">
-            <div class="article">
-                <button type="submit" style="background-color: transparent; border: none; padding: 0; margin: 0; cursor: pointer;">
-                    <img src="../../img/<?php echo $row['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
-                    <div>
-                        <h5><?php echo $row['nom']; ?></h5>
-                        <p><?php echo $row['minidescription']; ?></p>
-                        <p>Prix : <?php echo $row['prix']; ?> €</p>
-                    </div>
-                </button>
-                <input type="hidden" name="produit_id" value="<?php echo $row['id']; ?>">
-            </div>
-        </form>
-    <?php }
-}
-
-// Fermeture de la connexion à la base de données
-mysqli_close($conn);
-?>
-
+                    while ($row = mysqli_fetch_assoc($result)) { ?>
+                        <form action="pageProduit.php" method="post">
+                            <div class="article">
+                                <button type="submit" style="background-color: transparent; border: none; padding: 0; margin: 0; cursor: pointer;">
+                                    <img src="../../img/<?php echo $row['NomImage']; ?>" style="width: 100px; height: 100px; margin-right: 10px;">
+                                    <div>
+                                        <h5><?php echo $row['nom']; ?></h5>
+                                        <p><?php echo $row['minidescription']; ?></p>
+                                        <p>Prix : <?php echo $row['prix']; ?> €</p>
+                                    </div>
+                                </button>
+                                <input type="hidden" name="produit_id" value="<?php echo $row['id']; ?>">
+                            </div>
+                        </form>
+                    <?php }
+                }
+                // Fermeture de la connexion à la base de données
+                mysqli_close($conn);
+                ?>
 			</div>
 		</div>
 		<?php include '../../templates/footer.php'; ?>
