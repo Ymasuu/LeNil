@@ -24,7 +24,7 @@
                     $_SESSION["produit_id"] = $_POST['produit_id'];
                     // Requête pour récupérer les informations du produit cliqué
                     $produit_id = $_POST['produit_id'];
-                    $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur WHERE id = '$produit_id'");
+                    $resultat = mysqli_query($conn, "SELECT * FROM ProduitsVendeur WHERE id = '$produit_id'");
 
                     // Afficher les informations du produit
                     $produit = mysqli_fetch_assoc($resultat);
