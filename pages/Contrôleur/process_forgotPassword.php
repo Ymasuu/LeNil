@@ -1,12 +1,37 @@
 <?php
+require_once '..\..\database\config\connection.php';
+require_once '..\..\database\config\database.php';
 session_start();
+    
 if(isset($_SESSION["UTILISATEUR"])){
     header("Location: profil.php");
     exit();
 }
 $email = $_POST['mail'];
 
-$utilisateurs = explode("\n", file_get_contents("../../database/client.csv")); // récupération des données utilisateur
+$valide = 0; //par défaut, on considère que les informations entrées sont invalides
+
+// ACCES DE L'UTILISATEUR DANS LA BDD
+$email = mysqli_real_escape_string($conn, $email);
+
+
+// Execute the SQL query with escaped values
+$query = "SELECT * FROM Compte WHERE email='$email';";
+$result = mysqli_query($conn, $query);
+
+$resultCheck = mysqli_num_rows($result);
+
+//Si la requete est bonne...
+if ($resultCheck>0) {
+    $valide = 1;
+}
+
+
+
+
+
+
+/*$utilisateurs = explode("\n", file_get_contents("../../database/client.csv")); // récupération des données utilisateur
 
 $valide = 0; //par défaut, on considère que les informations entrées sont invalides
 
@@ -19,7 +44,7 @@ foreach($utilisateurs as $end) //on parcourt dans la liste des utilisateurs
         break;
     }
 }
-
+*/
 if($valide == 0){
     $_SESSION["erreur"] = "L'adresse mail n'est pas valide";
     header("Location:../Vue/forgotPassword.php");

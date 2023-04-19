@@ -1,9 +1,13 @@
 <?php
+require_once '..\..\database\config\connection.php';
+require_once '..\..\database\config\database.php';
 session_start();
+
 if(isset($_SESSION["UTILISATEUR"])){
     header("Location: ../vue/profil.php");
     exit();
 }
+
 $password = $_POST["password"];
 $password2 = $_POST["password2"];
 
@@ -13,10 +17,34 @@ if($password != $password2){
     exit();
 }
 
+$mail = $_SESSION["mail"];
+// ACCES DE L'UTILISATEUR DANS LA BDD
+$mail = mysqli_real_escape_string($conn, $mail);
+
+$valide = 0;
+
+$query = "UPDATE Compte SET motDePasse = '$password' WHERE email='$mail';";
+$result = mysqli_query($conn, $query);
+
+
+$password = mysqli_real_escape_string($conn, $password);
+
+$query = "SELECT * FROM Compte WHERE email='$mail'AND motDePasse='$password';";
+$result = mysqli_query($conn, $query);
+
+$resultCheck = mysqli_num_rows($result);
+//Si la requete est bonne...
+if ($resultCheck>0) {
+    $valide = 1;
+}
+
+
+
+/*
 $csvFile = file_get_contents("../../database/client.csv");
 $csvArray = explode("\n", $csvFile);
 
-$valide = 0;
+
 
 foreach($csvArray as $key => $line){
     $userData = explode(",", $line);
@@ -30,7 +58,7 @@ foreach($csvArray as $key => $line){
         break;
     }
 }
-
+*/
 if($valide == 0){
     $_SESSION["erreur"] = "une erreur est survenue, nous sommes désolés";
     header("Location: ../Vue/forgotPassword3.php");
