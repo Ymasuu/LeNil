@@ -24,10 +24,7 @@
     <div class="line"></div>
     <div>
         <ul class="button_link">
-            <li><a href=createAccount.php>Inscription</a></li>
-            <li><a href=login.php>Connexion</a></li>
             <li><a href=profil.php>Profil</a></li>
-            <li><a href=../Contrôleur/process_logout.php>Déconnexion</a></li>
             <li><a href=index.php>Accueil</a></li>
             <li><a href=about.php>A propos</a></li>
             <li><a href=contact.php>Contacter</a></li>
