@@ -21,6 +21,7 @@
         <div style="width: 500px; margin: auto;">
             <?php
                 if (isset($_POST['produit_id'])) {
+                    $_SESSION["produit_id"] = $_POST['produit_id'];
                     // Requête pour récupérer les informations du produit cliqué
                     $produit_id = $_POST['produit_id'];
                     $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur WHERE id = '$produit_id'");
@@ -29,7 +30,7 @@
                     $produit = mysqli_fetch_assoc($resultat);
             ?>
             <h1>Modification Produit</h1>
-            <form action="process_modifProduit.php" method="post">
+            <form action="../Contrôleur/process_modifProduit.php" method="post">
                 <fieldset>
                     <legend>Informations du produit</legend>
                     <p>Ne remplissez que les champs que vous désirez changer.</p>
