@@ -19,19 +19,21 @@
         <hr> <!-- Repère visuel temporaire -->
         <div style="width: 500px; margin: auto;">
             <h1>Modification Produit</h1>
-            <form action="Vendeur.php" method="post">
+            <form action="process_modifProduit.php" method="post">
                 <fieldset>
                     <legend>Informations du produit</legend>
                     <p>Ne remplissez que les champs que vous désirez changer.</p>
+                    
                     <table>
+                
                         <tr>
                             <td><label for="nom">Nom</label></td>
                             <td><input type="text" name="nom" id="nom" placeholder="<?php echo $produit['nom']; ?>"></td>
                             </td>
                         </tr>
                         <tr>
-                            <td><label for="quantite">Quantité</label></td>
-                            <td><input type="text" name="quantite" id="quantite" placeholder="<?php echo $produit['quantite']; ?>"></td>
+                            <td><label for="QuantiteVendeur">Quantité</label></td>
+                            <td><input type="text" name="QuantiteVendeur" id="QuantiteVendeur" placeholder="<?php echo $produit['QuantiteVendeur']; ?>"></td>
                         </tr>
                         <tr>
                             <td><label for="prix">Prix</label></td>
@@ -45,13 +47,22 @@
                             <td><label for="description">Description</label></td>
                             <td><input type="text" name="description" id="description" placeholder="<?php echo $produit['description']; ?>"></td>
                         </tr>
+                        <td colspan="2"><p>Confirmer la modification avec votre mot de passe :</p></td>
+                        </tr>
+                        <tr>
+                            <td><label for="mdp">mot de passe</label></td>
+                            <td><input type="password" name="mdp" id="mdp" placeholder="mot de passe"></td>
+                        </tr>
                         <tr>
                             <td><input class="bouton-golden" type="submit" value="Modifier"></td>
                             <td><?php if(isset($_SESSION['erreur'])){echo $_SESSION['erreur'];unset($_SESSION['erreur']);} ?></td>
                         </tr>
+                       
                     </table>
+                     
                 </fieldset>
             </form>
+           
         </div>
         <hr> <!-- Repère visuel temporaire -->
         <?php include '../../templates/footer.php'; ?>
