@@ -57,12 +57,13 @@
                 }
             ?>
         </div>
-        <form method="post" action="modifProduitVendeur.php">
-            <input type="submit" name="modifier_un_produit" value="Modifier ce produit">
-        </form>
-        <form method="post" action="suppProduitVendeur.php">
-            <input type="submit" name="supprimer_un_produit" value="Supprimer ce produit">
-        </form>
+            <form method="post" action="modifProduitVendeur.php">
+                <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
+                <input type="submit" name="modifier_un_produit" value="Modifier ce produit">
+            </form>
+            <form method="post" action="suppProduitVendeur.php">
+                <input type="submit" name="supprimer_un_produit" value="Supprimer ce produit">
+            </form>
         <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
     </div>
