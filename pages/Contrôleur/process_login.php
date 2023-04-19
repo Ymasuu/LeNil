@@ -63,8 +63,9 @@ if ($resultCheck>0) {
         if ($row['abonnement'] == 2) {
             $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
         }
-        //$_SESSION["UTILISATEUR"]["Abonnement"] = $row['abonnement'];
-        $_SESSION["UTILISATEUR"]["DateAbonnement"] = $row['dateAbonnement'];
+        if ($row['dateAbonnement'] != NULL){
+            $_SESSION["UTILISATEUR"]["DateAbonnement"] = $row['dateAbonnement'];
+        } else $_SESSION["UTILISATEUR"]["DateAbonnement"] = "None";
         $_SESSION["UTILISATEUR"]["TypeCompte"] = "client";
         header("Location:../Vue/index.php");
         exit();
@@ -101,7 +102,9 @@ if ($resultCheck>0) {
             $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
         }
         //$_SESSION["UTILISATEUR"]["Abonnement"] = $row['abonnement'];
-        $_SESSION["UTILISATEUR"]["DateAbonnement"] = $row['dateAbonnement'];
+        if ($row['dateAbonnement'] != NULL){
+            $_SESSION["UTILISATEUR"]["DateAbonnement"] = $row['dateAbonnement'];
+        }
         $_SESSION["UTILISATEUR"]["TypeCompte"] = "vendeur";
         header("Location:../Vue/index.php");
         exit();
