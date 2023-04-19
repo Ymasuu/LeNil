@@ -296,8 +296,6 @@ CREATE TABLE `ProduitsVendeur` (
 -- Déchargement des données de la table `ProduitsVendeur`
 --
 
-INSERT INTO table (champ) VALUES ('c''est une chaîne d''apostrophes');
-
 
 INSERT INTO `ProduitsVendeur` (`id`, `emailVendeur`, `QuantiteVendeur`, `prix`, `NomImage`, `nom`, `description`, `minidescription`, `categorie`) VALUES
 (1, 'magasin1@gmail.com', 100, '29.99', 'casque.png', 'Casque', 'Grâce à la nouvelle conception de son boîtier de commande audio USB et sa carte son intégrée, HyperX Cloud II amplifie l''audio et la voix pour créer une expérience de jeu Hi-Fi optimale. Vous serez toujours certain de tout entendre. Vous accédez à un monde de détails que les autres gamers ne connaîtront jamais : le bruissement d''une botte dans les feuilles, une course furtive dans une conduite. Les commandes indépendantes permettent de régler le volume de l''écoute et le niveau du micro. Vous pouvez aussi activer le son Surround 7.1 ou le micro.', 'Casque bluetooth', 'Informatique'),
