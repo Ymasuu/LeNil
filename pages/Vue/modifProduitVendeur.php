@@ -4,6 +4,7 @@
     require_once '..\..\database\config\database.php';
     session_start();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,14 +19,21 @@
         <?php include '../../templates/header.php'; ?>
         <hr> <!-- Repère visuel temporaire -->
         <div style="width: 500px; margin: auto;">
+            <?php
+                if (isset($_POST['produit_id'])) {
+                    // Requête pour récupérer les informations du produit cliqué
+                    $produit_id = $_POST['produit_id'];
+                    $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur WHERE id = '$produit_id'");
+
+                    // Afficher les informations du produit
+                    $produit = mysqli_fetch_assoc($resultat);
+            ?>
             <h1>Modification Produit</h1>
             <form action="process_modifProduit.php" method="post">
                 <fieldset>
                     <legend>Informations du produit</legend>
                     <p>Ne remplissez que les champs que vous désirez changer.</p>
-                    
                     <table>
-                
                         <tr>
                             <td><label for="nom">Nom</label></td>
                             <td><input type="text" name="nom" id="nom" placeholder="<?php echo $produit['nom']; ?>"></td>
@@ -54,15 +62,18 @@
                             <td><input type="password" name="mdp" id="mdp" placeholder="mot de passe"></td>
                         </tr>
                         <tr>
-                            <td><input class="bouton-golden" type="submit" value="Modifier"></td>
                             <td><?php if(isset($_SESSION['erreur'])){echo $_SESSION['erreur'];unset($_SESSION['erreur']);} ?></td>
-                        </tr>
-                       
+                        </tr> 
                     </table>
-                     
+                    <form method="post" action="process_modifProduit.php">
+                        <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
+                        <input type="submit" name="modifier_un_produit" value="Modifier">
+                    </form>
                 </fieldset>
             </form>
-           
+            <?php
+                }
+            ?>
         </div>
         <hr> <!-- Repère visuel temporaire -->
         <?php include '../../templates/footer.php'; ?>
