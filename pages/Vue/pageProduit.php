@@ -43,28 +43,24 @@
             <div class="info">
                 <div class="prix"><?php echo $produit['prix']; ?> €</div>
                 <div class="stock"><?php if($produit['QuantiteVendeur'] > 0) { echo 'En stock'; } else { echo 'Rupture de stock'; } ?></div>
-
-                <?php
-                if(isset($_POST['ajouter_au_panier'])){
-                    $produit_id = $produit['nom'];
-                    $prix_produit = $produit['prix'];
-                    $quantite = $_POST['quantite'];
-                    // Ajouter ici la logique pour ajouter l'article au panier
-                }
-                ?>
-
-                <div class="quantite">
-                    <label for="qty">Quantité :</label>
-                    <input type="number" name="quantite" id="qty" min="1" max="100" value="1">
-                </div>
-
+                
                 <form method="post" action="panier.php">
+                    <div class="quantite">
+                        <label for="qty">Quantité :</label>
+                        <input type="number" name="quantite" id="qty" min="1" max="100" value="1">
+                    </div>
                     <input type="hidden" name="produit_id" value="<?php echo $produit['nom']; ?>">
-                    <input type="hidden" name="prix_produit" value="<?php echo $produit['prix']; ?> €">
-                    <input type="hidden" name="quantite" value="<?php echo $quantite; ?>">
+                    <input type="hidden" name="prix_produit" value="<?php echo $produit['prix']; ?>">
                     <input type="submit" name="ajouter_au_panier" value="Ajouter au panier">
                 </form>
             </div>
+
+            <?php
+            if(isset($_POST['quantite'])) {
+                $quantite = $_POST['quantite'];
+            }
+            ?>
+
             <?php
                 } else {
                     // Si aucun produit n'a été cliqué, afficher un message d'erreur
