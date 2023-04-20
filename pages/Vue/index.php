@@ -27,28 +27,68 @@
 			<div class = "gauche">
 				<h1>Filtres</h1>
 				<form action="" method="post">
-					<label><input type="checkbox" name="informatique" value="informatique"> Informatique</label>
+					<label><input type="checkbox" name="categories[]" value="informatique"> Informatique </label>
 					<br>
-					<label><input type="checkbox" name="enfant" value="enfant"> Jeux pour enfant</label>
+					<label><input type="checkbox" name="categories[]" value="Jeux pour enfant"> Jeux pour enfant </label>
 					<br>
-					<label><input type="checkbox" name="vetement" value="vetement"> Vêtement</label>
+					<label><input type="checkbox" name="categories[]" value="vetement"> Vêtement </label>
 					<br>
-					<input type="submit" value="Envoyer">
+                    <label><input type="checkbox" name="categories[]" value="lego"> Lego </label>
+					<br>
+					<input type="submit" value="Filtrer">
 				</form>
 			</div>
 			<div class="box">
 			<?php
                 //Si $query contient une valeur de recherche
-                if (isset($_GET['query']) && !empty($_GET['query'])) {
-                    $query = $_GET['query'];
-                    $motsCles = explode(" ", $query);
-                    // Utiliser la variable $query ici
-                }
+if (isset($_GET['query']) && !empty($_GET['query'])) {
+    $query = $_GET['query'];
+    $motsCles = explode(" ", $query);
+    // Utiliser la variable $query ici
+
+    $emailCompte = $_SESSION["UTILISATEUR"]["email"];
+    $motCle = $query;
+
+    // Préparer la requête de vérification
+    $stmt_check = $conn->prepare("SELECT COUNT(*) as count FROM Recherche WHERE emailCompte = ? AND motCle = ?");
+    $stmt_check->bind_param("ss", $emailCompte, $motCle);
+    $stmt_check->execute();
+    $result = $stmt_check->get_result();
+    $row = $result->fetch_assoc();
+    
+    if($row['count'] == 0) {
+        //On ajoute dans la table Recherche la $query
+        // Préparer la requête d'insertion avec des paramètres
+        $stmt = $conn->prepare("INSERT INTO Recherche (emailCompte, motCle) VALUES (?, ?)");
+
+        // Lier les paramètres avec les valeurs à insérer
+        $stmt->bind_param("ss", $emailCompte, $motCle);
+
+        // Exécuter la requête
+        if ($stmt->execute()) {
+            //echo "Insertion réussie";
+        } else {
+            echo "Erreur d'insertion: " . $conn->error;
+        }
+
+        // Fermer la connexion
+        $stmt->close();
+    }
+
+    // Fermer la connexion
+    $stmt_check->close();
+}
                 // Requête pour récupérer les informations de chaque produit
                 //Si rien dans la barre de recherche
                 if (empty($_GET['query'])) {
+                    
                     $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur");
-
+                    if(isset($_POST['categories'])) {
+                        include('../Contrôleur/process_filtre.php');
+                        $resultat = $_SESSION['objet'];
+                        unset($_POST['categories']);
+                    }
+                    
                     //Parcours des résultats avec une boucle while
                     while ($produit = mysqli_fetch_assoc($resultat)) {
                         ?>
@@ -98,3 +138,4 @@
 	</div>
 </body>
 </html>
+

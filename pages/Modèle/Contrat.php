@@ -1,4 +1,5 @@
 <?
+
 class Contrat {
 private Compte $compte;
 private int $numero;

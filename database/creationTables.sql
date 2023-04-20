@@ -305,8 +305,8 @@ INSERT INTO `ProduitsVendeur` (`id`, `emailVendeur`, `QuantiteVendeur`, `prix`, 
 (5, 'magasin1@gmail.com', 55, '29.99', 'clavier.jpg', 'Clavier', NULL, 'Clavier de jeu', 'Informatique'),
 (6, 'magasin1@gmail.com', 75, '149.99', 'ecran.jpg', 'Ecran', NULL, 'Ecran haute résolution', 'Informatique'),
 (7, 'magasin1@gmail.com', 44, '14.99', 'hdmi.jpg', 'Câble Hdmi', NULL, 'Câble de connexion', 'Informatique'),
-(8, 'magasin2@gmail.com', 65, '50.99', 'lego2.jpg', 'Lego City', NULL, 'Lego pour construire votre ville', 'Jeux pour enfant'),
-(9, 'magasin2@gmail.com', 86, '45.99', 'lego_voiture.jpg', 'Lego Technic Voiture', NULL, 'Lego pour adulte', 'Jeux pour enfant'),
+(8, 'magasin2@gmail.com', 65, '50.99', 'lego2.jpg', 'Lego City', NULL, 'Lego pour construire votre ville', 'Lego'),
+(9, 'magasin2@gmail.com', 86, '45.99', 'lego_voiture.jpg', 'Lego Technic Voiture', NULL, 'Lego pour adulte', 'Lego'),
 (10, 'magasin2@gmail.com', 26, '5.99', 'lunette_soleil.jpg', 'Lunette soleil', NULL, 'Accessoire de mode', 'Vêtement'),
 (11, 'magasin2@gmail.com', 75, '24.99', 'manette.jpg', 'Manette', NULL, 'Manette de jeu', 'Informatique'),
 (12, 'magasin2@gmail.com', 99, '699.99', 'ordi_portable.jpg', 'Ordinateur Portable', NULL, 'Ordinateur portable pour gamer', 'Informatique'),
@@ -453,7 +453,7 @@ ALTER TABLE `QuantiteCommande`
 -- Index pour la table `Recherche`
 --
 ALTER TABLE `Recherche`
-  ADD PRIMARY KEY (`emailCompte`);
+  ADD PRIMARY KEY (`emailCompte`,`motCle`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées

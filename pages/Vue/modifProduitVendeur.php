@@ -63,6 +63,7 @@
                                     <option value="Vêtement" <?php if ($produit['categorie'] == "Vêtement") echo "selected"; ?> >Vêtement</option>
                                     <option value="Informatique" <?php if ($produit['categorie'] == "Informatique") echo "selected"; ?> >Informatique</option>
                                     <option value="Jeux pour enfant" <?php if ($produit['categorie'] == "Jeux pour enfant") echo "selected"; ?> >Jeux pour enfant</option>
+                                    <option value="Lego" <?php if ($produit['categorie'] == "Lego") echo "selected"; ?> >Lego</option>
                                 </select>
                         </td>
                         </tr>
