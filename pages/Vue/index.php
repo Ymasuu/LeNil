@@ -29,7 +29,7 @@
 				<form action="" method="post">
 					<label><input type="checkbox" name="categories[]" value="informatique"> Informatique </label>
 					<br>
-					<label><input type="checkbox" name="categories[]" value="enfant"> Jeux pour enfant </label>
+					<label><input type="checkbox" name="categories[]" value="Jeux pour enfant"> Jeux pour enfant </label>
 					<br>
 					<label><input type="checkbox" name="categories[]" value="vetement"> Vêtement </label>
 					<br>
