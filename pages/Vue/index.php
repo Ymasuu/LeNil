@@ -39,30 +39,43 @@
 			<div class="box">
 			<?php
                 //Si $query contient une valeur de recherche
-                if (isset($_GET['query']) && !empty($_GET['query'])) {
-                    $query = $_GET['query'];
-                    $motsCles = explode(" ", $query);
-                    // Utiliser la variable $query ici
+if (isset($_GET['query']) && !empty($_GET['query'])) {
+    $query = $_GET['query'];
+    $motsCles = explode(" ", $query);
+    // Utiliser la variable $query ici
 
-                    $emailCompte = $_SESSION["UTILISATEUR"]["email"];
-                    $motCle = $query;
-                    //On ajoute dans la table Recherche la $query
-                    // Préparer la requête d'insertion avec des paramètres
-$stmt = $conn->prepare("INSERT INTO Recherche (emailCompte, motCle) VALUES (?, ?)");
+    $emailCompte = $_SESSION["UTILISATEUR"]["email"];
+    $motCle = $query;
 
-// Lier les paramètres avec les valeurs à insérer
-$stmt->bind_param("ss", $emailCompte, $motCle);
+    // Préparer la requête de vérification
+    $stmt_check = $conn->prepare("SELECT COUNT(*) as count FROM Recherche WHERE emailCompte = ? AND motCle = ?");
+    $stmt_check->bind_param("ss", $emailCompte, $motCle);
+    $stmt_check->execute();
+    $result = $stmt_check->get_result();
+    $row = $result->fetch_assoc();
+    
+    if($row['count'] == 0) {
+        //On ajoute dans la table Recherche la $query
+        // Préparer la requête d'insertion avec des paramètres
+        $stmt = $conn->prepare("INSERT INTO Recherche (emailCompte, motCle) VALUES (?, ?)");
 
-// Exécuter la requête
-if ($stmt->execute()) {
-    //echo "Insertion réussie";
-} else {
-    echo "Erreur d'insertion: " . $conn->error;
+        // Lier les paramètres avec les valeurs à insérer
+        $stmt->bind_param("ss", $emailCompte, $motCle);
+
+        // Exécuter la requête
+        if ($stmt->execute()) {
+            //echo "Insertion réussie";
+        } else {
+            echo "Erreur d'insertion: " . $conn->error;
+        }
+
+        // Fermer la connexion
+        $stmt->close();
+    }
+
+    // Fermer la connexion
+    $stmt_check->close();
 }
-
-// Fermer la connexion
-$stmt->close();
-                }
                 // Requête pour récupérer les informations de chaque produit
                 //Si rien dans la barre de recherche
                 if (empty($_GET['query'])) {
