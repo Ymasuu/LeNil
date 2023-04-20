@@ -22,7 +22,6 @@
 </head>
 <body>
 	<?php include '../../templates/header.php'; ?>
-		<hr> <!-- Repère visuel temporaire -->
 		<div class="wrapper">
 			<div class="panier">
 				<h1>Panier</h1>
