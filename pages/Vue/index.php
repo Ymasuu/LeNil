@@ -55,8 +55,10 @@
                 <label><input type="checkbox" name="prix" value="3" onclick="UnChoixPossible(this)"
                     <?php if(isset($_POST['prix']) && $_POST['prix'] == 3) echo "checked"; ?> >
                     151 € ou plus
-                </label> <br>
+                </label> <br> <br> <br>
 
+
+                <br> 
                 <script>
                 function UnChoixPossible(checkbox) {
                     var choix = document.getElementsByName("prix");
@@ -67,6 +69,15 @@
                     }
                 }
                 </script>
+
+                <label><input type="checkbox" name="vendeur[]" value="magasin1@gmail.com"
+                    <?php if (isset($_POST['vendeur']) && in_array('magasin1@gmail.com', $_POST['vendeur'])) echo 'checked'; ?>>
+                    magasin1
+                </label> <br>
+                <label><input type="checkbox" name="vendeur[]" value="magasin2@gmail.com"
+                    <?php if (isset($_POST['vendeur']) && in_array('magasin2@gmail.com', $_POST['vendeur'])) echo 'checked'; ?>>
+                    magasin2
+                </label> <br>
 
                 <br> <br> <br>
                 <input type="submit" name="Filtre" value="Filtrer">
