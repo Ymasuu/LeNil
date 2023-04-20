@@ -27,15 +27,49 @@
 			<div class = "gauche">
 				<h1>Filtres</h1>
 				<form action="" method="post">
-					<label><input type="checkbox" name="categories[]" value="informatique"> Informatique </label>
-					<br>
-					<label><input type="checkbox" name="categories[]" value="Jeux pour enfant"> Jeux pour enfant </label>
-					<br>
-					<label><input type="checkbox" name="categories[]" value="vetement"> Vêtement </label>
-					<br>
-                    <label><input type="checkbox" name="categories[]" value="lego"> Lego </label>
-					<br>
-					<input type="submit" value="Filtrer">
+                <label><input type="checkbox" name="categories[]" value="informatique"
+                    <?php if (isset($_POST['categories']) && in_array('informatique', $_POST['categories'])) echo 'checked'; ?>>
+                    Informatique
+                </label> <br>
+                <label><input type="checkbox" name="categories[]" value="Jeux pour enfant"
+                    <?php if (isset($_POST['categories']) && in_array('Jeux pour enfant', $_POST['categories'])) echo 'checked'; ?>>
+                    Jeux pour enfant
+                </label> <br>
+                <label><input type="checkbox" name="categories[]" value="vetement" 
+                    <?php if (isset($_POST['categories']) && in_array('vetement', $_POST['categories'])) echo 'checked'; ?>>
+                    Vêtement
+                </label> <br>
+                <label><input type="checkbox" name="categories[]" value="lego" 
+                    <?php if (isset($_POST['categories']) && in_array('lego', $_POST['categories'])) echo 'checked'; ?>>
+                    Lego 
+                </label> <br> <br> <br>
+
+                <label><input type="checkbox" name="prix" value="1" onclick="UnChoixPossible(this)"
+                    <?php if(isset($_POST['prix']) && $_POST['prix'] == 1) echo "checked"; ?> >
+                    Entre 0 et 49 €
+                </label> <br>
+                <label><input type="checkbox" name="prix" value="2" onclick="UnChoixPossible(this)"                    
+                    <?php if(isset($_POST['prix']) && $_POST['prix'] == 2) echo "checked"; ?> >
+                    Entre 50 et 150 €
+                </label> <br>
+                <label><input type="checkbox" name="prix" value="3" onclick="UnChoixPossible(this)"
+                    <?php if(isset($_POST['prix']) && $_POST['prix'] == 3) echo "checked"; ?> >
+                    151 € ou plus
+                </label> <br>
+
+                <script>
+                function UnChoixPossible(checkbox) {
+                    var choix = document.getElementsByName("prix");
+                    for (var i = 0; i < choix.length; i++) {
+                        if (choix[i] !== checkbox) {
+                            choix[i].checked = false;
+                        }
+                    }
+                }
+                </script>
+
+                <br> <br> <br>
+                <input type="submit" name="Filtre" value="Filtrer">
 				</form>
 			</div>
 			<div class="box">
@@ -83,10 +117,9 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
                 if (empty($_GET['query'])) {
                     
                     $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur");
-                    if(isset($_POST['categories'])) {
+                    if(isset($_POST['Filtre'])) {
                         include('../Contrôleur/process_filtre.php');
                         $resultat = $_SESSION['objet'];
-                        unset($_POST['categories']);
                     }
                     
                     //Parcours des résultats avec une boucle while
