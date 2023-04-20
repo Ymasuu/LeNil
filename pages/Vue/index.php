@@ -68,6 +68,11 @@
                 }
                 </script>
 
+                <?php $sql = "SELECT nom FROM  ";
+
+                ?>
+                
+
                 <br> <br> <br>
                 <input type="submit" name="Filtre" value="Filtrer">
 				</form>
