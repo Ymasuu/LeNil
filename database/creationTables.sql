@@ -290,7 +290,7 @@ CREATE TABLE `ProduitsVendeur` (
   `nom` char(100) NOT NULL,
   `description` text,
   `minidescription` varchar(200) NOT NULL,
-  `categorie` enum('Informatique','Jeux pour enfant','Vêtement') NOT NULL
+  `categorie` enum('Informatique','Jeux pour enfant','Vêtement','Lego') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -314,8 +314,8 @@ INSERT INTO `ProduitsVendeur` (`id`, `emailVendeur`, `QuantiteVendeur`, `prix`, 
 (14, 'magasin1@gmail.com', 54, '6.99', 'playmobil2.jpeg', 'Playmobil 2.0', NULL, 'Pour vos enfants', 'Jeux pour enfant'),
 (15, 'magasin1@gmail.com', 865, '13.99', 'souris.jpg', 'Souris', NULL, 'Souris de jeu', 'Informatique'),
 (16, 'magasin1@gmail.com', 254, '949.99', 'tour.jpg', 'Tour PC', NULL, 'Ordinateur pour gamer', 'Informatique'),
-(17, 'magasin1@gmail.com', 55, '29.99', 'claquette.jpg', 'Claquette', NULL, 'Chaussure d''été', 'Vêtement');
-
+(17, 'magasin1@gmail.com', 55, '29.99', 'claquette.jpg', 'Claquette', NULL, 'Chaussure d''été', 'Vêtement'),
+(18, 'magasin1@gmail.com', 7, 100, 'LegoSonic.png', 'LEGO® Sonic the Hedgehog', NULL, 'Sonic Green Hill Zone Loop Challenge 76994','Lego');
 -- --------------------------------------------------------
 
 --
@@ -453,7 +453,7 @@ ALTER TABLE `QuantiteCommande`
 -- Index pour la table `Recherche`
 --
 ALTER TABLE `Recherche`
-  ADD PRIMARY KEY (`emailCompte`);
+  ADD PRIMARY KEY (`emailCompte`,`motCle`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
