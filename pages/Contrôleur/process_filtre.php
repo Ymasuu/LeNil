@@ -1,5 +1,5 @@
 <?php
-    // On récupere les valeurs cochez si elles existent
+    // On récupere les catégories si elles existent
     if(isset($_POST['categories'])) {
         $categories = $_POST['categories'];
     }
@@ -20,10 +20,32 @@
         $sql .= ")";
     }
 
+
+
+
+
+    // On récupere la fourchette de prix si elle existe
+
+    if(isset($_POST['prix'])) {
+        $prix = $_POST['prix'];
+    }
+
+    if(isset($prix)){
+        $sql .= " AND (";
+        if($prix == "1") $sql .= "prix BETWEEN 0 AND 49 )";
+        else if ($prix == "2") $sql.= "prix BETWEEN 50 AND 151 )";
+        else $sql .= "prix > 150 )";
+    }
+
+
+
+    $sql .= ";";
     // on exécute la requête SQL
-    $result = mysqli_query($conn, $sql);
+    $resultat = mysqli_query($conn, $sql);
+    if (!$resultat) {
+        die("Erreur SQL : " . mysqli_error($conn));
+    }
 
-    $_SESSION['objet'] = $result; 
-
+    $_SESSION['objet'] = $resultat; 
 
 ?>
