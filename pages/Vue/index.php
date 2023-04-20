@@ -27,13 +27,15 @@
 			<div class = "gauche">
 				<h1>Filtres</h1>
 				<form action="" method="post">
-					<label><input type="checkbox" name="informatique" value="informatique"> Informatique </label>
+					<label><input type="checkbox" name="categories[]" value="informatique"> Informatique </label>
 					<br>
-					<label><input type="checkbox" name="enfant" value="enfant"> Jeux pour enfant </label>
+					<label><input type="checkbox" name="categories[]" value="enfant"> Jeux pour enfant </label>
 					<br>
-					<label><input type="checkbox" name="vetement" value="vetement"> Vêtement </label>
+					<label><input type="checkbox" name="categories[]" value="vetement"> Vêtement </label>
 					<br>
-					<input type="submit" value="Envoyer">
+                    <label><input type="checkbox" name="categories[]" value="lego"> Lego </label>
+					<br>
+					<input type="submit" value="Filtrer">
 				</form>
 			</div>
 			<div class="box">
@@ -79,8 +81,14 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
                 // Requête pour récupérer les informations de chaque produit
                 //Si rien dans la barre de recherche
                 if (empty($_GET['query'])) {
+                    
                     $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur");
-
+                    if(isset($_POST['categories'])) {
+                        include('../Contrôleur/process_filtre.php');
+                        $resultat = $_SESSION['objet'];
+                        unset($_POST['categories']);
+                    }
+                    
                     //Parcours des résultats avec une boucle while
                     while ($produit = mysqli_fetch_assoc($resultat)) {
                         ?>
