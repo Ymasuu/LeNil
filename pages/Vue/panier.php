@@ -17,6 +17,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Panier</title>
 	<link rel="stylesheet" href="../../css/panier.css">
+	<link rel="stylesheet" href="../../css/style.css">
 	<link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
 <body>
@@ -30,9 +31,12 @@
 						if (isset($_POST['ajouter_au_panier'])) {
 							// Récupérer les informations du produit envoyées par le formulaire
 							$produit_id = $_POST['produit_id'];
-							$quantite = $_POST['quantite'];
-							$prix_produit = floatval($_POST['prix_produit']);
-							
+							if(isset($_POST['quantite'])){
+								$quantite = $_POST['quantite'];
+							}
+							$prix_produit = $_POST['prix_produit'];
+							$prix_total = floatval($prix_produit) * floatval($quantite);
+    
 							// Vérifier si le panier existe déjà dans la session
 							if (!isset($_SESSION['panier'])) {
 								$_SESSION['panier'] = array(); // Si non, créer un tableau vide pour le panier
@@ -41,18 +45,17 @@
 							// Vérifier si le produit est déjà dans le panier
 							if (isset($_SESSION['panier'][$produit_id])) {
 								// Si oui, mettre à jour la quantité et le prix total du produit dans le panier
-								$_SESSION['panier'][$produit_id]['quantite'] += $quantite;
-								$_SESSION['panier'][$produit_id]['prix_total'] += floatval($prix_produit) * $quantite;
+								$_SESSION['panier'][intval($produit_id)]['quantite'] += intval($quantite);
+								$_SESSION['panier'][$produit_id]['prix_total'] += $prix_total;
 							} else {
 								// Si non, ajouter le produit au panier avec sa quantité et son prix total
 								$_SESSION['panier'][$produit_id] = array(
 									'quantite' => $quantite,
 									'prix_produit' => $prix_produit,
-									'prix_total' => floatval($prix_produit) * $quantite
+									'prix_total' => $prix_total
 								);
 							}
 						}
-
 						// Afficher le contenu du panier
 						if (isset($_SESSION['panier'])) {
 							echo '<table>';
@@ -63,12 +66,11 @@
 								echo '<td>' . $produit_id . '</td>';
 								echo '<td>' . $produit['quantite'] . '</td>';
 								echo '<td>' . $produit['prix_produit'] . '</td>';
-								echo '<td>' . $produit['prix_produit'] * $produit['quantite'] . '</td>';
+								echo '<td>' . floatval($produit['prix_produit']) * floatval($produit['quantite']) . '</td>';
 								echo '</tr>';
-								$total_panier += $produit['prix_produit'] * $produit['quantite'];
+								$total_panier += floatval($produit['prix_produit']) * floatval($produit['quantite']);
 							}				 
 							echo '</table>';
-							echo 'Total du panier : ' . $total_panier;
 						} else {
 							echo 'Votre panier LeNil est vide.';
 						}
@@ -124,22 +126,27 @@
 				<div>
 					<h5>Sous-total</h5>
 					<p>
-						<?php echo $total_panier; ?>
+						<?php if(isset($total_panier)) echo $total_panier; ?>
 					</p>
 					<h5>Livraison</h5>
 					<p>
 						<?php 
 							$livraison = 14.99;
-							echo $livraison; 
+							if(isset($livraison)) echo $livraison; 
 						?>
 					</p>
 				</div>
 				<hr>
 				<div>
 					<h5>Total final</h5>
-					<?php $total_final = $total_panier + $livraison; ?>
+					<?php 
+						if(isset($total_panier) && isset($livraison)) {
+							$total_final = $total_panier + $livraison;
+						}
+					?>
+
 					<p>
-						<?php echo $total_final; ?>
+						<?php if(isset($total_final)) echo $total_final; ?>
 					</p>
 				</div>
 			</div>
