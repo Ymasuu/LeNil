@@ -6,6 +6,7 @@ require_once 'Panier.php';
 
 class Compte {
   
+  
     private static string $email;
     private string $motDePasse;
     private bool $abonnement;
@@ -16,7 +17,7 @@ class Compte {
     private Panier $panier;
     
   
-    function __construct() {
+    function __construct(string $email) {
       
       // récupération des données de la base de données
       require_once '..\..\..\database\config\database.php';

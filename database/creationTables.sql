@@ -453,7 +453,7 @@ ALTER TABLE `QuantiteCommande`
 -- Index pour la table `Recherche`
 --
 ALTER TABLE `Recherche`
-  ADD PRIMARY KEY (`emailCompte`);
+  ADD PRIMARY KEY (`emailCompte`,`motCle`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées

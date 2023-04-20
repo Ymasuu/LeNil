@@ -43,6 +43,25 @@
                     $query = $_GET['query'];
                     $motsCles = explode(" ", $query);
                     // Utiliser la variable $query ici
+
+                    $emailCompte = $_SESSION["UTILISATEUR"]["email"];
+                    $motCle = $query;
+                    //On ajoute dans la table Recherche la $query
+                    // Préparer la requête d'insertion avec des paramètres
+$stmt = $conn->prepare("INSERT INTO Recherche (emailCompte, motCle) VALUES (?, ?)");
+
+// Lier les paramètres avec les valeurs à insérer
+$stmt->bind_param("ss", $emailCompte, $motCle);
+
+// Exécuter la requête
+if ($stmt->execute()) {
+    //echo "Insertion réussie";
+} else {
+    echo "Erreur d'insertion: " . $conn->error;
+}
+
+// Fermer la connexion
+$stmt->close();
                 }
                 // Requête pour récupérer les informations de chaque produit
                 //Si rien dans la barre de recherche
@@ -98,3 +117,4 @@
 	</div>
 </body>
 </html>
+
