@@ -1,1 +1,1 @@
-Ce dossier contiendra les scripts SQL nécessaire au projet.8
+Ce dossier contiendra les scripts SQL nécessaire au projet.
