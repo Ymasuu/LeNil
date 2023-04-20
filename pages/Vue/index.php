@@ -27,11 +27,11 @@
 			<div class = "gauche">
 				<h1>Filtres</h1>
 				<form action="" method="post">
-					<label><input type="checkbox" name="informatique" value="informatique"> Informatique</label>
+					<label><input type="checkbox" name="informatique" value="informatique"> Informatique </label>
 					<br>
-					<label><input type="checkbox" name="enfant" value="enfant"> Jeux pour enfant</label>
+					<label><input type="checkbox" name="enfant" value="enfant"> Jeux pour enfant </label>
 					<br>
-					<label><input type="checkbox" name="vetement" value="vetement"> Vêtement</label>
+					<label><input type="checkbox" name="vetement" value="vetement"> Vêtement </label>
 					<br>
 					<input type="submit" value="Envoyer">
 				</form>
