@@ -32,6 +32,7 @@
 					<?php
 						if (isset($_POST['ajouter_au_panier'])) {
 							// Récupérer les informations du produit envoyées par le formulaire
+							$produit_nom = $_POST['produit_nom'];
 							$produit_id = $_POST['produit_id'];
 							if(isset($_POST['quantite'])){
 								$quantite = $_POST['quantite'];
@@ -39,7 +40,9 @@
 							$prix_produit = $_POST['prix_produit'];
 							$prix_total = floatval($prix_produit) * floatval($quantite);
 							
-							$id_produit = mysqli_real_escape_string($conn, $produit_id);
+							$sqlPrix_produit = mysqli_real_escape_string($conn, $prix_produit);
+							$sqlQuantite = mysqli_real_escape_string($conn, $quantite);
+							$sqlId_produit = mysqli_real_escape_string($conn, $produit_id);
 							$email = $_SESSION["UTILISATEUR"]["email"];
 							$email = mysqli_real_escape_string($conn, $email);
 							$sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
@@ -58,27 +61,33 @@
 							}
 
 
-							// Vérifier si le panier existe déjà dans la session
+// FAIT							// Vérifier si le panier existe déjà dans la session
 							if (!isset($_SESSION['panier'])) {
 								$_SESSION['panier'] = array(); // Si non, créer un tableau vide pour le panier
 							}
 
-							$sql = "SELECT quantite FROM quantiteCommande WHERE id = '$id_produit' AND emailClient = '$email'";
+							$sql = "SELECT * FROM quantiteCommande WHERE id = '$sqlId_produit' AND emailClient = '$email'";
 							$result = mysqli_query($conn, $sql);
 							$resultCheck = mysqli_num_rows($result);
 							//Si le produit est deja présent dans le panier
 							if ($resultCheck > 0) {
-
+								$sql = "UPDATE quantiteCommande SET quantite = quantite + $quantite WHERE id = '$sqlId_produit' AND emailClient = '$email'";
+								$result = mysqli_query($conn, $sql);
+								$sql = "UPDATE quantiteCommande SET prix = $sqlPrix_produit * quantite";
+								$result = mysqli_query($conn, $sql);					
+							} else {
+								$sql = "INSERT INTO `quantiteCommande` (`id`, `emailClient`, `quantite`, `prix`) VALUES ('$sqlId_produit', '$email', '$sqlQuantite', '$sqlPrix_produit'*$sqlQuantite);";
+								$result = mysqli_query($conn, $sql);
 							}
 
-							// Vérifier si le produit est déjà dans le panier
-							if (isset($_SESSION['panier'][$produit_id])) {
+// FAIT								// Vérifier si le produit est déjà dans le panier
+							if (isset($_SESSION['panier'][$produit_nom])) {
 								// Si oui, mettre à jour la quantité et le prix total du produit dans le panier
-								$_SESSION['panier'][intval($produit_id)]['quantite'] += intval($quantite);
-								$_SESSION['panier'][$produit_id]['prix_total'] += $prix_total;
+								$_SESSION['panier'][intval($produit_nom)]['quantite'] += intval($quantite);
+								$_SESSION['panier'][$produit_nom]['prix_total'] += $prix_total;
 							} else {
 								// Si non, ajouter le produit au panier avec sa quantité et son prix total
-								$_SESSION['panier'][$produit_id] = array(
+								$_SESSION['panier'][$produit_nom] = array(
 									'quantite' => $quantite,
 									'prix_produit' => $prix_produit,
 									'prix_total' => $prix_total
@@ -90,9 +99,9 @@
 							echo '<table>';
 							echo '<tr><th>Produit</th><th>Quantité</th><th>Prix unitaire</th><th>Prix total</th></tr>';
 							$total_panier = 0;
-							foreach ($_SESSION['panier'] as $produit_id => $produit) {
+							foreach ($_SESSION['panier'] as $produit_nom => $produit) {
 								echo '<tr>';
-								echo '<td>' . $produit_id . '</td>';
+								echo '<td>' . $produit_nom . '</td>';
 								echo '<td>' . $produit['quantite'] . '</td>';
 								echo '<td>' . $produit['prix_produit'] . '</td>';
 								echo '<td>' . floatval($produit['prix_produit']) * floatval($produit['quantite']) . '</td>';
@@ -110,12 +119,12 @@
 							echo '<form method="post" action="panier.php">';
 							echo '<table>';
 							echo '<tr><th>Produit</th><th>Quantité</th><th></th></tr>';
-							foreach ($_SESSION['panier'] as $produit_id => $produit) {
+							foreach ($_SESSION['panier'] as $produit_nom => $produit) {
 								echo '<tr>';
-								echo '<td>' . $produit_id . '</td>';
-								echo '<td><input type="number" name="quantite[' . $produit_id . ']" value="' . $produit['quantite'] . '"></td>';
+								echo '<td>' . $produit_nom . '</td>';
+								echo '<td><input type="number" name="quantite[' . $produit_nom . ']" value="' . $produit['quantite'] . '"></td>';
 								echo '<td><input type="submit" name="modifier_quantite" value="Modifier la quantité"></td>';
-								echo '<td><input type="submit" name="supprimer_produit[' . $produit_id . ']" value="Supprimer"></td>';
+								echo '<td><input type="submit" name="supprimer_produit[' . $produit_nom . ']" value="Supprimer"></td>';
 
 								echo '</tr>';
 							}				
@@ -125,16 +134,16 @@
 							// Traiter les modifications de quantité ou de suppression de produits
 							if (isset($_POST['modifier_quantite'])) {
 								// Traitement de la modification de quantité
-								foreach ($_POST['quantite'] as $produit_id => $nouvelle_quantite) {
-									$prix_produit = $_SESSION['panier'][$produit_id]['prix_produit'];
-									$_SESSION['panier'][$produit_id]['quantite'] = $nouvelle_quantite;
-									$_SESSION['panier'][$produit_id]['prix_total'] = $_SESSION['panier'][$produit_id]['quantite'] * $prix_produit;
+								foreach ($_POST['quantite'] as $produit_nom => $nouvelle_quantite) {
+									$prix_produit = $_SESSION['panier'][$produit_nom]['prix_produit'];
+									$_SESSION['panier'][$produit_nom]['quantite'] = $nouvelle_quantite;
+									$_SESSION['panier'][$produit_nom]['prix_total'] = $_SESSION['panier'][$produit_nom]['quantite'] * $prix_produit;
 								}
 								header('Location: panier.php'); // Recharger la page pour afficher les nouvelles informations du panier
 							} elseif (!empty($_POST['supprimer_produit'])) {
 								// Traitement de la suppression de produits
-								foreach ($_POST['supprimer_produit'] as $produit_id => $valeur) {
-									unset($_SESSION['panier'][$produit_id]); // Supprimer le produit du panier
+								foreach ($_POST['supprimer_produit'] as $produit_nom => $valeur) {
+									unset($_SESSION['panier'][$produit_nom]); // Supprimer le produit du panier
 								}
 								header('Location: panier.php'); // Recharger la page pour afficher les nouvelles informations du panier
 							}				

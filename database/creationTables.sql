@@ -350,7 +350,8 @@ INSERT INTO `produitsvendeur` (`id`, `emailVendeur`, `QuantiteVendeur`, `prix`, 
 CREATE TABLE `quantitecommande` (
   `id` int NOT NULL,
   `emailClient` varchar(100) NOT NULL,
-  `quantite` decimal(2,0) NOT NULL
+  `quantite` decimal(2,0) NOT NULL,
+  `prix` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
