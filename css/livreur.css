@@ -1,0 +1,41 @@
+.commandes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .article {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 90%;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .article button {
+    background-color: #ddd;
+    border: none;
+    color: #2E3F58;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .article button:hover {
+    background-color: #ddd;
+  }
+  
+  .article h5 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  
+  .article p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #2E3F58;
+  }
+  

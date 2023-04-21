@@ -1,0 +1,41 @@
+/* Style pour la div englobante */
+.commandes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+/* Style pour chaque article */
+.article {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Style pour le bouton de chaque article */
+.article button {
+    background-color: #EDF2F7;
+    color: #4A5568;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Style pour le titre de chaque article */
+.article h5 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+/* Style pour les informations de chaque commande */
+.article p {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
