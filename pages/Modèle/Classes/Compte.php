@@ -5,8 +5,6 @@ require_once 'Panier.php';
 
 
 class Compte {
-  
-  
     private static string $email;
     private string $motDePasse;
     private bool $abonnement;
