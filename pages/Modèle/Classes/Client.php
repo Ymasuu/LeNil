@@ -1,17 +1,19 @@
 <?
-
+require_once 'Compte.php';
+require_once 'Recherche.php';
+require_once 'Commande.php';
 class Client {
     private string $nom;
     private string $prenom;
     private string $dateNaissance;
     private int $numeroTel;
     private bool $connexion;
-    private Compte $compte;
-    private Commande $commande;
-    private Recherche $recherche;
+    private Compte $compte; //Le client a une seule compte
+    private  $listeCommandes; //1..* Le client peut avoir plusieurs commandes
+    private $listeRecherches; //0..* le Client peut avoir plusiers mots clées de recherche
     
-  
-    function __construct(string $nom, string $prenom, $dateNaissance,int $numeroTel,bool $connexion, Compte $compte, Commande $commande, Recherche $recherche) { 
+    
+    function __construct(string $nom, string $prenom, $dateNaissance,int $numeroTel,bool $connexion, Compte $compte) { 
       
       require_once '..\..\..\database\config\database.php';
       require_once '..\..\..\database\config\connection.php';
@@ -40,8 +42,7 @@ if ($result->num_rows > 0) {
   $numeroTel = $row["telephone"];
   $connexion = true;
   $compte = new Compte($row["emailCompte"], $row["motDePasse"], $row["abonnement"], new DateTime($row["dateAbonnement"]), $row["signatureContratClient"], $row["signatureContratVendeur"], $row["signatureContratLivreur"]);
-  $commande = new Commande();
-  $recherche = new Recherche();
+  $this->recuperationRecherchesClient($conn,$row["emailCompte"]);
   //$client = new Client($nom, $prenom, $dateNaissance, $numeroTel, $connexion, $compte, $commande, $recherche);
 } else {
   echo "Aucun client trouvé pour l'adresse e-mail '$email'." . $conn->error;
@@ -56,8 +57,6 @@ $conn->close();
       $this -> numeroTel = $numeroTel;
       $this -> connexion = $connexion;
       $this -> compte = $compte;
-      $this -> commande = $commande;
-      $this -> recherche = $recherche;
 
     }
   
@@ -79,11 +78,54 @@ $conn->close();
     function getCompte() {
         return $this->compte;
     }
-    function getCommande(){
-        return $this->commande;
+    function getlisteCommande(){
+        return $this->listeCommandes;
     }
     function getRecherche(){
-        return $this->recherche;
+        return $this->listeRecherches;
     }
+
+    function getEmail() {
+      return $this->compte->getEmail();
+    }
+
+
+    function recuperationRecherchesClient($conn,$emailCompte) {
+      // Préparation de la requête
+      $sql = "SELECT motCle FROM recherche WHERE emailCompte = ?";
+      
+      // Préparation de la commande préparée
+      $stmt = $conn->prepare($sql);
+      
+      // Association des paramètres
+      $stmt->bind_param("s", $emailCompte);
+      
+      // Exécution de la requête
+      $stmt->execute();
+      
+      // Récupération des résultats
+      $result = $stmt->get_result();
+      
+      // Affichage des résultats
+      while ($row = $result->fetch_assoc()) {
+          echo $row["motCle"] . "<br>";
+      }
+      
+      // Fermeture de la commande préparée et de la connexion à la base de données
+      $stmt->close();
+          }
+
+          function ajoutCommandeDansListeCommandesClient(Commande $commande) {
+            //On cherche dans la classe Commande le client
+
+            //On recupere cela dans le site. Le client
+            //fait la commande puis on l'insere dans la bdd.
+
+            //On ajoute dans cette classe Client la commande
+            //qui vient d'etre ajouté
+
+            array_push($listeCommandes, $commande);
+          }
+    
   }  
 ?>

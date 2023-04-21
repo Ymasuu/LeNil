@@ -5,8 +5,6 @@ require_once 'Panier.php';
 
 
 class Compte {
-  
-  
     private static string $email;
     private string $motDePasse;
     private bool $abonnement;
@@ -57,8 +55,9 @@ class Compte {
       $this ->abonnement = $abonnement;
       $this ->signatureContratClient = $signatureContratClient;
       $this ->signatureContratVendeur = $signatureContratVendeur;
-      $this->panier = $panier;
-    
+      
+      //Pour associer le panier au compte
+      $this->recupererPanierParEmailCompte($email);
   
     }
   
@@ -85,6 +84,28 @@ class Compte {
   function getPanier() {
     return $this->panier;
 }
+
+function recupererPanierParEmailCompte(string $emailCompte) {
+  // récupération des données de la base de données
+  require_once '..\..\..\database\config\database.php';
+  require_once '..\..\..\database\config\connection.php';
+  
+  $sql = "SELECT * FROM panier WHERE emailCompte = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("s", $emailCompte);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  
+  if ($result->num_rows > 0) {
+        
+    // créer un nouvel objet Panier avec les données récupérées
+    $this->panier = new Panier($this);
+    
+  } else {
+    //echo "Erreur dans la creation du panier pour ce Compte";
+  }
+}
+
 
     
   }

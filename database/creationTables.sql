@@ -140,6 +140,7 @@ INSERT INTO `colis` (`id`, `longueur`, `hauteur`, `poids`, `idCommande`) VALUES
 
 CREATE TABLE `commande` (
   `id` int NOT NULL,
+  `emailCompte`varchar(100) NOT NULL,
   `totalPayer` decimal(10,2) DEFAULT NULL,
   `modePayment` varchar(20) NOT NULL,
   `datePayment` date NOT NULL
@@ -149,8 +150,8 @@ CREATE TABLE `commande` (
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `totalPayer`, `modePayment`, `datePayment`) VALUES
-(457, 49.99, 'CB', '2023-03-21');
+INSERT INTO `commande` (`id`, `emailCompte`, `totalPayer`, `modePayment`, `datePayment`) VALUES
+(457,'livreur@gmail.com', 49.99, 'CB', '2023-03-21');
 
 -- --------------------------------------------------------
 
@@ -236,7 +237,8 @@ CREATE TABLE `infocompte` (
   `adresse` varchar(250) NOT NULL,
   `ville` varchar(50) NOT NULL,
   `codePostal` int NOT NULL,
-  `pays` varchar(50) NOT NULL
+  `pays` varchar(50) NOT NULL,
+  `ticket` TINYINT(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -427,7 +429,7 @@ ALTER TABLE `colis`
 -- Index pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`, `emailCompte`);
 
 --
 -- Index pour la table `compte`
