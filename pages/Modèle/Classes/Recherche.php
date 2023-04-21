@@ -1,16 +1,19 @@
 <?
+
+//La recherche existe quand elle est faite par un client.
+//Puis chaque fois q'un client fait le meme type de recherche
+//on l'ajoute dans la listeClients ici.
+//De meme les Clients ont une liste de recherche qu'ils ont fait
+//enregistrée dans la bdd
 class Recherche {
     private String $motCle;
     private $listeProduits; //0..* liste de type Produit
-
+    private $listeClients; // 1..* liste de type Clients
 
     function __construct(String $motCle) { 
         $this ->motCle = $motCle;
         $this->rechercherListeProduits($motCle);
       }
-
-
-
 
 
 
