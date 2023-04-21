@@ -349,6 +349,7 @@ INSERT INTO `produitsvendeur` (`id`, `emailVendeur`, `QuantiteVendeur`, `prix`, 
 
 CREATE TABLE `quantitecommande` (
   `id` int NOT NULL,
+  `nom` char(100) NOT NULL,
   `emailClient` varchar(100) NOT NULL,
   `quantite` decimal(2,0) NOT NULL,
   `prix` decimal(10,2) NOT NULL
