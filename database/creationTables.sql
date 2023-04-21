@@ -237,7 +237,8 @@ CREATE TABLE `infocompte` (
   `adresse` varchar(250) NOT NULL,
   `ville` varchar(50) NOT NULL,
   `codePostal` int NOT NULL,
-  `pays` varchar(50) NOT NULL
+  `pays` varchar(50) NOT NULL,
+  `ticket` TINYINT(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --

@@ -22,15 +22,15 @@ $result = $conn->query($sql);
 
 // Vérification si la requête a réussi
 if ($result) {
-  // Boucle pour parcourir les résultats
-  while ($row = $result -> fetch_assoc()) {
+  $row = $result -> fetch_assoc();
+
     // Récupération des valeurs de chaque colonne
-    $emailCompte = $row["emailCompte"];
-    $HT = $row["HT"];
-    $TVA = $row["TVA"];
-    $TTC = $row["TTC"];
+    $this->emailCompte = $row["emailCompte"];
+    $this->HT = $row["HT"];
+    $this->TVA = $row["TVA"];
+    $this->TTC = $row["TTC"];
     
-  }
+  
   
   // Libération des résultats de la requête
   $result -> free_result();
