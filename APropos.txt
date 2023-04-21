@@ -20,4 +20,4 @@ une vue contient des balises HTML.
 
 Pages/Contrôleur :
 Module qui traite les actions de l'utilisateur, modifie les
-données du modèle et de la vue..
+données du modèle et de la vue.
