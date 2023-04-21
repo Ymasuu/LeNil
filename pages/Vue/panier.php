@@ -38,12 +38,39 @@
 							}
 							$prix_produit = $_POST['prix_produit'];
 							$prix_total = floatval($prix_produit) * floatval($quantite);
-    
+							
+							$id_produit = mysqli_real_escape_string($conn, $produit_id);
+							$email = $_SESSION["UTILISATEUR"]["email"];
+							$email = mysqli_real_escape_string($conn, $email);
+							$sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
+							$result = mysqli_query($conn, $sql);
+
+							$resultCheck = mysqli_num_rows($result);
+							//Si un panier existe deja, on met à jour les valeurs
+							if ($resultCheck > 0) {
+								$sql = "UPDATE panier SET HT = HT + '$prix_total' WHERE emailCompte='$email'";
+								$result = mysqli_query($conn, $sql);
+								$sql = "UPDATE panier SET TTC = HT * 1.2 WHERE emailCompte='$email'";
+								$result = mysqli_query($conn, $sql);
+							} else {
+								$sql = "INSERT INTO `panier` (`emailCompte`, `HT`, `TVA`, `TTC`) VALUES ('$email', '$prix_total', 20.00, '$prix_total'*1.2);";
+								$result = mysqli_query($conn, $sql);
+							}
+
+
 							// Vérifier si le panier existe déjà dans la session
 							if (!isset($_SESSION['panier'])) {
 								$_SESSION['panier'] = array(); // Si non, créer un tableau vide pour le panier
 							}
-							
+
+							$sql = "SELECT quantite FROM quantiteCommande WHERE id = '$id_produit' AND emailClient = '$email'";
+							$result = mysqli_query($conn, $sql);
+							$resultCheck = mysqli_num_rows($result);
+							//Si le produit est deja présent dans le panier
+							if ($resultCheck > 0) {
+
+							}
+
 							// Vérifier si le produit est déjà dans le panier
 							if (isset($_SESSION['panier'][$produit_id])) {
 								// Si oui, mettre à jour la quantité et le prix total du produit dans le panier
