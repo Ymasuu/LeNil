@@ -22,6 +22,9 @@
 </head>
 <body>
 	<?php include '../../templates/header.php'; ?>
+	<?php
+		if(isset($_SESSION["message"]))echo "<center><b>".$_SESSION["message"]."</b></center>"; unset($_SESSION["message"]);
+	?>
 		<div class="wrapper">
 			<div class="panier">
 				<h1>Panier</h1>
@@ -109,15 +112,17 @@
 								header('Location: panier.php'); // Recharger la page pour afficher les nouvelles informations du panier
 							}				
 						}	
-						
-						if (isset($_POST['action']) && $_POST['action'] == 'vider_panier') {
-							unset($_SESSION['panier']);
-						}
 					?>	
 					<form method="post" action="panier.php">
 						<input type="hidden" name="action" value="vider_panier">
 						<button type="submit">Tout supprimer</button>
 					</form>
+					<?php
+						if (isset($_POST['action']) && $_POST['action'] == 'vider_panier') {
+							unset($_SESSION['panier']);
+							unset($_SESSION['prixPanier']);
+						}
+					?>
 				</div>
 			</div>
 			<div class="total">
@@ -138,14 +143,22 @@
 				<hr>
 				<div>
 					<h5>Total final</h5>
-					<?php 
+					<?php
 						if(isset($total_panier) && isset($livraison)) {
 							$total_final = $total_panier + $livraison;
 						}
 					?>
-
 					<p>
-						<?php if(isset($total_final)) echo $total_final; ?>
+						<?php 
+							if(isset($total_final)){
+								if(isset($_SESSION['prixPanier'])){
+									$total_final = $_SESSION['prixPanier'];
+									unset($_SESSION['prixPanier']);
+								} 
+								else $_SESSION['prixPanier'] = $total_final;
+								echo $total_final;
+							}
+						?>
 					</p>
 				</div>
 			</div>
@@ -157,13 +170,13 @@
 					<h5>Livraison estimée le :</h5>
 				</div>
 			</div>
-			<div class="code">
+			<center class="code">
 				<h3>Ajouter un code promo</h3>
-				<form action="" method="post">
-					<input type="text" name="nom" placeholder="Entrez un code"><br>
+				<form action="../Contrôleur/process_codePromo.php" method="post">
+					<input type="text" name="code" placeholder="Entrez un code">
 					<button type="submit">Envoyer</button>
 				</form>
-			</div>
+			</center>
 		</div>
 	<hr> <!-- Repère visuel temporaire -->
 	<?php include '../../templates/footer.php'; ?>

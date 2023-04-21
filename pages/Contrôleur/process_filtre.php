@@ -4,11 +4,8 @@
     $sql = "SELECT * FROM produitsvendeur WHERE 1=1";
 
     // On récupere les catégories si elles existent
-    if(isset($_POST['categories'])) {
+    if(isset($_POST['categories'])){
         $categories = $_POST['categories'];
-    }
-
-    if(isset($categories)){
         $sql .= " AND (";
         $i = 0;
         foreach($categories as $categorie) {
@@ -26,11 +23,8 @@
 
 
     // On récupere la fourchette de prix si elle existe
-    if(isset($_POST['prix'])) {
+    if(isset($_POST['prix'])){
         $prix = $_POST['prix'];
-    }
-
-    if(isset($prix)){
         $sql .= " AND (";
         if($prix == "1") $sql .= "prix BETWEEN 0 AND 49 )";
         else if ($prix == "2") $sql.= "prix BETWEEN 50 AND 151 )";
@@ -38,11 +32,8 @@
     }
 
     // On récupere les catégories si elles existent
-    if(isset($_POST['vendeur'])) {
+    if(isset($_POST['vendeur'])){
         $vendeur = $_POST['vendeur'];
-    }
-
-    if(isset($vendeur)){
         $sql .= " AND (";
         $i = 0;
         foreach($vendeur as $v) {
