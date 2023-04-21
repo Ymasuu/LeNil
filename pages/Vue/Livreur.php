@@ -2,6 +2,7 @@
     // Pour la connection de la bdd
     require_once '..\..\database\config\connection.php';
     require_once '..\..\database\config\database.php';
+    require_once '..\..\pages\Modèle\Classes\Compte.php'; //Pour acceder au compte du livreur
     session_start();
 ?>
 <!DOCTYPE html>
