@@ -50,7 +50,8 @@
                         <label for="qty">Quantité :</label>
                         <input type="number" name="quantite" id="qty" min="1" max="100" value="1">
                     </div>
-                    <input type="hidden" name="produit_id" value="<?php echo $produit['nom']; ?>">
+                    <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
+                    <input type="hidden" name="produit_nom" value="<?php echo $produit['nom']; ?>">
                     <input type="hidden" name="prix_produit" value="<?php echo $produit['prix']; ?>">
                     <input type="submit" name="ajouter_au_panier" value="Ajouter au panier">
                 </form>
