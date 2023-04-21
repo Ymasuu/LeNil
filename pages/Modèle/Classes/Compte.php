@@ -60,7 +60,6 @@ class Compte {
       
       //Pour associer le panier au compte
       $this->recupererPanierParEmailCompte($email);
-    
   
     }
   

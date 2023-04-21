@@ -85,6 +85,10 @@ $conn->close();
         return $this->listeRecherches;
     }
 
+    function getEmail() {
+      return $this->compte->getEmail();
+    }
+
 
     function recuperationRecherchesClient($conn,$emailCompte) {
       // Préparation de la requête
