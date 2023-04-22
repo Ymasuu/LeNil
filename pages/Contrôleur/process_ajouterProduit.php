@@ -12,6 +12,21 @@
         exit();
     }
 
+    //GESTION DE L'IMAGE
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        // Chemin d'accès où enregistrer l'image sur le système de fichiers
+        $upload_path = '../../img';
+    
+        // Nom de fichier unique pour éviter les conflits
+        $filename = uniqid() . '-' . $_FILES['image']['name'];
+    
+        // Chemin d'accès complet vers le fichier uploadé
+        $file_path = $upload_path . '/' . $filename;
+    
+        // Enregistrement de l'image sur le système de fichiers
+        move_uploaded_file($_FILES['image']['tmp_name'], $file_path);
+    }
+
     // récupérer les autres données du formulaire
     $nom = $_POST['nom'];
     $quantite = $_POST['quantite'];
@@ -32,8 +47,8 @@
     $nouvelle_id = $ancien_id + 1;
 
     // Add the new product with the incremented ID
-    $sql = "INSERT INTO produitsvendeur (id, emailVendeur, QuantiteVendeur, prix, nom, description, minidescription) 
-            VALUES ('$nouvelle_id', '$emailVendeur', '$quantite', '$prix', '$nom', '$description', '$minidescription')";
+    $sql = "INSERT INTO produitsvendeur (id, emailVendeur, QuantiteVendeur, prix, nom, description, minidescription, NomImage) 
+            VALUES ('$nouvelle_id', '$emailVendeur', '$quantite', '$prix', '$nom', '$description', '$minidescription', '$filename')";
     $result = $conn->query($sql);
     if(!$result) {
         echo "Erreur lors de l'exécution de la requête SQL : " . mysqli_error($conn);
@@ -46,45 +61,12 @@
     header('Location:../Vue/Vendeur.php');
     exit();
 
-    
-
-
-    /*// Vérifiez si l'utilisateur est connecté
-    if(isset($_SESSION['email'])){
-
-        // Vérifiez si l'utilisateur est un vendeur
-        if($_SESSION['type_compte'] == 'vendeur'){
-
-            // Récupérez l'email du vendeur à partir de la session
-            $email_vendeur = $_SESSION['email'];
-
-            //GESTION DE L'IMAGE
-            if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-                // Chemin d'accès où enregistrer l'image sur le système de fichiers
-                $upload_path = '../../img';
-            
-                // Nom de fichier unique pour éviter les conflits
-                $filename = uniqid() . '-' . $_FILES['image']['name'];
-            
-                // Chemin d'accès complet vers le fichier uploadé
-                $file_path = $upload_path . '/' . $filename;
-            
-                // Enregistrement de l'image sur le système de fichiers
-                move_uploaded_file($_FILES['image']['tmp_name'], $file_path);
-            
-                // Message de succès
-                echo "L'image a été téléchargée avec succès !";
-            }
-  
-            // Exécution de la requête
-            if(mysqli_query($conn, $sql)){
-                // Message de succès
-                $_SESSION["message"] = "Produit ajouté avec succès !";
-            } else{
-                // Message d'erreur
-                $_SESSION["message"] = "Erreur lors de l'ajout du produit : " . mysqli_error($conn);
-            }
-
-        }
-    }*/
+    // Exécution de la requête
+    if(mysqli_query($conn, $sql)){
+        // Message de succès
+        $_SESSION["message"] = "Produit ajouté avec succès !";
+    } else{
+        // Message d'erreur
+        $_SESSION["message"] = "Erreur lors de l'ajout du produit : " . mysqli_error($conn);
+    }
 ?>
