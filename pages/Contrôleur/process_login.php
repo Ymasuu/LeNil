@@ -137,6 +137,35 @@ if ($resultCheck>0) {
         header("Location:../Vue/index.php");
         exit();
             }
+
+        //ADMIN ------> A GERER ENCORE
+        else if ($row['admin'] == 1) {
+            unset($_SESSION["errorLogin"]); // on supprime la variable de session erreur
+        $_SESSION["UTILISATEUR"]["nom"] = $detailUtilisateur[0];
+        $_SESSION["UTILISATEUR"]["prenom"] = $detailUtilisateur[0];
+        $_SESSION["UTILISATEUR"]["email"] = $detailUtilisateur[1];
+        $_SESSION["UTILISATEUR"]["tel"] = $detailUtilisateur[2];
+        $_SESSION["UTILISATEUR"]["adresse"] = $detailUtilisateur[3];
+        $_SESSION["UTILISATEUR"]["ville"] = $detailUtilisateur[4];
+        $_SESSION["UTILISATEUR"]["codePostal"] = $detailUtilisateur[5];
+        $_SESSION["UTILISATEUR"]["pays"] = $detailUtilisateur[6];
+        $_SESSION["UTILISATEUR"]["mdp"] = $detailUtilisateur[7];
+        if ($row['abonnement'] == 0) {
+            $_SESSION["UTILISATEUR"]["Abonnement"] = "None";
+        }
+        if ($row['abonnement'] == 1) {
+            $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Mensuel";
+        }
+        if ($row['abonnement'] == 2) {
+            $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
+        }
+        if ($row['dateAbonnement'] != NULL){
+            $_SESSION["UTILISATEUR"]["DateAbonnement"] = $row['dateAbonnement'];
+        }
+        $_SESSION["UTILISATEUR"]["TypeCompte"] = "admin";
+        header("Location:../Vue/index.php");
+        exit();
+            }
 }
     // Pour chaque erreur de login, on imcrémente une variable de 1
     if (!isset($_SESSION["errorLogin"])) {

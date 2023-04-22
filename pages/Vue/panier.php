@@ -227,6 +227,9 @@
 						?>
 					</p>
 				</div>
+				<form action="../Contrôleur/process_commander.php" method="post">
+					<input type="submit" name="commander" value="Commander">
+				</form>
 			</div>
 		</div>
 		<div class="wrapper">
