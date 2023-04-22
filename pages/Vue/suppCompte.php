@@ -19,6 +19,4 @@
     header("Location: Admin.php");
     exit();
     }
-
-   
 ?>
