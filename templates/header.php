@@ -20,6 +20,7 @@ if (session_status() == PHP_SESSION_NONE) {
 			if(!isset($_SESSION["UTILISATEUR"]["TypeCompte"])) echo "<li class='style'><a href='about.php' class='lien'>A propos</a></li>";
 			else if ($_SESSION["UTILISATEUR"]["TypeCompte"] == "vendeur") echo "<li class='style'><a href='Vendeur.php' class='lien'>Gérer Produit</a></li>";
 			else if ($_SESSION["UTILISATEUR"]["TypeCompte"] == "livreur") echo "<li class='style'><a href='Livreur.php' class='lien'>Gérer Livraison</a></li>";
+			else if ($_SESSION["UTILISATEUR"]["TypeCompte"] == "admin") echo "<li class='style'><a href='Admin.php' class='lien'>Gérer</a></li>";
 			else echo "<li class='style'><a href='profil.php' class='lien'>Profil</a></li>";
 
 			if (!isset($_SESSION["UTILISATEUR"])) echo "<li class='style'><a href='login.php' class='lien'>Se Connecter</a></li>";

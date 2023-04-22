@@ -1,0 +1,38 @@
+.bouto form {
+    display: inline-block;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bouto input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+.description {
+    margin-left:10px;
+}
+
+.description h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.description h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.description hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+}

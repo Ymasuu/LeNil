@@ -11,8 +11,9 @@
     <meta cjharset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casquette</title>
-    <link rel="stylesheet" href="../../css/pageProduit.css">
+    <link rel="stylesheet" href="../../css/pageProduitvendeur.css">
     <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/pageProduit.css">
     <link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
 <body>
@@ -60,6 +61,7 @@
                 }
             ?>
         </div>
+        <div class="bouto">
             <form method="post" action="modifProduitVendeur.php">
                 <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
                 <input type="submit" name="modifier_un_produit" value="Modifier ce produit">
@@ -68,6 +70,7 @@
                 <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
                 <input type="submit" name="supprimer_un_produit" value="Supprimer ce produit">
             </form>
+        </div>
         <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
     </div>

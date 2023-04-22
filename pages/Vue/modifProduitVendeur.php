@@ -30,6 +30,7 @@
                     // Afficher les informations du produit
                     $produit = mysqli_fetch_assoc($resultat);
             ?>
+            
             <h1>Modification Produit</h1>
             <form action="../Contrôleur/process_modifProduit.php" method="post">
                 <fieldset>
