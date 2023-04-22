@@ -1,6 +1,14 @@
 <?php
-	session_start();
+    require_once '..\..\database\config\connection.php';
+    require_once '..\..\database\config\database.php';
+    session_start();
+
+    // Récupérer les informations des utilisateurs à partir de la base de données
+    $sql = "SELECT * FROM compte";
+    $result = $conn->query($sql);
+
 ?>
+
 <!DOCTYPE html>
 <html> 
 <head>
@@ -14,7 +22,31 @@
 	<div>
 		<?php include '../../templates/header.php'; ?>
 
-
+        <h1>Liste des utilisateurs</h1>
+        <table>
+            <tr>
+                <th>Email</th>
+                <th>Mot de passe</th>
+                <th>Abonnement</th>
+                <th>Date d'abonnement</th>
+                <th>Signature contrat client</th>
+                <th>Signature contrat vendeur</th>
+                <th>Signature contrat livreur</th>
+                <th>Administrateur</th>
+            </tr>
+            <?php
+                // Afficher les informations des utilisateurs dans un tableau
+                if($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "<tr><td>".$row["email"]."</td><td>".$row["motDePasse"]."</td><td>".$row["abonnement"]."</td><td>".$row["dateAbonnement"]."</td><td>".$row["signatureContratClient"]."</td><td>".$row["signatureContratVendeur"]."</td><td>".$row["signatureContratLivreur"]."</td><td>".$row["admin"]."</td><td>";
+                        echo "<form method='post' action='modifCompte.php'>";
+                        echo "<input type='hidden' name='email' value='".$row["email"]."'>";
+                        echo "<input type='submit' name='modifier_compte' value='Modifier ce compte'>";
+                        echo "</form>";
+                    }                    
+                }
+            ?>
+        </table>
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>
