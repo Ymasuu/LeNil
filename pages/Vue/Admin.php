@@ -43,10 +43,19 @@
                         echo "<input type='hidden' name='email' value='".$row["email"]."'>";
                         echo "<input type='submit' name='modifier_compte' value='Modifier ce compte'>";
                         echo "</form>";
+
+                        echo "<form method='post' action='suppCompte.php'>";
+                        echo "<input type='hidden' name='email' value='".$row["email"]."'>";
+                        echo "<input type='submit' name='supprimer_compte' value='Supprimer ce compte'>";
+                        echo "</form>";
+
                     }                    
                 }
             ?>
-        </table>
+            </table>
+            <form method="post" action="ajoutCompte.php">
+                <input type="submit" name="ajouter_un_compte" value="Ajouter un compte">
+            </form>
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>
