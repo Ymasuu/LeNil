@@ -18,7 +18,7 @@ $mail = $_POST['mail'];
 $password = $_POST['password'];
 
 //ACCES DE LUTILISATEUR DANS LA BDD
-// Escape special characters to prevent SQL injection attacks
+//on convertir nos variables pour les utiliser en requete SQL
 $mail = mysqli_real_escape_string($conn, $mail);
 $password = mysqli_real_escape_string($conn, $password);
 
@@ -34,7 +34,7 @@ if ($resultCheck>0) {
     //ON VERIFIE SI CEST UNE COMPTE CLIENT, VENDEUR OU LIVREUR
 
     if ($row['signatureContratClient'] == 1) {
-    unset($_SESSION["errorLogin"]); // on supprime la variable de session
+    unset($_SESSION["errorLogin"]); // on supprime la variable de session erreur
     //CLIENT
     //On fait d'autres requetes pour obtenir les informations nécessaires de ce compte
         $sousquery = "SELECT * FROM InfoCompte WHERE emailCompte = '$mail';";
@@ -82,7 +82,7 @@ if ($resultCheck>0) {
             $informations = mysqli_fetch_assoc($sousresult);
         }
 
-        unset($_SESSION["errorLogin"]); // on supprime la variable de session
+        unset($_SESSION["errorLogin"]); // on supprime la variable de session erreur
         $_SESSION["UTILISATEUR"]["nom"] = $informations['nom'];
         $_SESSION["UTILISATEUR"]["prenom"] = "";
         $_SESSION["UTILISATEUR"]["email"] = $row['email'];
@@ -111,7 +111,7 @@ if ($resultCheck>0) {
         
         //LIVREUR ------> A GERER ENCORE
         else if ($row['signatureContratLivreur'] == 1) {
-            unset($_SESSION["errorLogin"]); // on supprime la variable de session
+            unset($_SESSION["errorLogin"]); // on supprime la variable de session erreur
         $_SESSION["UTILISATEUR"]["nom"] = $detailUtilisateur[0];
         $_SESSION["UTILISATEUR"]["prenom"] = $detailUtilisateur[0];
         $_SESSION["UTILISATEUR"]["email"] = $detailUtilisateur[1];

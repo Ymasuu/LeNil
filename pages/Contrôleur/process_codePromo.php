@@ -25,14 +25,19 @@
             header("Location:../Vue/panier.php");
             exit();
         }
+        $email = $_SESSION["UTILISATEUR"]["email"];
         // si le montant du panier n'est pas suffisant pour utiliser le code
-        else if ($_SESSION['prixPanier'] < $row['APartirDeCombien']){
+        $sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
+        $result = mysqli_query($conn, $sql);
+        $row2 = mysqli_fetch_assoc($result);
+        if ($row2['TTC'] < $row['APartirDeCombien']){
             $_SESSION['message'] = "Désolé ce code est valide à partir de " . $row['APartirDeCombien'] . " € minimum.";
             header("Location:../Vue/panier.php");
             exit();
         }
         else {
-            $_SESSION['prixPanier'] = $_SESSION['prixPanier'] - $row['Valeur_Code'];
+            $nv_montant = $row2['TTC'] - $row['Valeur_Code'];
+            $sql = "UPDATE panier SET TTC = '$nv_montant' WHERE emailCompte = '$email'";
             $_SESSION['message'] = "Le code est validé.";
         }
     }
