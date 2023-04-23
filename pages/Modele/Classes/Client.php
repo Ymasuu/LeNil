@@ -13,7 +13,7 @@ class Client {
     private $listeRecherches; //0..* le Client peut avoir plusiers mots clées de recherche
     
     
-    function __construct(string $nom, string $prenom, $dateNaissance,int $numeroTel,bool $connexion, Compte $compte) { 
+    function __construct($email, Compte $compte) { 
       
       require_once '..\..\..\database\config\database.php';
       require_once '..\..\..\database\config\connection.php';
