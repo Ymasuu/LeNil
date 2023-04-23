@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : dim. 23 avr. 2023 à 21:01
+-- Généré le : dim. 23 avr. 2023 à 21:17
 -- Version du serveur : 8.0.28
 -- Version de PHP : 8.0.28
 
@@ -108,7 +108,8 @@ CREATE TABLE `code_promo` (
 INSERT INTO `code_promo` (`id`, `Code`, `Valeur_Code`, `APartirDeCombien`, `dateDePeremption`) VALUES
 (1, 'PRIMTEMPS', 20, 80, '2023-06-21'),
 (2, 'PROMO10', 10, 100, '2023-04-30'),
-(3, 'AVRIL2023', 15, 60, '2023-04-30');
+(3, 'AVRIL2023', 15, 60, '2023-04-30'),
+(4, 'MARS2023', 20, 80, '2023-03-31');
 
 -- --------------------------------------------------------
 
