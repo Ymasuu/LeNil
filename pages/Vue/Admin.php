@@ -21,6 +21,7 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
+        <hr> <!-- Repère visuel temporaire -->
         <h1>Liste des utilisateurs</h1>
         <table>
             <tr>
@@ -38,22 +39,20 @@
                 if($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         echo "<tr><td>".$row["email"]."</td><td>".$row["motDePasse"]."</td><td>".$row["abonnement"]."</td><td>".$row["dateAbonnement"]."</td><td>".$row["signatureContratClient"]."</td><td>".$row["signatureContratVendeur"]."</td><td>".$row["signatureContratLivreur"]."</td><td>".$row["admin"]."</td><td>";
-                        echo "<form method='post' action='modifCompte.php'>";
-                        echo "<input type='hidden' name='email' value='".$row["email"]."'>";
-                        echo "<input type='submit' name='modifier_compte' value='Modifier ce compte'>";
-                        echo "</form>";
-
+                        
                         echo "<form method='post' action='suppCompte.php'>";
                         echo "<input type='hidden' name='email' value='".$row["email"]."'>";
-                        echo "<input type='submit' name='supprimer_compte' value='Supprimer ce compte'>";
+                        echo "<input type='submit' name='supprimer_compte' value='Supprimer ce compte' class='bouton-golden'>";
                         echo "</form>";
                     }                    
                 }
+                
             ?>
             </table>
             <form method="post" action="ajoutCompte.php">
-                <input type="submit" name="ajouter_un_compte" value="Ajouter un compte">
+                <input type="submit" name="ajouter_un_compte" value="Ajouter un compte" class="bouton-golden">
             </form>
+        <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>

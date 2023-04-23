@@ -30,7 +30,7 @@
                     $produit = mysqli_fetch_assoc($resultat);
             ?>
             <div class="image">
-                <img src="../../img/<?php echo $produit['NomImage']; ?>" >
+                <img src="../../img/<?php echo $produit['NomImage']; ?>" style="width: 300px; height: 300px; ">
             </div>
             <div class="detail">
                 <h1><?php echo $produit['nom']; ?></h1>

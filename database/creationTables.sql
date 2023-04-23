@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : dim. 23 avr. 2023 à 21:17
+-- Généré le : dim. 23 avr. 2023 à 22:05
 -- Version du serveur : 8.0.28
 -- Version de PHP : 8.0.28
 
@@ -108,8 +108,7 @@ CREATE TABLE `code_promo` (
 INSERT INTO `code_promo` (`id`, `Code`, `Valeur_Code`, `APartirDeCombien`, `dateDePeremption`) VALUES
 (1, 'PRIMTEMPS', 20, 80, '2023-06-21'),
 (2, 'PROMO10', 10, 100, '2023-04-30'),
-(3, 'AVRIL2023', 15, 60, '2023-04-30'),
-(4, 'MARS2023', 20, 80, '2023-03-31');
+(3, 'AVRIL2023', 15, 60, '2023-04-30');
 
 -- --------------------------------------------------------
 
@@ -144,16 +143,15 @@ CREATE TABLE `commande` (
   `emailCompte` varchar(100) NOT NULL,
   `totalPayer` decimal(10,2) DEFAULT NULL,
   `modePayment` varchar(20) NOT NULL,
-  `datePayment` date NOT NULL,
-  `Livre` tinyint(1) NOT NULL
+  `datePayment` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `emailCompte`, `totalPayer`, `modePayment`, `datePayment`, `Livre`) VALUES
-(457, 'livreur@gmail.com', 49.99, 'CB', '2023-03-21', 0);
+INSERT INTO `commande` (`id`, `emailCompte`, `totalPayer`, `modePayment`, `datePayment`) VALUES
+(457, 'livreur@gmail.com', 49.99, 'CB', '2023-03-21');
 
 -- --------------------------------------------------------
 
@@ -354,6 +352,7 @@ INSERT INTO `produitsvendeur` (`id`, `emailVendeur`, `QuantiteVendeur`, `prix`, 
 
 CREATE TABLE `quantitecommande` (
   `id` int NOT NULL,
+  `idCommande` int NOT NULL,
   `nom` char(100) NOT NULL,
   `emailClient` varchar(100) NOT NULL,
   `quantite` decimal(2,0) NOT NULL,
@@ -494,7 +493,7 @@ ALTER TABLE `produitsvendeur`
 -- Index pour la table `quantitecommande`
 --
 ALTER TABLE `quantitecommande`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`idCommande`);
 
 --
 -- Index pour la table `recherche`
@@ -528,7 +527,7 @@ ALTER TABLE `adresse`
 ALTER TABLE `adresse_commande_quantitecommande`
   ADD CONSTRAINT `Adresse_Commande_QuantiteCommande_ibfk_1` FOREIGN KEY (`idAdresse`) REFERENCES `adresse` (`id`),
   ADD CONSTRAINT `Adresse_Commande_QuantiteCommande_ibfk_2` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`id`),
-  ADD CONSTRAINT `Adresse_Commande_QuantiteCommande_ibfk_3` FOREIGN KEY (`idQuantiteCommande`) REFERENCES `quantitecommande` (`id`);
+  ADD CONSTRAINT `Adresse_Commande_QuantiteCommande_ibfk_3` FOREIGN KEY (`idQuantiteCommande`) REFERENCES `quantitecommande` (`idCommande`);
 
 --
 -- Contraintes pour la table `a_commandecontientproduitvendeur`

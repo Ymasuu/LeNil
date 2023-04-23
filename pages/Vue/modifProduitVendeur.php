@@ -69,19 +69,13 @@
                                 </select>
                         </td>
                         </tr>
-                        <td colspan="2"><p>Confirmer la modification avec votre mot de passe :</p></td>
-                        </tr>
-                        <tr>
-                            <td><label for="mdp">mot de passe</label></td>
-                            <td><input type="password" name="mdp" id="mdp" placeholder="mot de passe"></td>
-                        </tr>
                         <tr>
                             <td><?php if(isset($_SESSION['erreur'])){echo $_SESSION['erreur'];unset($_SESSION['erreur']);} ?></td>
                         </tr> 
                     </table>
                     <form method="post" action="process_modifProduit.php">
                         <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
-                        <input type="submit" name="modifier_un_produit" value="Modifier">
+                        <input type="submit" name="modifier_un_produit" value="Modifier" >
                     </form>
                 </fieldset>
             </form>
