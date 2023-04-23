@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : dim. 23 avr. 2023 à 20:28
+-- Généré le : dim. 23 avr. 2023 à 20:34
 -- Version du serveur : 8.0.28
 -- Version de PHP : 8.0.28
 
@@ -124,14 +124,6 @@ CREATE TABLE `colis` (
   `idCommande` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Déchargement des données de la table `colis`
---
-
-INSERT INTO `colis` (`id`, `longueur`, `hauteur`, `poids`, `idCommande`) VALUES
-(27, 55.00, 40.00, 7.50, 457),
-(28, 5.00, 4.00, 3.50, 457);
-
 -- --------------------------------------------------------
 
 --
@@ -146,13 +138,6 @@ CREATE TABLE `commande` (
   `datePayment` date NOT NULL,
   `idAdresse` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `commande`
---
-
-INSERT INTO `commande` (`id`, `emailCompte`, `totalPayer`, `modePayment`, `datePayment`, `idAdresse`) VALUES
-(457, 'livreur@gmail.com', 49.99, 'CB', '2023-03-21', 0);
 
 -- --------------------------------------------------------
 
@@ -428,7 +413,8 @@ ALTER TABLE `colis`
 -- Index pour la table `commande`
 --
 ALTER TABLE `commande`
-  ADD PRIMARY KEY (`id`,`emailCompte`);
+  ADD PRIMARY KEY (`id`,`emailCompte`),
+  ADD KEY `idAdresse` (`idAdresse`);
 
 --
 -- Index pour la table `compte`
@@ -547,6 +533,12 @@ ALTER TABLE `cb`
 --
 ALTER TABLE `colis`
   ADD CONSTRAINT `Colis_ibfk_1` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`id`);
+
+--
+-- Contraintes pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idAdresse`) REFERENCES `adresse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Contraintes pour la table `contenupanier`
