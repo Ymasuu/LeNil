@@ -13,11 +13,11 @@
         <div class="c1">
             <h5 class="color pt2">Concepteurs</h5>
             <ul class="name">
-                <li>Samy BELBOUAB</li>
+                <li>Ethan PINTO</li>
                 <li>Clément FOULON</li>
                 <li>Abdellah HASSANI</li>
+                <li>Samy BELBOUAB</li>
                 <li>Renato Daniel NASCIMENTO ARDILES</li>
-                <li>Ethan PINTO</li>
             </ul>
         </div>
     </div>
