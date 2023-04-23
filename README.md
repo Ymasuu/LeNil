@@ -10,3 +10,6 @@ Suite à cela, un identifiant et un mot de passe vont etre demandé. L'identifia
 On peut maintenant se connecter à l'index (localhost/Chemin).
 
 Vous pouvez maintenant naviguez dans LENIL comme bon vous semble.
+
+Lien du git du projet :
+https://github.com/Hanabi-TheFox/LeNil 
