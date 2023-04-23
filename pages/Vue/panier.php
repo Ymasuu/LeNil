@@ -134,9 +134,14 @@
 									$quantite = $row['quantite'];
 									$prix = $row['prix'];
 									$prod = $row['id'];
+									$sql = "SELECT QuantiteVendeur FROM produitsVendeur WHERE id = '$prod'";
+									$resultat = mysqli_query($conn, $sql);
+									$row3 = mysqli_fetch_array($resultat, MYSQLI_ASSOC);
+									$max = (int) $row3['QuantiteVendeur'];
+									
 									echo '<tr>';
 									echo '<td>' . $nom . '</td>';
-									echo '<td><input type="number" name="quantite[' . $prod . ']" value="' . $quantite . '"></td>';
+									echo '<td><input type="number" min="1" max="' . $max . '" name="quantite[' . $prod . ']" value="' . $quantite . '"></td>';
 									echo '<input type="hidden" name="nom[' . $prod . ']" value="' . $nom . '"></td>';
 									echo '<td><input type="submit" name="modifier_quantite[' . $prod . ']" value="Modifier la quantité"></td>';
 									echo '<td><input type="submit" class=bouton-golden name="supprimer_produit[' . $prod . ']" value="Supprimer"></td>';

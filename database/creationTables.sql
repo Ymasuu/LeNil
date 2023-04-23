@@ -143,7 +143,8 @@ CREATE TABLE `commande` (
   `emailCompte` varchar(100) NOT NULL,
   `totalPayer` decimal(10,2) DEFAULT NULL,
   `modePayment` varchar(20) NOT NULL,
-  `datePayment` date NOT NULL
+  `datePayment` date NOT NULL,
+  `Livre` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
