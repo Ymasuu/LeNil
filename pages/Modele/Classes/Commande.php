@@ -10,7 +10,7 @@ class Commande {
     private $listeColis;
     private $id;
 
-    function __construct(int $totalPayer, String $modePayment,QuantiteCommande $quantiteCommande,Client $client) { 
+    function __construct(Client $client) { 
         require_once '..\..\database\config\connection.php';
         require_once '..\..\database\config\database.php';
         $query = "SELECT * FROM commande WHERE emailCompte = '{$client->getEmail()}'";
