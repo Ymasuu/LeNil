@@ -36,6 +36,9 @@ $conn->close();
       function getLongueur() {
         return $this->longueur;
     }
+    function getLargeur() {
+        return $this->largeur;
+    }
 
     function getHauteur() {
         return $this->hauteur;

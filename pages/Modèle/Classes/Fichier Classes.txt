@@ -1,6 +1,0 @@
-Fichier contenant toutes le classes
-dans le diagrame de classes fait en classe X)
-
-Le modele va s'en servir des ces classes pour l'affiche
-et envoi d'informations via le controleur vers la vue
-
