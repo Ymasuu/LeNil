@@ -10,7 +10,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LE NIL</title>
-    <link rel="stylesheet" href="../../css/vendeur.css">
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
@@ -47,7 +46,7 @@
                             <td><input type="radio" name="type_compte" id="admin" value="admin"></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Ajouter le compte"></td>
+                            <td><input type="submit" value="Ajouter le compte" class="bouton-golden"></td>
                         </tr>
                     </table>
                 </fieldset>
