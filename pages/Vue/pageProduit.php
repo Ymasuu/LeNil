@@ -48,7 +48,7 @@
                 <form method="post" action="panier.php">
                     <div class="quantite">
                         <label for="qty">Quantité :</label>
-                        <input type="number" name="quantite" id="qty" min="1" max="100" value="1">
+                        <input type="number" name="quantite" id="qty" min="1" max=<?php echo $produit['QuantiteVendeur']; ?> value="1">
                     </div>
                     <input type="hidden" name="produit_id" value="<?php echo $produit['id']; ?>">
                     <input type="hidden" name="produit_nom" value="<?php echo $produit['nom']; ?>">

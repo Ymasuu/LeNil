@@ -72,9 +72,24 @@
 								$sql = "UPDATE quantiteCommande SET quantite = quantite + $quantite WHERE id = '$sqlId_produit' AND emailClient = '$email'";
 								$result = mysqli_query($conn, $sql);
 								$sql = "UPDATE quantiteCommande SET prix = $sqlPrix_produit * quantite";
-								$result = mysqli_query($conn, $sql);					
+								$result = mysqli_query($conn, $sql);
 							} else {
-								$sql = "INSERT INTO `quantiteCommande` (`id`, `nom`, `emailClient`, `quantite`, `prix`) VALUES ('$sqlId_produit', '$sqlNom', '$email', '$sqlQuantite', '$sqlPrix_produit');";
+								// on regarde si des commandes existent dans la table
+								$sql = "SELECT * FROM quantiteCommande";
+								$result = mysqli_query($conn, $sql);
+								$resultCheck = mysqli_num_rows($result);
+								if($resultCheck <= 0){
+									$nouvelle_id = 0;
+								}else {
+									// on récupère l'id du dernier élément de la table
+									$sql_ancien_id = "SELECT MAX(id) AS ancien_id FROM quantiteCommande";
+									$result_ancien_id = $conn->query($sql_ancien_id);
+									$row_ancien_id = $result_ancien_id->fetch_assoc();
+									$ancien_id = $row_ancien_id['ancien_id'];
+									// on l'incrémente de 1
+									$nouvelle_id = $ancien_id + 1;
+								}
+								$sql = "INSERT INTO `quantiteCommande` (`id`, `idCommande`, `nom`, `emailClient`, `quantite`, `prix`) VALUES ('$sqlId_produit', '$nouvelle_id', '$sqlNom', '$email', '$sqlQuantite', '$sqlPrix_produit');";
 								$result = mysqli_query($conn, $sql);
 							}
 						}
@@ -119,9 +134,14 @@
 									$quantite = $row['quantite'];
 									$prix = $row['prix'];
 									$prod = $row['id'];
+									$sql = "SELECT QuantiteVendeur FROM produitsVendeur WHERE id = '$prod'";
+									$resultat = mysqli_query($conn, $sql);
+									$row3 = mysqli_fetch_array($resultat, MYSQLI_ASSOC);
+									$max = (int) $row3['QuantiteVendeur'];
+									
 									echo '<tr>';
 									echo '<td>' . $nom . '</td>';
-									echo '<td><input type="number" name="quantite[' . $prod . ']" value="' . $quantite . '"></td>';
+									echo '<td><input type="number" min="1" max="' . $max . '" name="quantite[' . $prod . ']" value="' . $quantite . '"></td>';
 									echo '<input type="hidden" name="nom[' . $prod . ']" value="' . $nom . '"></td>';
 									echo '<td><input type="submit" name="modifier_quantite[' . $prod . ']" value="Modifier la quantité"></td>';
 									echo '<td><input type="submit" class=bouton-golden name="supprimer_produit[' . $prod . ']" value="Supprimer"></td>';
@@ -292,10 +312,19 @@
 				<div>
 					<h5>Livraison estimée le :
 						<?php
-							date_default_timezone_set('Europe/Paris');
-							$date = date('Y-m-d');
-							$date = date('Y-m-d', strtotime($date . ' +3 days'));
-							echo $date;
+							$sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
+							$result = mysqli_query($conn, $sql);
+
+							$resultCheck = mysqli_num_rows($result);
+							//Si le panier existe 
+							if ($resultCheck > 0) {								
+								date_default_timezone_set('Europe/Paris');
+								$date = date('Y-m-d');
+								if($_SESSION["UTILISATEUR"]["Abonnement"] == "None"){
+									$date = date('Y-m-d', strtotime($date . ' +3 days'));
+								} else $date = date('Y-m-d', strtotime($date . ' +1 days'));
+								echo $date;
+							}
 						?>
 					</h5>
 				</div>

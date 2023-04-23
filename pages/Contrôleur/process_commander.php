@@ -13,41 +13,56 @@
     // on recupere les valeurs panier
     $sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
     $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_assoc($result);
-    if(isset($_SESSION["UTILISATEUR"]["prixCode"])){
-        $prix = $_SESSION["UTILISATEUR"]["prixCode"];
-        unset($_SESSION["UTILISATEUR"]["prixCode"]);
-    } else $prix = $row['TTC'];
-    
-    $sql = "SELECT * FROM commande";
-    $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);
-    // si la table est vide 
-    if($resultCheck <= 0){
-        $nouvelle_id = 0;
-    }else {
-        // on récupère l'id du dernier élément de la table
-         $sql_ancien_id = "SELECT MAX(id) AS ancien_id FROM commande";
-         $result_ancien_id = $conn->query($sql_ancien_id);
-         $row_ancien_id = $result_ancien_id->fetch_assoc();
-         $ancien_id = $row_ancien_id['ancien_id'];
-         // on l'incrémente de 1
-         $nouvelle_id = $ancien_id + 1;
-    }
+    //Si le panier existe 
+    if ($resultCheck > 0) {
+        $row = mysqli_fetch_assoc($result);
+        if(isset($_SESSION["UTILISATEUR"]["prixCode"])){
+            $prix = $_SESSION["UTILISATEUR"]["prixCode"];
+            unset($_SESSION["UTILISATEUR"]["prixCode"]);
+        } else $prix = $row['TTC'];
+        
+        $sql = "SELECT * FROM commande";
+        $result = mysqli_query($conn, $sql);
+        $resultCheck = mysqli_num_rows($result);
+        // si la table est vide 
+        if($resultCheck <= 0){
+            $nouvelle_id = 0;
+        }else {
+            // on récupère l'id du dernier élément de la table
+            $sql_ancien_id = "SELECT MAX(id) AS ancien_id FROM commande";
+            $result_ancien_id = $conn->query($sql_ancien_id);
+            $row_ancien_id = $result_ancien_id->fetch_assoc();
+            $ancien_id = $row_ancien_id['ancien_id'];
+            // on l'incrémente de 1
+            $nouvelle_id = $ancien_id + 1;
+        }
 
-    // On ajoute la commande avec ses données
-    $sql = "INSERT INTO commande (id, emailCompte, totalPayer, modePayment, datePayment, Livre) 
-            VALUES ('$nouvelle_id', '$email', '$prix', 'CB', '$date', '0')";
-    $result = $conn->query($sql);
-    if(!$result) {
-        echo "Erreur lors de l'exécution de la requête SQL : " . mysqli_error($conn);
-    }
-    
-    $_SESSION['message'] = "Votre commande est validé, merci.";
-    $sql = "DELETE FROM quantiteCommande WHERE emailClient = '$email'";
-    $result = mysqli_query($conn, $sql);							
-    $sql = "DELETE FROM panier WHERE emailCompte = '$email'";
-    $result = mysqli_query($conn, $sql);
+        // On ajoute la commande avec ses données
+        $sql = "INSERT INTO commande (id, emailCompte, totalPayer, modePayment, datePayment, Livre) 
+                VALUES ('$nouvelle_id', '$email', '$prix', 'CB', '$date', '0')";
+        $result = $conn->query($sql);
+        if(!$result) {
+            echo "Erreur lors de l'exécution de la requête SQL : " . mysqli_error($conn);
+        }
+        
+        // GESTION DE STOCK 
+        $sql = "SELECT * FROM quantiteCommande WHERE emailClient = '$email'";
+        $result = mysqli_query($conn, $sql);
+        while ($row = mysqli_fetch_assoc($result)) {
+            $quantite = $row['quantite'];
+            $id = $row['id'];
+            $sql = "UPDATE produitsVendeur SET QuantiteVendeur = QuantiteVendeur - '$quantite' WHERE id = '$id'";
+            $resultat = mysqli_query($conn, $sql);
+        }
+
+        
+        $_SESSION['message'] = "Votre commande est validé, merci.";
+        $sql = "DELETE FROM quantiteCommande WHERE emailClient = '$email'";
+        $result = mysqli_query($conn, $sql);							
+        $sql = "DELETE FROM panier WHERE emailCompte = '$email'";
+        $result = mysqli_query($conn, $sql);
+    } else $_SESSION['message'] = "Vous n'avez pas de panier.";
 
     header('Location:../Vue/panier.php');
 
