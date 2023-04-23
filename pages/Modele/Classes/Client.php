@@ -19,21 +19,21 @@ class Client {
       require_once '..\..\..\database\config\connection.php';
       //date('Y-m-d H:i:s');
       
-      // Préparer la requête SQL avec la variable email
+      //requête SQL avec la variable email
 $sql = "SELECT i.emailCompte, i.prenom, i.nom, i.dateNaissance, i.telephone, i.adresse, i.ville, i.codePostal, i.pays, c.abonnement, c.dateAbonnement, c.signatureContratClient, c.signatureContratVendeur, c.signatureContratLivreur 
 FROM InfoCompte i 
 JOIN Compte c ON i.emailCompte = c.email 
 WHERE i.emailCompte = '$email'";
 
-// Exécuter la requête SQL
+
 $result = $conn->query($sql);
 
-// Vérifier si la requête a réussi
+// on verifie si la requête a réussi
 if (!$result) {
   die("La requête a échoué : " . $conn->error);
 }
 
-// Parcourir les résultats et créer un objet Client avec les données récupérées
+// on parcours les résultats et créer un objet Client avec les données récupérées
 if ($result->num_rows > 0) {
   $row = $result->fetch_assoc();
   $nom = $row["nom"];

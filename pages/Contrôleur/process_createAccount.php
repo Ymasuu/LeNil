@@ -77,17 +77,16 @@ if (mysqli_num_rows($result) > 0) {
 //---INSERTION DANS LA BDD POUR LES TABLES COMPTE & INFOCOMPTE----
 mysqli_begin_transaction($conn);
 // Requête d'insertion dans la table Compte
-$sql1 = "INSERT INTO Compte (email, motDePasse, abonnement, dateAbonnement, signatureContratClient, signatureContratVendeur, signatureContratLivreur)
-         VALUES (?, ?, ?, ?, ?, ?, ?)";
+$sql1 = "INSERT INTO Compte (email, motDePasse, abonnement, dateAbonnement, signatureContratClient, signatureContratVendeur, signatureContratLivreur, admin)
+VALUES (?, ?, ?, ?, ?, ?, ?, 0)";
 $stmt1 = mysqli_prepare($conn, $sql1);
 mysqli_stmt_bind_param($stmt1, "ssisiii", $email, $motDePasse, $abonnement, $dateAbonnement, $signatureContratClient, $signatureContratVendeur, $signatureContratLivreur);
 
 // Requête d'insertion dans la table InfoCompte
 $sql2 = "INSERT INTO InfoCompte (emailCompte, prenom, nom, dateNaissance, telephone, adresse, ville, codePostal, pays)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 $stmt2 = mysqli_prepare($conn, $sql2);
-mysqli_stmt_bind_param($stmt2, "ssssisssi", $email, $prenom, $nom, $dateNaissance, $telephone, $adresse, $ville, $codePostal, $pays);
-
+mysqli_stmt_bind_param($stmt2, "ssssisssi", $emailCompte, $prenom, $nom, $dateNaissance, $telephone, $adresse, $ville, $codePostal, $pays);
 
 // Définition des variables pour l'insertion COMPTE
 $email = $email;
@@ -96,10 +95,10 @@ $abonnement = 0; // 0 = pas d'abonnement, 1 = abonnement mensuel, 2 = abonnement
 
 // Vérification de l'abonnement et définition de la date d'abonnement si applicable
 if($user["Abonnement"] == "Non abonné") {
-    $dateAbonnement = NULL; // Pas d'abonnement
+$dateAbonnement = NULL; // Pas d'abonnement
 } else {
-    $dateAbonnement = DateTime::createFromFormat('d-m-Y', $user['Abonnement']); // Conversion de la chaîne en objet DateTime
-    $dateAbonnement = $dateAbonnement->format('Y-m-d'); // On passe à ce format pour la bdd
+$dateAbonnement = DateTime::createFromFormat('d-m-Y', $user['Abonnement']); // Conversion de la chaîne en objet DateTime
+$dateAbonnement = $dateAbonnement->format('Y-m-d'); // On passe à ce format pour la bdd
 }
 $signatureContratClient = 1; // 0 = non signé, 1 = signé
 $signatureContratVendeur = 0; // 0 = non signé, 1 = signé
@@ -117,16 +116,15 @@ $ville = $user['ville'];
 $codePostal = $user['codePostal'];
 $pays = $user['pays'];
 
-
 // Exécution des requêtes
 if(mysqli_stmt_execute($stmt1) && mysqli_stmt_execute($stmt2)) {
-    // Succès
-    mysqli_commit($conn);
-    //echo "Compte créé avec succès!";
+// Succès
+mysqli_commit($conn);
+//echo "Compte créé avec succès!";
 } else {
-    // Erreur
-    mysqli_rollback($conn);
-    echo "Erreur lors de la création du compte: " . mysqli_error($conn);
+// Erreur
+mysqli_rollback($conn);
+echo "Erreur lors de la création du compte: " . mysqli_error($conn);
 }
 
 // Fermeture des connexions

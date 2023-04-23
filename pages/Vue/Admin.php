@@ -21,7 +21,6 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
-
         <h1>Liste des utilisateurs</h1>
         <table>
             <tr>
@@ -48,7 +47,6 @@
                         echo "<input type='hidden' name='email' value='".$row["email"]."'>";
                         echo "<input type='submit' name='supprimer_compte' value='Supprimer ce compte'>";
                         echo "</form>";
-
                     }                    
                 }
             ?>

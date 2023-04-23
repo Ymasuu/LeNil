@@ -53,27 +53,21 @@
                         </tr>
                         <tr>
                             <td><label for="client">Client</label></td>
-                            <td><input type="text" name="new_client" id="client" placeholder="<?php echo $row['signatureContratClient']; ?>"></td>
+                            <td><input type="radio" name="type_compte" id="client" value="client"></td>
                         </tr>
                         <tr>
                             <td><label for="vendeur">Vendeur</label></td>
-                            <td><input type="text" name="new_vendeur" id="vendeur" placeholder="<?php echo $row['signatureContratVendeur']; ?>"></td>
+                            <td><input type="radio" name="type_compte" id="vendeur" value="vendeur"></td>
                         </tr>
                         <tr>
                             <td><label for="livreur">Livreur</label></td>
-                            <td><input type="text" name="new_livreur" id="livreur" placeholder="<?php echo $row['signatureContratLivreur']; ?>"></td>
-                        </tr>
-                        <td colspan="2"><p>Confirmer la modification avec votre mot de passe :</p></td>
+                            <td><input type="radio" name="type_compte" id="livreur" value="livreur"></td>
                         </tr>
                         <tr>
-                            <td><label for="mdp">mot de passe</label></td>
-                            <td><input type="password" name="mdp" id="mdp" placeholder="mot de passe"></td>
+                            <td><label for="admin">Administrateur</label></td>
+                            <td><input type="radio" name="type_compte" id="admin" value="admin"></td>
                         </tr>
-                        <tr>
-                            <td><?php if(isset($_SESSION['erreur'])){echo $_SESSION['erreur'];unset($_SESSION['erreur']);} ?></td>
-                        </tr> 
-                    </table>
-                    
+                    </table>      
                 </fieldset>
             </form>
             <form method="post" action="../Contrôleur/process_modifCompte.php">
