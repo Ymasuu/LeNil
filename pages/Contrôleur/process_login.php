@@ -112,30 +112,40 @@ if ($resultCheck>0) {
         //LIVREUR ------> A GERER ENCORE
         else if ($row['signatureContratLivreur'] == 1) {
             unset($_SESSION["errorLogin"]); // on supprime la variable de session erreur
-        $_SESSION["UTILISATEUR"]["nom"] = $detailUtilisateur[0];
-        $_SESSION["UTILISATEUR"]["prenom"] = $detailUtilisateur[0];
-        $_SESSION["UTILISATEUR"]["email"] = $detailUtilisateur[1];
-        $_SESSION["UTILISATEUR"]["tel"] = $detailUtilisateur[2];
-        $_SESSION["UTILISATEUR"]["adresse"] = $detailUtilisateur[3];
-        $_SESSION["UTILISATEUR"]["ville"] = $detailUtilisateur[4];
-        $_SESSION["UTILISATEUR"]["codePostal"] = $detailUtilisateur[5];
-        $_SESSION["UTILISATEUR"]["pays"] = $detailUtilisateur[6];
-        $_SESSION["UTILISATEUR"]["mdp"] = $detailUtilisateur[7];
-        if ($row['abonnement'] == 0) {
-            $_SESSION["UTILISATEUR"]["Abonnement"] = "None";
-        }
-        if ($row['abonnement'] == 1) {
-            $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Mensuel";
-        }
-        if ($row['abonnement'] == 2) {
-            $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
-        }
-        if ($row['dateAbonnement'] != NULL){
-            $_SESSION["UTILISATEUR"]["DateAbonnement"] = $row['dateAbonnement'];
-        }
-        $_SESSION["UTILISATEUR"]["TypeCompte"] = "livreur";
-        header("Location:../Vue/index.php");
-        exit();
+            //CLIENT
+            //On fait d'autres requetes pour obtenir les informations nécessaires de ce compte
+                $sousquery = "SELECT * FROM InfoCompte WHERE emailCompte = '$mail';";
+                $sousresult = mysqli_query($conn, $sousquery);
+                $sousresultCheck = mysqli_num_rows($sousresult);
+                if ($sousresultCheck>0) {
+                    $informations = mysqli_fetch_assoc($sousresult);
+                }
+        
+                $_SESSION["UTILISATEUR"]["nom"] = $informations['nom'];
+                $_SESSION["UTILISATEUR"]["prenom"] = $informations['prenom'];
+                $_SESSION["UTILISATEUR"]["email"] = $row['email'];
+                $_SESSION["UTILISATEUR"]["dateNaissance"] = $informations['dateNaissance'];
+                $_SESSION["UTILISATEUR"]["tel"] = $informations['telephone'];
+                $_SESSION["UTILISATEUR"]["adresse"] = $informations['adresse'];
+                $_SESSION["UTILISATEUR"]["ville"] = $informations['ville'];
+                $_SESSION["UTILISATEUR"]["codePostal"] = $informations['codePostal'];
+                $_SESSION["UTILISATEUR"]["pays"] = $informations['pays'];
+                $_SESSION["UTILISATEUR"]["mdp"] = $row['motDePasse'];
+                if ($row['abonnement'] == 0) {
+                    $_SESSION["UTILISATEUR"]["Abonnement"] = "None";
+                }
+                if ($row['abonnement'] == 1) {
+                    $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Mensuel";
+                }
+                if ($row['abonnement'] == 2) {
+                    $_SESSION["UTILISATEUR"]["Abonnement"] = "Abonnement Annuel";
+                }
+                if ($row['dateAbonnement'] != NULL){
+                    $_SESSION["UTILISATEUR"]["DateAbonnement"] = $row['dateAbonnement'];
+                } else $_SESSION["UTILISATEUR"]["DateAbonnement"] = "None";
+                $_SESSION["UTILISATEUR"]["TypeCompte"] = "livreur";
+                header("Location:../Vue/index.php");
+                exit();
             }
 
         //ADMIN ------> A GERER ENCORE
