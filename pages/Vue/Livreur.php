@@ -1,8 +1,9 @@
 <?php
     // Pour la connection de la bdd
-    require_once '..\..\database\config\connection.php';
-    require_once '..\..\database\config\database.php';
     session_start();
+    require_once 'classes_necessaires.php';
+    // Instanciation de la classe CompteLivreur pour récupérer le tableau associatif
+    
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,59 +23,45 @@
 		?>
         <hr> <!-- Repère visuel temporaire -->
         <div class="commandes">
-            <form action="pageLivreur.php" method="post">
-                    <div class="article">
-                        <button type="submit">
-                            <div>
-                                <h5>Commande #12345</h5>
-                                <p>Date de commande : 20 avril 2023 à 10h30</p>
-                                <p>Adresse de livraison : 123 rue des Fleurs, 75001 Paris</p>
-                            </div>
-                        </button>
-                        <input type="hidden" name="produit_id" value="<?php echo $row['id']; ?>">
-                    </div>
-                </form>
+            <?php
+                // Boucle pour afficher toutes les commandes
+
+
+                /////-------ON METS LA CLASSE COMPTELIVREUR CAR IL NE RECONNAIT PAS LE FICHIER DANS MODELE/CLASSES
+                //JE NE SAIS PAS POURQUOI ----------////////////////////////////////////
+
+                ///////////COMPTE ////////////////////////////////////////////////////////
+
+
+                /////////////--------------///////////////////////////////////////////////////
+
+
+
+                $livreur = new CompteLivreur($_SESSION["UTILISATEUR"]["email"],$_SESSION["UTILISATEUR"]["codePostal"]);
+    $tableauAssociatifColisClient = $livreur->getTableauAssociatifColisClient();
+                foreach($tableauAssociatifColisClient as $idColis => $association) {
+                    $colis = $association['colis'];
+                    $compte = $association['compte'];
+                    $commande = $colis->getCommande();
+                    $client = $commande->getClient();
+            ?>
                 <form action="pageLivreur.php" method="post">
                     <div class="article">
                         <button type="submit">
                             <div>
-                                <h5>Commande #12345</h5>
-                                <p>Date de commande : 20 avril 2023 à 10h30</p>
-                                <p>Adresse de livraison : 123 rue des Fleurs, 75001 Paris</p>
+                                <h5>Commande #<?php echo $commande->getIdCommande(); ?></h5>
+                                <p>Date de commande : <?php echo $commande->getDateCommande(); ?></p>
+                                <p>Adresse de livraison : <?php echo $client->getAdresse(); ?></p>
                             </div>
                         </button>
-                        <input type="hidden" name="produit_id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" name="colis_id" value="<?php echo $idColis; ?>">
                     </div>
                 </form>
-                <form action="pageLivreur.php" method="post">
-                    <div class="article">
-                        <button type="submit">
-                            <div>
-                                <h5>Commande #12345</h5>
-                                <p>Date de commande : 20 avril 2023 à 10h30</p>
-                                <p>Adresse de livraison : 123 rue des Fleurs, 75001 Paris</p>
-                            </div>
-                        </button>
-                        <input type="hidden" name="produit_id" value="<?php echo $row['id']; ?>">
-                    </div>
-                </form>
-            </div>
+            <?php } ?>
+        </div>
         <hr> <!-- Repère visuel temporaire -->
         <?php include '../../templates/footer.php'; ?>
     </div>
 </body>
 </html>
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+

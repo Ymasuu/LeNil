@@ -32,10 +32,29 @@ class Compte {
           $this->signatureContratVendeur = $row["signatureContratVendeur"];
 
           // initialisation de $contrat
-          $contratId = $row["contratId"];
-          //On associe un contrat
-          $this->contrat = new Contrat($contratId,$this);
+          $numero;//pour le numero du contrat
+          if ($this->signatureContratClient == 1) {
+            $numero = 1;
+          }
+          else if($this->signatureContratVendeur == 1) {
+            $numero = 2;
+          }
+          else {
+            $numero = 3;
+          }
+$sql = "SELECT * FROM contrat WHERE numero = $numero";
 
+// Exécutez la requête
+$result = $conn->query($sql);
+
+// Vérifier s'il y a des résultats
+    // Récupérer les données du contrat
+    $contrat = $result->fetch_assoc();
+    $this->contrat = new Contrat($numero,$this);
+    // Afficher les données du contrat
+    //echo "Numéro du contrat: " . $contrat['numero'] . "<br>";
+    //echo "Texte du contrat: " . $contrat['texte'];
+    //echo "Aucun contrat trouvé avec ce numéro.";
           // initialisation de $listeMoyensPayments
           $sql2 = "SELECT * FROM MoyenPayment WHERE email = ?";
           $stmt2 = $conn->prepare($sql2);
@@ -58,8 +77,8 @@ class Compte {
       
       //Pour associer le panier au compte
       $this->recupererPanierParEmailCompte($email);
-  
-    }
+
+  }
   
     function getEmail() {
       return $this->email;
@@ -105,9 +124,6 @@ function recupererPanierParEmailCompte(string $emailCompte) {
     //echo "Erreur dans la creation du panier pour ce Compte";
   }
 }
+    }
 
-
-    
-  }
-  
   ?>
