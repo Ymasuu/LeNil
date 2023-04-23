@@ -124,7 +124,7 @@
 									echo '<td><input type="number" name="quantite[' . $prod . ']" value="' . $quantite . '"></td>';
 									echo '<input type="hidden" name="nom[' . $prod . ']" value="' . $nom . '"></td>';
 									echo '<td><input type="submit" name="modifier_quantite[' . $prod . ']" value="Modifier la quantité"></td>';
-									echo '<td><input type="submit" name="supprimer_produit[' . $prod . ']" value="Supprimer"></td>';
+									echo '<td><input type="submit" class=bouton-golden name="supprimer_produit[' . $prod . ']" value="Supprimer"></td>';
 									echo '</tr>';
 								}				
 								echo '</table>';
@@ -182,14 +182,11 @@
 								$result = mysqli_query($conn, $sql);
 								$resultCheck = mysqli_num_rows($result);
 								if ($resultCheck > 0) {
-									$quantite2 = 0;
-									$prix2 = 0;
+									$prix = 0;
 									while ($row = mysqli_fetch_assoc($result)) {
-										$quantite2 += $row['quantite'];
-										$prix2 += $row['prix'];
-									}		
-									$prixPanier = $quantite2 * $prix2;
-									$sql = "UPDATE panier SET HT = '$prixPanier' WHERE emailCompte='$email'";
+										$prix += $row['quantite'] * $row['prix'];
+									}
+									$sql = "UPDATE panier SET HT = '$prix' WHERE emailCompte='$email'";
 									$result = mysqli_query($conn, $sql);
 									$sql = "UPDATE panier SET TTC = HT * 1.2 WHERE emailCompte='$email'";
 									$result = mysqli_query($conn, $sql);
@@ -199,7 +196,7 @@
 					?>	
 					<form method="post" action="panier.php">
 						<input type="hidden" name="action" value="vider_panier">
-						<button type="submit">Tout supprimer</button>
+						<button type="submit" class="bouton-golden">Tout supprimer</button>
 					</form>
 					<?php
 						if (isset($_POST['action']) && $_POST['action'] == 'vider_panier') {
@@ -215,9 +212,23 @@
 			<div class="total">
 				<h1>Total</h1>
 				<div>
-					<h5>Sous-total</h5>
-					<p>
-						<?php 
+					<h5>Prix Hors Taxe : 
+						<?php
+							$sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
+							$result = mysqli_query($conn, $sql);
+							$resultCheck = mysqli_num_rows($result);
+							// Possibilité de modifier le panier s'il existe
+							if ($resultCheck > 0) {
+								$row = mysqli_fetch_assoc($result);
+								$prixHT = $row['HT'];
+							}
+							if(isset($prixHT)){
+								echo $prixHT . " €";
+							}
+						?>
+					</h5>
+					<h5>Prix TTC (20% de TVA) :  
+						<?php
 							$sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
 							$result = mysqli_query($conn, $sql);
 							$resultCheck = mysqli_num_rows($result);
@@ -226,40 +237,52 @@
 								$row = mysqli_fetch_assoc($result);
 								$prix = $row['TTC'];
 							}
-							if(isset($prix)) echo $prix; 
-						?>
-					</p>
-					<h5>Livraison</h5>
-					<p>
-						<?php
-							if (isset($prix)) {
-								$livraison = $prix * 0.05;
-								$livraison = round($livraison, 2);
-								echo $livraison;
+							if(isset($prix)){
+								echo $prix . " €";
 							}
 						?>
-					</p>
+					</h5>
+					<h5>Livraison
+						<?php
+							if (isset($prix)) {
+								if($_SESSION["UTILISATEUR"]["Abonnement"] == "None"){
+									$livraison = $prix * 0.05;
+									$livraison = round($livraison, 2);
+									echo $livraison;
+								}else{
+									$livraison = 0;
+									echo $livraison . " €";
+								} 
+
+							}
+						?>
+					</h5>
 				</div>
 				<hr>
 				<div>
 					<h5>Total final</h5>
 					<?php
-						if(isset($total_panier) && isset($livraison)) {
+						if(isset($prix) && isset($livraison)) {
 							$total_final = $prix + $livraison;
 							$sql = "UPDATE panier SET TTC = '$total_final' WHERE emailCompte='$email'";
 							$result = mysqli_query($conn, $sql);
 						}
+						if(isset($_SESSION["UTILISATEUR"]["prixCode"])){
+							$total_final = $_SESSION["UTILISATEUR"]["prixCode"];
+							$sql = "UPDATE panier SET TTC = '$total_final' WHERE emailCompte='$email'";
+							$result = mysqli_query($conn, $sql);
+						}
 					?>
-					<p>
+					<h5>
 						<?php 
 							if(isset($total_final)){
-								echo $total_final;
+								echo $total_final . " €";
 							}
 						?>
-					</p>
+					</h5>
 				</div>
 				<form action="../Contrôleur/process_commander.php" method="post">
-					<input type="submit" name="commander" value="Commander">
+					<input type="submit" class="bouton-golden" name="commander" value="Commander">
 				</form>
 			</div>
 		</div>
@@ -267,14 +290,21 @@
 			<div class="livraison">
 				<h1>Livraison estimée</h1>
 				<div>
-					<h5>Livraison estimée le :</h5>
+					<h5>Livraison estimée le :
+						<?php
+							date_default_timezone_set('Europe/Paris');
+							$date = date('Y-m-d');
+							$date = date('Y-m-d', strtotime($date . ' +3 days'));
+							echo $date;
+						?>
+					</h5>
 				</div>
 			</div>
 			<center class="code">
 				<h3>Ajouter un code promo</h3>
 				<form action="../Contrôleur/process_codePromo.php" method="post">
 					<input type="text" name="code" placeholder="Entrez un code">
-					<button type="submit">Envoyer</button>
+					<button type="submit" class="bouton-golden">Envoyer</button>
 				</form>
 			</center>
 		</div>

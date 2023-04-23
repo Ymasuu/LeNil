@@ -37,16 +37,16 @@
     //$image = $_FILES['image'];
 
    
-    // Get the ID of the last inserted product
-    $sql_ancien_id = "SELECT MAX(id) AS ancien_id FROM produitsvendeur WHERE emailVendeur = '$emailVendeur'";
+    // on récupère l'id du dernier élément de la table
+    $sql_ancien_id = "SELECT MAX(id) AS ancien_id FROM produitsvendeur";
     $result_ancien_id = $conn->query($sql_ancien_id);
     $row_ancien_id = $result_ancien_id->fetch_assoc();
     $ancien_id = $row_ancien_id['ancien_id'];
 
-    // Increment the last ID by 1
+    // on l'incrémente de 1
     $nouvelle_id = $ancien_id + 1;
 
-    // Add the new product with the incremented ID
+    // On ajoute le produit avec ses données
     $sql = "INSERT INTO produitsvendeur (id, emailVendeur, QuantiteVendeur, prix, nom, description, minidescription, NomImage) 
             VALUES ('$nouvelle_id', '$emailVendeur', '$quantite', '$prix', '$nom', '$description', '$minidescription', '$filename')";
     $result = $conn->query($sql);

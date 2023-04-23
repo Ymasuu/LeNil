@@ -80,7 +80,7 @@
                 </label> <br>
 
                 <br> <br> <br>
-                <input type="submit" name="Filtre" value="Filtrer">
+                <input type="submit" name="Filtre" class="bouton-golden" value="Filtrer">
 				</form>
 			</div>
 			<div class="box">
