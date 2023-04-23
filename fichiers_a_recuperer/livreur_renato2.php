@@ -44,9 +44,53 @@
                     $compte = $association['compte'];
                     $commande = $colis->getCommande();
                     $client = $commande->getClient();
+
+
+
+                    $conn = new mysqli(DB_HOST, DB_USER,DB_PASS,DB_NAME);
+
+                    if ($conn->connect_error) {
+                        die("Erreur de connexion : " . $conn->connect_error);
+                    }
                     
+                    $sql = "SELECT colis.id, infocompte.adresse, infocompte.codePostal, commande.datePayment 
+                    FROM colis 
+                    JOIN commande ON colis.idCommande = commande.id 
+                    JOIN infocompte ON commande.emailCompte = infocompte.emailCompte";
+                    
+                    $result = $conn->query($sql);
+                    
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            if ($_SESSION["UTILISATEUR"]["codePostal"] == $row["codePostal"]) {
+                            // Traitement des données récupérées
+                            $adresseClient = $row["adresse"];
+                            $idColis = $row["id"];
+                            $dateCommande = $row["datePayment"];
+                            $codePostalClient = $row["codePostal"];
+                            }
+                        }
+                    } else {
+                       // echo "Aucun résultat trouvé.";
+                    }
+                    
+                    $mysqli->close();
             ?>
                 <form action="pageLivreur.php" method="post">
+                    <div class="article">
+                        <button type="submit">
+                            <div>
+                                <h5>Commande #<?php echo $idColis; ?></h5>
+                                <p>Date de commande : <?php echo $dateCommande; ?></p>
+                                <p>Adresse de livraison : <?php echo $adresseClient; ?></p>
+                            </div>
+                        </button>
+                        <input type="hidden" name="colis_id" value="<?php echo $idColis; ?>">
+                    </div>
+                </form>
+
+                <!--
+<form action="pageLivreur.php" method="post">
                     <div class="article">
                         <button type="submit">
                             <div>
@@ -58,6 +102,9 @@
                         <input type="hidden" name="colis_id" value="<?php echo $idColis; ?>">
                     </div>
                 </form>
+                -->
+
+            
             <?php } ?>
         </div>
         <hr> <!-- Repère visuel temporaire -->
@@ -65,4 +112,3 @@
     </div>
 </body>
 </html>
-
