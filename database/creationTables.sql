@@ -181,7 +181,9 @@ INSERT INTO `compte` (`email`, `motDePasse`, `abonnement`, `dateAbonnement`, `si
 ('magasin1@gmail.com', '123456', 2, '2023-03-11', 0, 1, 0, 0),
 ('magasin2@gmail.com', '123456', 2, '2023-02-14', 0, 1, 0, 0),
 ('renato.nascimento.ardiles@cy-tech.fr', '123456', 0, NULL, 1, 0, 1, 0),
-('samy.belbouab@gmail.com', '123456', 2, '2023-03-21', 1, 0, 0, 0);
+('samy.belbouab@gmail.com', '123456', 2, '2023-03-21', 1, 0, 0, 0),
+('livreur@gmail.com', '123456', 0, NULL, 0, 0, 1, 0);
+
 
 -- --------------------------------------------------------
 
