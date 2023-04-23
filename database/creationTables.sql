@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : sam. 22 avr. 2023 à 15:08
+-- Généré le : dim. 23 avr. 2023 à 20:28
 -- Version du serveur : 8.0.28
 -- Version de PHP : 8.0.28
 
@@ -143,15 +143,16 @@ CREATE TABLE `commande` (
   `emailCompte` varchar(100) NOT NULL,
   `totalPayer` decimal(10,2) DEFAULT NULL,
   `modePayment` varchar(20) NOT NULL,
-  `datePayment` date NOT NULL
+  `datePayment` date NOT NULL,
+  `idAdresse` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `commande`
 --
 
-INSERT INTO `commande` (`id`, `emailCompte`, `totalPayer`, `modePayment`, `datePayment`) VALUES
-(457, 'livreur@gmail.com', 49.99, 'CB', '2023-03-21');
+INSERT INTO `commande` (`id`, `emailCompte`, `totalPayer`, `modePayment`, `datePayment`, `idAdresse`) VALUES
+(457, 'livreur@gmail.com', 49.99, 'CB', '2023-03-21', 0);
 
 -- --------------------------------------------------------
 
@@ -178,12 +179,11 @@ INSERT INTO `compte` (`email`, `motDePasse`, `abonnement`, `dateAbonnement`, `si
 ('abdellah.hassani2002@gmail.com', '123456', 1, '2023-03-01', 1, 0, 0, 0),
 ('ethanpINTo02@gmail.com', '123456', 0, NULL, 1, 0, 0, 0),
 ('foulonclem@cy-tech.fr', '123456', 0, NULL, 0, 0, 0, 1),
+('livreur@gmail.com', '123456', 0, NULL, 0, 0, 1, 0),
 ('magasin1@gmail.com', '123456', 2, '2023-03-11', 0, 1, 0, 0),
 ('magasin2@gmail.com', '123456', 2, '2023-02-14', 0, 1, 0, 0),
 ('renato.nascimento.ardiles@cy-tech.fr', '123456', 0, NULL, 1, 0, 1, 0),
-('samy.belbouab@gmail.com', '123456', 2, '2023-03-21', 1, 0, 0, 0),
-('livreur@gmail.com', '123456', 0, NULL, 0, 0, 1, 0);
-
+('samy.belbouab@gmail.com', '123456', 2, '2023-03-21', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -255,8 +255,7 @@ INSERT INTO `infocompte` (`emailCompte`, `prenom`, `nom`, `dateNaissance`, `tele
 ('magasin1@gmail.com', 'MAGASIN1', 'MAGASIN1', '1989-05-11', '0130365987', '12 Allée de la Garance', 'PARIS', 75019, 'France', 0),
 ('magasin2@gmail.com', 'MAGASIN2', 'MAGASIN2', '1989-05-11', '0130365987', '130, Clos Chapelle-aux-Champs', 'PARIS', 75019, 'France', 0),
 ('renato.nascimento.ardiles@cy-tech.fr', 'Renato', 'Nascimento Ardiles', '2000-03-21', '0000000000', '22 rue de la petite-nuit', 'Cergy', 95000, 'France', 0),
-('samy.belbouab@gmail.com', 'Samy', 'Belbouab', '2002-02-18', '0610122887', '26 rue de le grande piece', 'Menucourt', 95180, 'France', 0),
-('livreur@gmail.com', 'Dimitri', 'Joe', '1990-01-01', '123456', '123 Main St', 'Anytown', 75000, 'France', 0);
+('samy.belbouab@gmail.com', 'Samy', 'Belbouab', '2002-02-18', '0610122887', '26 rue de le grande piece', 'Menucourt', 95180, 'France', 0);
 
 -- --------------------------------------------------------
 
@@ -281,13 +280,6 @@ CREATE TABLE `panier` (
   `TVA` decimal(10,2) NOT NULL,
   `TTC` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `panier`
---
-
-INSERT INTO `panier` (`emailCompte`, `HT`, `TVA`, `TTC`) VALUES
-('abdellah.hassani2002@gmail.com', 100.00, 20.00, 120.00);
 
 -- --------------------------------------------------------
 
