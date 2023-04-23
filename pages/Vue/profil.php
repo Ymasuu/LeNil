@@ -17,8 +17,10 @@ if(!isset($_SESSION["UTILISATEUR"])){
     <link rel="icon" type="image/png" href="../../img/logo2.png">
 </head>
 <body>
-    <?php include '../../templates/header.php'; ?>
+    
     <div>
+    <?php include '../../templates/header.php'; ?>
+    <hr> <!-- Repère visuel temporaire -->    
         <div style="width: 500px; margin: auto;">
             <h1>Profil Utilisateur</h1>
             <fieldset>
@@ -95,9 +97,10 @@ if(!isset($_SESSION["UTILISATEUR"])){
                 <button class="bouton-golden" onclick="confirmerSuppression()">Oui</button>
                 <button class="bouton-golden" onclick="annulerSuppression()">Non</button>
             </div>
-        </div>
-    </div>
+        </div>  
+    <hr> <!-- Repère visuel temporaire -->
     <?php include '../../templates/footer.php'; ?>
+    </div>
     <script>
         function afficherPopup(){
             document.getElementById("popup").style.display = "block";

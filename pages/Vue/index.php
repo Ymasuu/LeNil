@@ -17,6 +17,7 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
+        <hr> <!-- Repère visuel temporaire -->
 		<?php
 			if(isset($_SESSION["UTILISATEUR"])){
 				echo " <h2 style=display:inline;> Bienvenue " . $_SESSION["UTILISATEUR"]["nom"] . " " . $_SESSION["UTILISATEUR"]["prenom"] . "</h4>";
@@ -248,6 +249,7 @@ if (isset($_GET['query']) && !empty($_GET['query'])) {
                 ?>
 			</div>
 		</div>
+        <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>

@@ -58,9 +58,9 @@
             <form method="post" action="ajoutProduitVendeur.php">
                 <input type="submit" name="ajouter_un_produit" value="Ajouter un produit">
             </form>
-            <hr> <!-- Repère visuel temporaire -->
-            <?php include '../../templates/footer.php'; ?>
         </div>
+        <hr> <!-- Repère visuel temporaire -->
+        <?php include '../../templates/footer.php'; ?>
     </div>
 </body>
 </html>

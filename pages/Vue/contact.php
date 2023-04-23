@@ -20,6 +20,7 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
+        <hr> <!-- Repère visuel temporaire -->
         <div class="contact">
             <h2>Demande de contact</h2>
             <form id="form" action="mail.php" method="post">
@@ -52,7 +53,7 @@
             </form>
         </div>
         
-
+        <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>

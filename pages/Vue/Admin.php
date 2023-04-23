@@ -21,6 +21,7 @@
 <body>
 	<div>
 		<?php include '../../templates/header.php'; ?>
+        <hr> <!-- Repère visuel temporaire -->
         <h1>Liste des utilisateurs</h1>
         <table>
             <tr>
@@ -51,6 +52,7 @@
             <form method="post" action="ajoutCompte.php">
                 <input type="submit" name="ajouter_un_compte" value="Ajouter un compte" class="bouton-golden">
             </form>
+        <hr> <!-- Repère visuel temporaire -->
 		<?php include '../../templates/footer.php'; ?>
 	</div>
 </body>
