@@ -28,7 +28,13 @@
                 $resultCheck = mysqli_num_rows($resultat);
                 // s'il existe des commandes 
                 if($resultCheck > 0){
-                    while ($row = mysqli_fetch_assoc($resultat)) { ?>
+                    while ($row = mysqli_fetch_assoc($resultat)) { 
+                        // on recupere l'adresse du client
+                        $mail = $row['emailCompte'];
+                        $sql2 = "SELECT adresse FROM infoCompte WHERE emailCompte = '$mail'";
+                        $result = mysqli_query($conn, $sql2);
+                        $row2 = mysqli_fetch_assoc($result);
+                        ?>
                         <form action="../Contrôleur/process_notifierClient.php" method="post">
                             <div class="article">
                                 <button type="submit" name="commandeID" value="<?php echo $row['id']; ?>" >
@@ -36,7 +42,7 @@
                                         <h5>Commande #<?php echo $row['id']; ?></h5>
                                         <p>Date de commande : <?php echo $row['datePayment']; ?></p>
                                         <p>Prix : <?php echo $row['totalPayer']; ?> €</p>
-                                        <p>Adresse : <?php echo "" ?></p>
+                                        <p>Adresse : <?php echo $row['emailCompte'] ?></p>
                                     </div>
                                 </button>
                             </div>
