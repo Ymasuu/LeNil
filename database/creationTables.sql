@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : dim. 23 avr. 2023 à 22:05
+-- Généré le : dim. 23 avr. 2023 à 23:07
 -- Version du serveur : 8.0.28
 -- Version de PHP : 8.0.28
 
@@ -124,14 +124,6 @@ CREATE TABLE `colis` (
   `idCommande` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Déchargement des données de la table `colis`
---
-
-INSERT INTO `colis` (`id`, `longueur`, `hauteur`, `poids`, `idCommande`) VALUES
-(27, 55.00, 40.00, 7.50, 457),
-(28, 5.00, 4.00, 3.50, 457);
-
 -- --------------------------------------------------------
 
 --
@@ -143,16 +135,8 @@ CREATE TABLE `commande` (
   `emailCompte` varchar(100) NOT NULL,
   `totalPayer` decimal(10,2) DEFAULT NULL,
   `modePayment` varchar(20) NOT NULL,
-  `datePayment` date NOT NULL,
-  `Livre` tinyint(1) NOT NULL
+  `datePayment` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `commande`
---
-
-INSERT INTO `commande` (`id`, `emailCompte`, `totalPayer`, `modePayment`, `datePayment`) VALUES
-(457, 'livreur@gmail.com', 49.99, 'CB', '2023-03-21');
 
 -- --------------------------------------------------------
 
@@ -184,26 +168,6 @@ INSERT INTO `compte` (`email`, `motDePasse`, `abonnement`, `dateAbonnement`, `si
 ('magasin2@gmail.com', '123456', 2, '2023-02-14', 0, 1, 0, 0),
 ('renato.nascimento.ardiles@cy-tech.fr', '123456', 0, NULL, 1, 0, 1, 0),
 ('samy.belbouab@gmail.com', '123456', 2, '2023-03-21', 1, 0, 0, 0);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `contenupanier`
---
-
-CREATE TABLE `contenupanier` (
-  `idProduitsVendeur` int NOT NULL,
-  `QuantitePanier` int NOT NULL,
-  `emailCompte` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Déchargement des données de la table `contenupanier`
---
-
-INSERT INTO `contenupanier` (`idProduitsVendeur`, `QuantitePanier`, `emailCompte`) VALUES
-(7, 5, 'abdellah.hassani2002@gmail.com'),
-(17, 5, 'abdellah.hassani2002@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -240,23 +204,22 @@ CREATE TABLE `infocompte` (
   `adresse` varchar(250) NOT NULL,
   `ville` varchar(50) NOT NULL,
   `codePostal` int NOT NULL,
-  `pays` varchar(50) NOT NULL,
-  `ticket` tinyint(1) NOT NULL DEFAULT '0'
+  `pays` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `infocompte`
 --
 
-INSERT INTO `infocompte` (`emailCompte`, `prenom`, `nom`, `dateNaissance`, `telephone`, `adresse`, `ville`, `codePostal`, `pays`, `ticket`) VALUES
-('abdellah.hassani2002@gmail.com', 'Abdellah', 'Hassani', '2000-03-21', '0767756606', '15 bd du port', 'Cergy', 95000, 'France', 0),
-('ethanpINTo02@gmail.com', 'Ethan', 'Pinto', '2000-03-21', '0661839460', '22 rue de la petite-nuit', 'Cergy', 95800, 'France', 0),
-('foulonclem@cy-tech.fr', 'Clement', 'Foulon', '2002-03-19', '0632135190', '22 boulevard de l oise', 'Cergy', 95000, 'France', 0),
-('livreur@gmail.com', 'Dimitri', 'Joe', '1990-01-01', '123456', '123 Main St', 'Anytown', 75000, 'France', 0),
-('magasin1@gmail.com', 'MAGASIN1', 'MAGASIN1', '1989-05-11', '0130365987', '12 Allée de la Garance', 'PARIS', 75019, 'France', 0),
-('magasin2@gmail.com', 'MAGASIN2', 'MAGASIN2', '1989-05-11', '0130365987', '130, Clos Chapelle-aux-Champs', 'PARIS', 75019, 'France', 0),
-('renato.nascimento.ardiles@cy-tech.fr', 'Renato', 'Nascimento Ardiles', '2000-03-21', '0000000000', '22 rue de la petite-nuit', 'Cergy', 95000, 'France', 0),
-('samy.belbouab@gmail.com', 'Samy', 'Belbouab', '2002-02-18', '0610122887', '26 rue de le grande piece', 'Menucourt', 95180, 'France', 0);
+INSERT INTO `infocompte` (`emailCompte`, `prenom`, `nom`, `dateNaissance`, `telephone`, `adresse`, `ville`, `codePostal`, `pays`) VALUES
+('abdellah.hassani2002@gmail.com', 'Abdellah', 'Hassani', '2000-03-21', '0767756606', '15 bd du port', 'Cergy', 95000, 'France'),
+('ethanpINTo02@gmail.com', 'Ethan', 'Pinto', '2000-03-21', '0661839460', '22 rue de la petite-nuit', 'Cergy', 95800, 'France'),
+('foulonclem@cy-tech.fr', 'Clement', 'Foulon', '2002-03-19', '0632135190', '22 boulevard de l oise', 'Cergy', 95000, 'France'),
+('livreur@gmail.com', 'Dimitri', 'Joe', '1990-01-01', '123456', '123 Main St', 'Anytown', 75000, 'France'),
+('magasin1@gmail.com', 'MAGASIN1', 'MAGASIN1', '1989-05-11', '0130365987', '12 Allée de la Garance', 'PARIS', 75019, 'France'),
+('magasin2@gmail.com', 'MAGASIN2', 'MAGASIN2', '1989-05-11', '0130365987', '130, Clos Chapelle-aux-Champs', 'PARIS', 75019, 'France'),
+('renato.nascimento.ardiles@cy-tech.fr', 'Renato', 'Nascimento Ardiles', '2000-03-21', '0000000000', '22 rue de la petite-nuit', 'Cergy', 95000, 'France'),
+('samy.belbouab@gmail.com', 'Samy', 'Belbouab', '2002-02-18', '0610122887', '26 rue de le grande piece', 'Menucourt', 95180, 'France');
 
 -- --------------------------------------------------------
 
@@ -356,7 +319,7 @@ CREATE TABLE `quantitecommande` (
   `idCommande` int NOT NULL,
   `nom` char(100) NOT NULL,
   `emailClient` varchar(100) NOT NULL,
-  `quantite` int NOT NULL,
+  `quantite` decimal(2,0) NOT NULL,
   `prix` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -444,12 +407,6 @@ ALTER TABLE `commande`
 --
 ALTER TABLE `compte`
   ADD PRIMARY KEY (`email`);
-
---
--- Index pour la table `contenupanier`
---
-ALTER TABLE `contenupanier`
-  ADD PRIMARY KEY (`idProduitsVendeur`);
 
 --
 -- Index pour la table `contrat`
@@ -556,12 +513,6 @@ ALTER TABLE `cb`
 --
 ALTER TABLE `colis`
   ADD CONSTRAINT `Colis_ibfk_1` FOREIGN KEY (`idCommande`) REFERENCES `commande` (`id`);
-
---
--- Contraintes pour la table `contenupanier`
---
-ALTER TABLE `contenupanier`
-  ADD CONSTRAINT `ContenuPanier_ibfk_1` FOREIGN KEY (`idProduitsVendeur`) REFERENCES `produitsvendeur` (`id`);
 
 --
 -- Contraintes pour la table `infocompte`
