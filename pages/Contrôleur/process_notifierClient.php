@@ -7,7 +7,7 @@
 <?php
     if($_POST['commandeID']){
         $id = $_POST['commandeID'];
-        $sql = "DELETE FROM commande WHERE id = '$id'";
+        $sql = "UPDATE commande SET Livre = 1 WHERE id = '$id'";
         $resultat = mysqli_query($conn, $sql);
         $_SESSION['message'] = "Merci d'avoir accepté la commande #". $id . " un email va etre envoyé au client.";
     }

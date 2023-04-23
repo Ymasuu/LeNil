@@ -34,20 +34,22 @@
                         $sql2 = "SELECT adresse FROM infoCompte WHERE emailCompte = '$mail'";
                         $result = mysqli_query($conn, $sql2);
                         $row2 = mysqli_fetch_assoc($result);
+                        if($row['Livre'] == 0){
                         ?>
-                        <form action="../Contrôleur/process_notifierClient.php" method="post">
-                            <div class="article">
-                                <button type="submit" name="commandeID" value="<?php echo $row['id']; ?>" >
-                                    <div>
-                                        <h5>Commande #<?php echo $row['id']; ?></h5>
-                                        <p>Date de commande : <?php echo $row['datePayment']; ?></p>
-                                        <p>Prix : <?php echo $row['totalPayer']; ?> €</p>
-                                        <p>Adresse : <?php echo $row['emailCompte'] ?></p>
-                                    </div>
-                                </button>
-                            </div>
-                        </form>
-            <?php   }
+                            <form action="../Contrôleur/process_notifierClient.php" method="post">
+                                <div class="article">
+                                    <button type="submit" name="commandeID" value="<?php echo $row['id']; ?>" >
+                                        <div>
+                                            <h5>Commande #<?php echo $row['id']; ?></h5>
+                                            <p>Date de commande : <?php echo $row['datePayment']; ?></p>
+                                            <p>Prix : <?php echo $row['totalPayer']; ?> €</p>
+                                            <p>Adresse : <?php echo $row2['adresse'] ?></p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </form>
+            <?php       }
+                    }
                 } 
             ?>  
         </div>

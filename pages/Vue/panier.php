@@ -284,7 +284,14 @@
 			<div class="livraison">
 				<h1>Livraison estimée</h1>
 				<div>
-					<h5>Livraison estimée le :</h5>
+					<h5>Livraison estimée le :
+						<?php
+							date_default_timezone_set('Europe/Paris');
+							$date = date('Y-m-d');
+							$date = date('Y-m-d', strtotime($date . ' +3 days'));
+							echo $date;
+						?>
+					</h5>
 				</div>
 			</div>
 			<center class="code">

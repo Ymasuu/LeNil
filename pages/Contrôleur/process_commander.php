@@ -5,10 +5,11 @@
 
     date_default_timezone_set('Europe/Paris');
     $date = date('Y-m-d');
-    $email = mysqli_real_escape_string($conn, $date);
+    $date = mysqli_real_escape_string($conn, $date);
     
     $email = $_SESSION["UTILISATEUR"]["email"];
     $email = mysqli_real_escape_string($conn, $email);
+    
     // on recupere les valeurs panier
     $sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
     $result = mysqli_query($conn, $sql);
@@ -35,8 +36,8 @@
     }
 
     // On ajoute la commande avec ses données
-    $sql = "INSERT INTO commande (id, emailCompte, totalPayer, modePayment, datePayment) 
-            VALUES ('$nouvelle_id', '$email', '$prix', 'CB', '$date')";
+    $sql = "INSERT INTO commande (id, emailCompte, totalPayer, modePayment, datePayment, Livre) 
+            VALUES ('$nouvelle_id', '$email', '$prix', 'CB', '$date', '0')";
     $result = $conn->query($sql);
     if(!$result) {
         echo "Erreur lors de l'exécution de la requête SQL : " . mysqli_error($conn);
