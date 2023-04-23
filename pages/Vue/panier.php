@@ -118,12 +118,13 @@
 									$nom = $row['nom'];
 									$quantite = $row['quantite'];
 									$prix = $row['prix'];
+									$prod = $row['id'];
 									echo '<tr>';
 									echo '<td>' . $nom . '</td>';
-									echo '<td><input type="number" name="quantite[' . $nom . ']" value="' . $quantite . '"></td>';
-									echo '<input type="hidden" name="nom" value="' . $nom . '"></td>';
-									echo '<td><input type="submit" name="modifier_quantite" value="Modifier la quantité"></td>';
-									echo '<td><input type="submit" name="supprimer_produit[' . $nom . ']" value="Supprimer"></td>';
+									echo '<td><input type="number" name="quantite[' . $prod . ']" value="' . $quantite . '"></td>';
+									echo '<input type="hidden" name="nom[' . $prod . ']" value="' . $nom . '"></td>';
+									echo '<td><input type="submit" name="modifier_quantite[' . $prod . ']" value="Modifier la quantité"></td>';
+									echo '<td><input type="submit" name="supprimer_produit[' . $prod . ']" value="Supprimer"></td>';
 									echo '</tr>';
 								}				
 								echo '</table>';
@@ -131,26 +132,55 @@
 
 								// Traitement des modifications de quantité ou de suppression de produits
 								if (isset($_POST['modifier_quantite'])) { // Traitement de la modification de quantité
-									$nom = $_POST['nom'];
-									$nouvelle_quantite = $_POST['quantite'][$nom];
-									$nom = mysqli_real_escape_string($conn, $nom);
-									$nouvelle_quantite = mysqli_real_escape_string($conn, $nouvelle_quantite);
-									$sql = "UPDATE quantiteCommande SET quantite = '$nouvelle_quantite' WHERE nom = '$nom'";
-									$result = mysqli_query($conn, $sql);
+									foreach($_POST['modifier_quantite'] as $prod => $v) {
+										$nom = $_POST['nom'][$prod];
+										$nouvelle_quantite = $_POST['quantite'][$prod];
+										$nom = mysqli_real_escape_string($conn, $nom);
+										$nouvelle_quantite = mysqli_real_escape_string($conn, $nouvelle_quantite);
+										// on supprime la ligne si la nouvelle quantite est egale a 0 ou moins
+										if ($nouvelle_quantite <= 0){
+											$sql = "DELETE FROM quantiteCommande WHERE nom = '$nom'";
+											$result = mysqli_query($conn, $sql);
+											// on vide le panier si c'était le dernier produit du client
+											$sql = "SELECT * FROM quantiteCommande WHERE emailClient = '$email'";
+											$result = mysqli_query($conn, $sql);
+											$resultCheck = mysqli_num_rows($result);
+											if ($resultCheck <= 0) { 
+												$sql = "DELETE FROM quantiteCommande WHERE emailClient = '$email'";
+												$result = mysqli_query($conn, $sql);							
+												$sql = "DELETE FROM panier WHERE emailCompte = '$email'";
+												$result = mysqli_query($conn, $sql);
+											}
+										}
+										$sql = "UPDATE quantiteCommande SET quantite = '$nouvelle_quantite' WHERE nom = '$nom'";
+										$result = mysqli_query($conn, $sql);
+									}
 									header('Location: panier.php');
+									
 								} else if (!empty($_POST['supprimer_produit'])) {
-									$nom = $_POST['nom'];
-									$nouvelle_quantite = $_POST['quantite'][$nom];
-									$nom = mysqli_real_escape_string($conn, $nom);
-									$nouvelle_quantite = mysqli_real_escape_string($conn, $nouvelle_quantite);
-									$sql = "UPDATE quantiteCommande SET quantite = quantite - '$nouvelle_quantite' WHERE nom = '$nom'";
-									$result = mysqli_query($conn, $sql);
-									header('Location: panier.php');
+									foreach($_POST['supprimer_produit'] as $prod => $v) {
+										$nom = $_POST['nom'][$prod];
+										$nom = mysqli_real_escape_string($conn, $nom);
+										// on supprime la ligne
+										$sql = "DELETE FROM quantiteCommande WHERE nom = '$nom'";
+										$result = mysqli_query($conn, $sql);
+										// on vide le panier si c'était le dernier produit du client
+										$sql = "SELECT * FROM quantiteCommande WHERE emailClient = '$email'";
+										$result = mysqli_query($conn, $sql);
+										$resultCheck = mysqli_num_rows($result);
+										if ($resultCheck <= 0) {
+											$sql = "DELETE FROM panier WHERE emailCompte = '$email'";
+											$result = mysqli_query($conn, $sql);
+										}
+									}
+									header('Location: panier.php');		
 								}
+															
 								
 								// on recalcule la valeur du panier en fonction des changements effectués
 								$sql = "SELECT * FROM quantiteCommande WHERE emailClient = '$email'";
 								$result = mysqli_query($conn, $sql);
+								$resultCheck = mysqli_num_rows($result);
 								if ($resultCheck > 0) {
 									$quantite2 = 0;
 									$prix2 = 0;
@@ -202,10 +232,11 @@
 					<h5>Livraison</h5>
 					<p>
 						<?php
-                            if(isset($prix)){
-                                $livraison = $prix * 0.05;
-                                echo $livraison; 
-                            }
+							if (isset($prix)) {
+								$livraison = $prix * 0.05;
+								$livraison = round($livraison, 2);
+								echo $livraison;
+							}
 						?>
 					</p>
 				</div>
