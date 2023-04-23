@@ -24,9 +24,8 @@ if(!isset($_SESSION["UTILISATEUR"])){
             <div class="flex">
                 <h4>ABONNEMENT MENSUEL</h4>
                 <ul class="test">
-                    <li>Des réductions sur certains articles</li>
                     <li>Livraison plus rapide</li>
-                    <li>Frais de Livraison gratuits</li>
+                    <li>Frais de Livraison gratuit</li>
                     <li>10€/mois</li>
                 </ul>
                 <input class="bouton-golden" type="submit"  id="mensuel" name="mensuel" value="s'abonner">
@@ -34,9 +33,8 @@ if(!isset($_SESSION["UTILISATEUR"])){
             <div class="flex">
                 <h4>ABONNEMENT ANNUEL</h4>
                 <ul class="test">
-                    <li>Des réductions sur certains articles</li>
                     <li>Livraison plus rapide</li>
-                    <li>Frais de Livraison gratuits</li>
+                    <li>Frais de Livraison gratuit</li>
                     <li>100€/an</li>
                 </ul>
                 <input class="bouton-golden" type="submit" id="annuel" name="annuel" value="s'abonner">
