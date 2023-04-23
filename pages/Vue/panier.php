@@ -72,9 +72,24 @@
 								$sql = "UPDATE quantiteCommande SET quantite = quantite + $quantite WHERE id = '$sqlId_produit' AND emailClient = '$email'";
 								$result = mysqli_query($conn, $sql);
 								$sql = "UPDATE quantiteCommande SET prix = $sqlPrix_produit * quantite";
-								$result = mysqli_query($conn, $sql);					
+								$result = mysqli_query($conn, $sql);
 							} else {
-								$sql = "INSERT INTO `quantiteCommande` (`id`, `nom`, `emailClient`, `quantite`, `prix`) VALUES ('$sqlId_produit', '$sqlNom', '$email', '$sqlQuantite', '$sqlPrix_produit');";
+								// on regarde si des commandes existent dans la table
+								$sql = "SELECT * FROM quantiteCommande";
+								$result = mysqli_query($conn, $sql);
+								$resultCheck = mysqli_num_rows($result);
+								if($resultCheck <= 0){
+									$nouvelle_id = 0;
+								}else {
+									// on récupère l'id du dernier élément de la table
+									$sql_ancien_id = "SELECT MAX(id) AS ancien_id FROM quantiteCommande";
+									$result_ancien_id = $conn->query($sql_ancien_id);
+									$row_ancien_id = $result_ancien_id->fetch_assoc();
+									$ancien_id = $row_ancien_id['ancien_id'];
+									// on l'incrémente de 1
+									$nouvelle_id = $ancien_id + 1;
+								}
+								$sql = "INSERT INTO `quantiteCommande` (`id`, `idCommande`, `nom`, `emailClient`, `quantite`, `prix`) VALUES ('$sqlId_produit', '$nouvelle_id', '$sqlNom', '$email', '$sqlQuantite', '$sqlPrix_produit');";
 								$result = mysqli_query($conn, $sql);
 							}
 						}
