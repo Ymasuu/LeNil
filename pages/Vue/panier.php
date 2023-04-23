@@ -292,10 +292,19 @@
 				<div>
 					<h5>Livraison estimée le :
 						<?php
-							date_default_timezone_set('Europe/Paris');
-							$date = date('Y-m-d');
-							$date = date('Y-m-d', strtotime($date . ' +3 days'));
-							echo $date;
+							$sql = "SELECT * FROM panier WHERE emailCompte = '$email'";
+							$result = mysqli_query($conn, $sql);
+
+							$resultCheck = mysqli_num_rows($result);
+							//Si le panier existe 
+							if ($resultCheck > 0) {								
+								date_default_timezone_set('Europe/Paris');
+								$date = date('Y-m-d');
+								if($_SESSION["UTILISATEUR"]["Abonnement"] == "None"){
+									$date = date('Y-m-d', strtotime($date . ' +3 days'));
+								} else $date = date('Y-m-d', strtotime($date . ' +1 days'));
+								echo $date;
+							}
 						?>
 					</h5>
 				</div>
