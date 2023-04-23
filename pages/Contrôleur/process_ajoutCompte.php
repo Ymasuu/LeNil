@@ -6,7 +6,6 @@
     $email = $_POST['new_email'];
     $mdp = $_POST['new_mdp'];
     $abonnement = 0;
-    $dateAbonnement = NULL;
 
     // Utiliser les valeurs POST pour initialiser les variables $signatureContrat*
     $client = $_POST['type_compte'] == 'client' ? 1 : 0;
@@ -15,8 +14,8 @@
     $admin = $_POST['type_compte'] == 'admin' ? 1 : 0;
 
     // Ajouter le nouveau compte avec l'ID incrémenté
-    $sql = "INSERT INTO compte (email, motDePasse, abonnement, dateAbonnement, signatureContratClient, signatureContratVendeur, signatureContratLivreur, admin) 
-            VALUES ('$email', '$mdp', '$abonnement', '$dateAbonnement', '$client', '$vendeur', '$livreur', '$admin')";
+    $sql = "INSERT INTO compte (email, motDePasse, abonnement, signatureContratClient, signatureContratVendeur, signatureContratLivreur, admin) 
+            VALUES ('$email', '$mdp', '$abonnement', '$client', '$vendeur', '$livreur', '$admin')";
     $result = $conn->query($sql);
     if(!$result) {
         echo "Erreur lors de l'exécution de la requête SQL : " . mysqli_error($conn);
