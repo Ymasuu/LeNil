@@ -10,8 +10,6 @@
         $produit_id = $_POST['produit_id'];
         $resultat = mysqli_query($conn, "SELECT * FROM produitsvendeur WHERE id = '$produit_id'");
     }
-    // a cause des clés étrangeres :
-    mysqli_query($conn, "DELETE FROM contenupanier WHERE idProduitsVendeur = '$produit_id'");
 
     // supprimer le produit
     $sql = "DELETE FROM produitsvendeur WHERE id = '$produit_id'";
